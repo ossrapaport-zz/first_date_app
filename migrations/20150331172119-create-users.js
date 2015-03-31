@@ -14,10 +14,13 @@ module.exports = {
       name: {
         type: DataTypes.STRING
       },
-      age: {
+      dateOfBirth: {
         type: DataTypes.STRING
       },
       location: {
+        type: DataTypes.STRING
+      },
+      personality: {
         type: DataTypes.STRING
       },
       password: {
