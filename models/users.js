@@ -3,8 +3,9 @@ module.exports = function(sequelize, DataTypes) {
   var users = sequelize.define("users", {
     username: DataTypes.STRING,
     name: DataTypes.STRING,
-    age: DataTypes.STRING,
+    dateOfBirth: DataTypes.STRING,
     location: DataTypes.STRING,
+    personality: DataTypes.STRING,
     password: DataTypes.TEXT
   }, {
     timestamps: false,
@@ -12,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         users.belongsToMany(models.interests, {
-          through: "interests_tags",
+          through: "interests_users",
           foreignKey: "user_id"
         });
       }
