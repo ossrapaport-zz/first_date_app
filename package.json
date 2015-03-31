@@ -26,3 +26,6 @@
   "require": "^2.1.17"
   }
 }
+
+//Please note that you need to run npm install before anything
+//on the backend will work. 
