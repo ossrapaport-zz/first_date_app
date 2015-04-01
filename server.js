@@ -5,6 +5,7 @@ var application_root = __dirname,
     bodyParser = require("body-parser"),
     models = require("./models"),
     path = require("path"),
+    environment = require("dotenv"),
     request = require("request");
 
 //Models 
@@ -12,6 +13,14 @@ var User = models.users;
 var Interest = models.interests;
 
 var app = express();
+environment.load();
+
+var yelp = require("yelp").createClient ({
+  consumer_key: process.env.YELP_CONSUMER_KEY,
+  consumer_secret: process.env.YELP_CONSUMER_SECRET,
+  token: process.env.YELP_TOKEN,
+  token_secret: process.env.YELP_TOKEN_SECRET
+});
 
 app.use(logger("dev"));
 app.use(bodyParser());
@@ -170,6 +179,16 @@ app.delete("/interests/:id", function(req ,res) {
     .then(function() {  
       res.send(interest);
     });
+  });
+});
+
+
+//Restaurant Search
+
+app.get("/search_for_restaurants", function(req, res) {
+
+  yelp.search({term: "food", location: "New York City"}, function(error, data) {
+    res.send(data);
   });
 });
 
