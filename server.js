@@ -8,8 +8,6 @@ var application_root = __dirname,
     environment = require("dotenv"),
     request = require("request");
 
-
-
 //Models 
 var User = models.users;
 var Interest = models.interests;
@@ -218,5 +216,13 @@ app.get("/search_for_restaurant", function(req, res) {
 app.listen(3000, function() {
   console.log("Server running on 3000");
 });
+
+//Yelp API
+
+yelp.search({term: "food", location: "Montreal"},  function (error, data){
+  console.log(error);
+  console.log(data);
+}) 
+	
 
 

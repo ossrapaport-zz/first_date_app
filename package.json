@@ -28,7 +28,6 @@
     "pg-hstore": "^2.3.1",
     "request": "^2.4.17",
     "sequelize": "^2.0.5",
-    "yelp": "^0.2.0",
-    "factual-api": "^1.0.7"
+    "yelp": "^0.2.0"
   }
 }
