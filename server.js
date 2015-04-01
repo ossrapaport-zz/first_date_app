@@ -8,6 +8,8 @@ var application_root = __dirname,
     environment = require("dotenv"),
     request = require("request");
 
+
+
 //Models 
 var User = models.users;
 var Interest = models.interests;
@@ -15,12 +17,15 @@ var Interest = models.interests;
 var app = express();
 environment.load();
 
-var yelp = require("yelp").createClient ({
+/*var yelp = require("yelp").createClient ({
   consumer_key: process.env.YELP_CONSUMER_KEY,
   consumer_secret: process.env.YELP_CONSUMER_SECRET,
   token: process.env.YELP_TOKEN,
   token_secret: process.env.YELP_TOKEN_SECRET
-});
+});*/
+
+var Factual = require("factual-api");
+var factual = new Factual(process.env.FACTUAL_KEY, process.env.FACTUAL_SECRET);
 
 app.use(logger("dev"));
 app.use(bodyParser());
@@ -183,7 +188,7 @@ app.delete("/interests/:id", function(req ,res) {
 });
 
 
-//Restaurant Search
+/*//Restaurant Search
 
 app.get("/search_for_date", function(req, res) {
 
@@ -192,10 +197,23 @@ app.get("/search_for_date", function(req, res) {
   });
 
   //Then, once we've gotten the search term,
-/*  yelp.business(RESTAURANT_ID, function(error, data) {
+  yelp.business(RESTAURANT_ID, function(error, data) {
     res.send(data);
-  });*/
-});
+  });
+});*/
+
+
+//Factual Search -- For Example Only, Not Functional With Search
+
+app.get("/search_for_restaurant", function(req, res) {
+  factual.get('/t/places-us', {
+    filters: {
+      "$and":[{"locality":"new york"}, {"category_labels":{"$includes":"Italian"}}, {"category_ids":{"$includes":338}}]}
+  }, function (error, response) {
+    res.send(response.data);
+  });
+})
+
 
 app.listen(3000, function() {
   console.log("Server running on 3000");
