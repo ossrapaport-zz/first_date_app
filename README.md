@@ -1,4 +1,4 @@
-# first_date_app
+# first_date_suggestion_app
 A web application to plan your first date.
 
 -- Minimum Viable Product --
