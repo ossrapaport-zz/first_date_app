@@ -190,11 +190,16 @@ app.delete("/interests/:id", function(req ,res) {
 
 //Restaurant Search
 
-app.get("/search_for_restaurants", function(req, res) {
+app.get("/search_for_date", function(req, res) {
 
   yelp.search({term: "food", location: "New York City"}, function(error, data) {
     res.send(data);
   });
+
+  //Then, once we've gotten the search term,
+/*  yelp.business(RESTAURANT_ID, function(error, data) {
+    res.send(data);
+  });*/
 });
 
 app.listen(3000, function() {
@@ -208,6 +213,5 @@ yelp.search({term: "food", location: "Montreal"},  function (error, data){
   console.log(data);
 }) 
 	
-
 
 
