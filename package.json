@@ -4,28 +4,26 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ossrapaport/first_date_app.git"
   },
-  "author": "\"Frank, Nya, Owen\"",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ossrapaport/first_date_app/issues"
   },
   "homepage": "https://github.com/ossrapaport/first_date_app",
   "dependencies": {
-  "body-parser": "^1.12.2",
-  "express": "^4.12.3",
-  "morgan": "^1.5.2",
-  "pg": "^4.3.0",
-  "pg-hstore": "^2.3.1",
-  "sequelize": "^2.0.5",
-  "request": "^2.54.0"
+    "body-parser": "^1.12.2",
+    "express": "^4.12.3",
+    "morgan": "^1.5.2",
+    "pg": "^4.3.0",
+    "pg-hstore": "^2.3.1",
+    "sequelize": "^2.0.5",
+    "require" : "^2.4.17"
   }
 }
-
-//Please note that you need to run npm install before anything
-//on the backend will work. 
