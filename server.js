@@ -5,7 +5,12 @@ var application_root = __dirname,
     bodyParser = require("body-parser"),
     models = require("./models"),
     request = require("request");
-
+    yelp = require("yelp").createClient({
+      consumer_key: "SNO3fb9JwdTyLYhzQvqb1Q",
+      consumer_secret: "-pknZYqGYtv0aNOqluc2Oga3xbY",
+      token:"KqFqJDr3u30Yc7JG3mOe_94do45n2UGX",
+      token_secret: "h652ocr52fnnB8ACvgVOSRI5t4k"
+    });
 //Models 
 var User = models.users;
 var Interest = models.interests;
@@ -174,6 +179,14 @@ app.delete("/interests/:id", function(req ,res) {
 app.listen(3000, function() {
   console.log("Server running on 3000");
 });
+
+//Yelp API
+
+yelp.search({term: "food", location: "Montreal"},  function (error, data){
+  console.log(error);
+  console.log(data);
+}) 
+	
 
 
 
