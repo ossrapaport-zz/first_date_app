@@ -5,7 +5,6 @@ var application_root = __dirname,
     bodyParser = require("body-parser"),
     models = require("./models"),
     path = require("path"),
-    //OAuth = require("oauth-1.0a"),
     environment = require("dotenv"),
     request = require("request");
 
@@ -15,6 +14,13 @@ var Interest = models.interests;
 
 var app = express();
 environment.load();
+
+var yelp = require("yelp").createClient ({
+  consumer_key: process.env.YELP_CONSUMER_KEY,
+  consumer_secret: process.env.YELP_CONSUMER_SECRET,
+  token: process.env.YELP_TOKEN,
+  token_secret: process.env.YELP_TOKEN_SECRET
+});
 
 app.use(logger("dev"));
 app.use(bodyParser());
@@ -176,27 +182,14 @@ app.delete("/interests/:id", function(req ,res) {
   });
 });
 
-//Request Routes
 
-app.get("/search_for_restaurant", function(req, res) {
-  var queryParams = req.query;
-  queryParams.oauth_token = process.env.YELP_OAUTH_TOKEN;
-  queryParams.oauth_consumer_key = process.env.YELP_OAUTH_CONSUMER_KEY;
-  queryParams.oauth_signature_method = process.env.YELP_OAUTH_SIGNATURE_METHOD;
-  queryParams.oauth_signature = process.env.YELP_OAUTH_SIGNATURE;
-  queryParams.oauth_nonce = new Date().getTime() + "" + new Date().getMilliseconds(); 
-  queryParams.oauth_timestamp = Math.floor(Date.now() / 1000);
+//Restaurant Search
 
-  request({
-    uri: "http://api.yelp.com/v2/search?term=food&location=San+Francisco",
-    method: "GET",
-    json: true,
-    qs: queryParams
-  },
-  function(error, response, body) {
-    var results = body.data;
-    res.send(results);
-  })
+app.get("/search_for_restaurants", function(req, res) {
+
+  yelp.search({term: "food", location: "New York City"}, function(error, data) {
+    res.send(data);
+  });
 });
 
 app.listen(3000, function() {
