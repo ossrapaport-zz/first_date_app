@@ -4,6 +4,7 @@ var application_root = __dirname,
     logger = require("morgan"),
     bodyParser = require("body-parser"),
     models = require("./models"),
+    path = require("path"),
     request = require("request");
     yelp = require("yelp").createClient({
       consumer_key: "SNO3fb9JwdTyLYhzQvqb1Q",
@@ -19,7 +20,8 @@ var app = express();
 
 app.use(logger("dev"));
 app.use(bodyParser());
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(application_root, "public")));
+app.use(express.static(path.join(application_root, "browser")));
 
 //User Routes
 
