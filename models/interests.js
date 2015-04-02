@@ -1,7 +1,8 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
   var interests = sequelize.define("interests", {
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    type: DataTypes.STRING
   }, {
     timestamps: false,
 

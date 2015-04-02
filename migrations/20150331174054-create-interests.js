@@ -10,6 +10,9 @@ module.exports = {
       },
       name: {
         type: DataTypes.STRING
+      },
+      type: {
+        type: DataTypes.STRING
       }
     }).done(done);
   },
