@@ -6,6 +6,7 @@ var application_root = __dirname,
     models = require("./models"),
     path = require("path"),
     environment = require("dotenv"),
+    algorithm = require("./algorithm.js"),
     request = require("request");
 
 //Models 
@@ -24,7 +25,7 @@ environment.load();
 });*/
 
 var Factual = require("factual-api");
-var factual = new Factual(process.env.FACTUAL_KEY, process.env.FACTUAL_SECRET);
+var factual = new Factual(process.env.FACTUAL_KEY_2, process.env.FACTUAL_SECRET_2);
 
 app.use(logger("dev"));
 app.use(bodyParser());
@@ -273,7 +274,7 @@ app.get("/search_for_restaurant/:date_id/:price/:neighborhood", function(req, re
   var cuisine = "TO BE SET";
   
   factual.get('/t/restaurants-us', {filters:
-    {"$and":[{"locality":"new york", "price":3, "alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"soho"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}]}},
+    {"$and":[{"price":3, "alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"park slope"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}]}},
     function (error, response) {
   res.send(response.data);
   });
@@ -285,6 +286,8 @@ app.get("/search_for_restaurant/:date_id/:price/:neighborhood", function(req, re
 //a modified form.
 
 app.post("/date_and_search/:price/:neighborhood", function(req, res) {
+  var price = req.query.price;
+  var neighborhood = req.query.neighborhood;
   var dateParams = {
     firstName: req.body.firstName,
     personality: req.body.personality
@@ -311,8 +314,12 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
               for (var i = 0; i < dateInterests.length; i ++) {
                 typesArray.push(dateInterests[i].type); //Creates an array of the types of the date's interests
               }
-              console.log(typesArray);
-              res.send(typesArray);
+              var factualQuery = algorithm.buildSearchQuery(price, neighborhood, typesArray); //Makes query string
+              factual.get("/t/restaurants-us", {filters:
+                factualQuery
+              }, function(error, response) {
+                res.send(response.data);
+              })
             });
           }
         });
@@ -320,6 +327,16 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
     })
   });
 });
+
+app.get("/test", function(req, res) {
+  var array = [1,2];
+  var factualQuery = algorithm.buildSearchQuery(1, 1, array); //Makes query string
+  factual.get("/t/restaurants-us", {filters:
+    factualQuery
+  }, function(error, response) {
+    res.send(response.data);
+  });
+})
 
 app.listen(3000, function() {
   console.log("Server running on 3000");
