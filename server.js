@@ -203,12 +203,16 @@ app.get("/search_for_date", function(req, res) {
 
 //Factual Search -- For Example Only, Not Functional With Search
 
-app.get("/search_for_restaurant", function(req, res) {
-  factual.get('/t/places-us', {
-    filters: {
-      "$and":[{"locality":"new york"}, {"category_labels":{"$includes":"Italian"}}, {"category_ids":{"$includes":338}}]}
-  }, function (error, response) {
-    res.send(response.data);
+app.get("/search_for_restaurant/:price/:neighborhood", function(req, res) {
+  
+  var price = req.params.price;
+  var neighborhood = req.params.neighborhood;
+  var cuisine = "TO BE SET";
+
+  factual.get('/t/restaurants-us', {filters:
+    {"$and":[{"locality":"new york", "price":3, "alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"soho"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}]}},
+    function (error, response) {
+  res.send(response.data);
   });
 })
 
