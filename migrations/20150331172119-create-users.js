@@ -14,7 +14,7 @@ module.exports = {
       name: {
         type: DataTypes.STRING
       },
-      dateOfBirth: {
+      date_of_birth: {
         type: DataTypes.STRING
       },
       location: {
