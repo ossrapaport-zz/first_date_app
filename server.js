@@ -298,6 +298,35 @@ app.get("/interests_test/:id", function(req, res) {
   });
 });
 
+app.post("/post_test", function(req, res) {
+  var data = {
+    firstName: req.body.firstName,
+    personality: req.body.personality
+  }
+  Date
+  .create(data)
+  .then(function(date) {
+    console.log(date);
+    res.send(date);
+  })
+});
+
+app.post("/date_and_search/:price/:neighborhood", function(req, res) {
+  var dateParams = req.body;
+
+  Date
+  .create(dateParams)
+  .then(function(date) {
+    
+
+    date
+    .getInterests()
+    .then(function(interests) {
+
+    })
+  })
+})
+
 app.listen(3000, function() {
   console.log("Server running on 3000");
 }); 
