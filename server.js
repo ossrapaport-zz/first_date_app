@@ -28,7 +28,7 @@ var factual = new Factual(process.env.FACTUAL_KEY, process.env.FACTUAL_SECRET);
 
 app.use(logger("dev"));
 app.use(bodyParser());
-app.use(express.static(path.join(application_root, "public")));
+//app.use(express.static(path.join(application_root, "public")));
 app.use(express.static(path.join(application_root, "browser")));
 
 //User Routes
