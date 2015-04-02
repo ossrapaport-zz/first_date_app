@@ -1,4 +1,6 @@
 App.Collections.Users = Backbone.Collections.extend({
-	url: 'users',
+	 
+  //Needs initialize function
+  url: '/users',
 	model: App.Models.User
 })

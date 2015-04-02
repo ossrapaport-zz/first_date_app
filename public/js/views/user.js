@@ -4,6 +4,7 @@ App.Views.User = Backbone.View.extend({
 		this.render();
 	},
 	render: function() {
-		this.$el.html( this.template( this.model.toJSON() ) )
+		this.$el.html( this.template(this.model.toJSON()) );
 	}
+  //Functions we need: setUser, updateUser 
 })
