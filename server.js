@@ -312,20 +312,38 @@ app.post("/post_test", function(req, res) {
 });
 
 app.post("/date_and_search/:price/:neighborhood", function(req, res) {
-  var dateParams = req.body;
+  var dateParams = {
+    firstName: req.body.firstName,
+    personality: req.body.personality
+  };
+  var interestIDArray = req.body.interest_ids; //These names have to be in front end
 
   Date
   .create(dateParams)
   .then(function(date) {
-    
-
+    interestIDArray.forEach(function(interestID) {
+      Interest
+      .findOne(interestID)
+      .then(function(interest) {
+        date
+        .addInterest(interest)
+        .then(function() {
+          console.log("Added interest");
+        })
+      })
+    })
+    //Asynchronous nature means JS goes below first,
+    //and doesn't send back anything
+    console.log("Down to here");
     date
     .getInterests()
-    .then(function(interests) {
-
-    })
+    .then(function(dateInterests) {
+      console.log(dateInterests);
+      res.send(dateInterests);
+    })  
   })
 })
+
 
 app.listen(3000, function() {
   console.log("Server running on 3000");
