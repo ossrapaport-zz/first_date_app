@@ -8,6 +8,10 @@ var App = {
 App.Models.Interest = Backbone.Model.extend({
 	initialize: function() {
 		console.log("New Interest Model created");
-	}
+	},
+	defaults: {
+		name: 'Name',
+		type: 'Type'
+	},
   //Need to give it attributes
 })
