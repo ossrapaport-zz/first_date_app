@@ -1,0 +1,369 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100, 400);
+@import url(http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css);
+
+body {
+	width:100%;
+	height: 100%;
+	position: relative;
+	background: #fff;
+	color: #222;
+	margin: 0;
+	font-family: 'Roboto' , sans-serif;
+}
+
+p {
+	font-size: 16px;
+	color: #fff;
+	padding-bottom: 10px;
+}
+
+h1 {
+	font-size: 50px;
+	color: #fff;
+	font-weight: 400;
+	padding: 12px;
+}
+
+h2 {
+	font-size: 32px;
+	color: #fff;
+	font-weight: 400;
+	padding: 12px;
+}
+
+h4 {
+	font-size: 24px;
+	color: #fff;
+	font-weight: 400;
+	padding: 12px;
+
+}
+
+.clear {
+	clear: both;
+	padding-top: 20px;
+}
+
+.fixed-width {
+	display: block;
+	width: 920px;
+	margin: 0 auto;
+}
+
+#header {
+	width: 100%;
+	background: #222;
+	height: 50px;
+	position: relative;
+	top:0;
+	z-index: 1
+}
+
+#logo {
+	float: left;
+	color: #fff;
+	font-size: 24px;
+	padding: 10px 15px;
+}
+
+#top-section {
+	width: 100%;
+	height: 800px;
+	background: url('http://a.images.blip.tv/Roysp-HipsterhoodS2E1HipstersWithHangovers625.jpg');
+	background-size: cover;
+	display: block;
+	position: relative;
+}
+
+
+#login-box {
+	position: relative;
+	width:700px;
+	padding-top: 180px;
+	margin-left: -350px;
+	left: 50%;
+}
+
+.flat-form {
+  background: #ff6b57;
+  margin: 85px auto;
+  width: 390px;
+  height: 340px;
+  position: relative;
+  font-family: 'Roboto';
+
+}
+
+ul {
+  list-style: none
+}
+
+.tabs {
+  background: #e74c3c;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  list-style: none
+}
+.tabs li {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+
+}
+.tabs a {
+  background: #e74c3c;
+  display: block;
+  float: left;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px 22px 12px 22px;
+  /*border-right: 1px solid @tab-border;*/
+
+}
+.tabs li:last-child a {
+  border-right: none;
+  width: 174px;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+}
+.tabs a.active {
+  background: #ff6b57;
+  border-right: none;
+  -webkit-transition: all 0.5s linear;
+	-moz-transition: all 0.5s linear;
+	transition: all 0.5s linear;
+}
+.form-action {
+  padding: 0 20px;
+  position: relative;
+}
+
+.form-action h1 {
+  font-size: 42px;
+  padding-bottom: 10px;
+}
+.form-action p {
+  font-size: 12px;
+  padding-bottom: 10px;
+  line-height: 25px;
+}
+form {
+  padding-right: 20px !important;
+}
+form input[type=text],
+form input[type=password],
+form input[type=submit] {
+  font-family: 'Roboto';
+}
+
+form input[type=text],
+form input[type=password] {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  background: #fff;
+  border: none;
+  color: #e74c3c;
+  outline: none;
+}
+
+.dark-box {
+  background: #5e0400;
+  box-shadow: 1px 3px 3px #3d0100 inset;
+  height: 40px;
+  width: 50px;
+}
+.form-action .dark-box.bottom {
+  position: absolute;
+  right: 0;
+  bottom: -24px;
+}
+.tabs + .dark-box.top {
+  position: absolute;
+  right: 0;
+  top: 0px;
+}
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+
+.button {
+    border: none;
+    display: block;
+    background: #136899;
+    height: 40px;
+    width: 80px;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 5px;
+    /*box-shadow: 0px 3px 1px #2075aa;*/
+  	-webkit-transition: all 0.15s linear;
+	  -moz-transition: all 0.15s linear;
+	  transition: all 0.15s linear;
+}
+
+.button:hover {
+  background: #1e75aa;
+  /*box-shadow: 0 3px 1px #237bb2;*/
+}
+
+.button:active {
+  background: #136899;
+  /*box-shadow: 0 3px 1px #0f608c;*/
+}
+
+::-webkit-input-placeholder {
+  color: #e74c3c;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #e74c3c;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #e74c3c;
+}
+:-ms-input-placeholder {
+  color: #e74c3c;
+}
+
+#buttons {
+	width: 900px;
+	margin: auto;
+}
+
+#post-btn {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 20px 30px;
+  background-color: #b2dad7;
+  border: none;
+  color: #2d292d;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  -webkit-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+  border-radius: 3px;
+  text-decoration: none
+}
+
+#post-btn:hover {
+  background: #ff6b57;
+  color: #fff;
+}
+
+#suggestion-btn {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 20px 30px;
+  background-color: #2d292d;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  -webkit-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+#suggestion-btn:hover {
+  background: #b2dad7;
+  color: #2d292d;
+}
+
+/*Inner Page*/
+#inner-page {
+	width: 100%;
+	height: 800px;
+	background: #fff;
+	display: block;
+	position: relative;
+}
+
+.app-wrapper {
+	display: block;
+	width: 920px;
+	height: 400px;
+	padding: 20px;
+	margin: 50px auto;
+	background: #ff6b57;
+	border-radius: 8px
+}
+
+.form-label {
+	font-size: 24px;
+	color: #fff;
+	font-weight: 400;
+	padding: 12px;
+}
+
+#info-list {
+	font-size: 40px;
+}
+
+.date-wrapper {
+	width: 900px;
+	margin: 20px auto;
+}
+
+#search-result {	
+	display: block;
+	width: 920px;
+	height: 755px;
+	padding: 20px;
+	margin: 50px auto;
+	background: #ff6b57;
+	border-radius: 8px
+}
+
+#img-gallery {
+	margin-top: 10px;
+}
+
+.one-third {
+	width: 45%;
+	float: left;
+	padding: 20px 10px;
+}
+
+.one-third-last {
+	width: 45%;
+	float: right;
+	padding: 20px 0;
+}
+
+
+/*Rating*/
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  font-size: 25px;
+  color: #fff;
+  float: right;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.2em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
