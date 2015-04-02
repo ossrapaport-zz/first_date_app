@@ -272,13 +272,6 @@ app.get("/search_for_restaurant/:date_id/:price/:neighborhood", function(req, re
   var neighborhood = req.params.neighborhood;
   var cuisine = "TO BE SET";
   
-  Date
-  .findOne(dateID, {include: [Interest]}
-    )
-  .then(function(date) {
-
-  })
-
   factual.get('/t/restaurants-us', {filters:
     {"$and":[{"locality":"new york", "price":3, "alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"soho"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}]}},
     function (error, response) {
@@ -286,30 +279,10 @@ app.get("/search_for_restaurant/:date_id/:price/:neighborhood", function(req, re
   });
 })
 
-app.get("/interests_test/:id", function(req, res) {
-  Date
-  .findOne(req.params.id, { include: [Interest] })
-  .then(function(date) {
-    date
-    .getInterests()
-    .then(function(interests) {
-      res.send(interests);
-    });
-  });
-});
-
-app.post("/post_test", function(req, res) {
-  var data = {
-    firstName: req.body.firstName,
-    personality: req.body.personality
-  }
-  Date
-  .create(data)
-  .then(function(date) {
-    console.log(date);
-    res.send(date);
-  })
-});
+//I need to integrate the above code with the code below,
+//and that will yield our algorithm. Where I am responding
+//typesArray right now is where the above code belongs in
+//a modified form.
 
 app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   var dateParams = {
@@ -317,33 +290,36 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
     personality: req.body.personality
   };
   var interestIDArray = req.body.interest_ids; //These names have to be in front end
+  var count = 0;
 
   Date
-  .create(dateParams)
+  .create(dateParams) //Make new date
   .then(function(date) {
-    interestIDArray.forEach(function(interestID) {
-      Interest
+    interestIDArray.forEach(function(interestID) { //Add all the date's interests with a counter to avoid asynchronous issues 
+      Interest 
       .findOne(interestID)
-      .then(function(interest) {
+      .then(function(interest) {        
         date
         .addInterest(interest)
         .then(function() {
-          console.log("Added interest");
-        })
-      })
+          count ++;
+          if (count == interestIDArray.length) { //Once all are added, get those interests
+           date
+            .getInterests()
+            .then(function(dateInterests) { //Look at those interests
+              var typesArray = [];
+              for (var i = 0; i < dateInterests.length; i ++) {
+                typesArray.push(dateInterests[i].type); //Creates an array of the types of the date's interests
+              }
+              console.log(typesArray);
+              res.send(typesArray);
+            });
+          }
+        });
+      });
     })
-    //Asynchronous nature means JS goes below first,
-    //and doesn't send back anything
-    console.log("Down to here");
-    date
-    .getInterests()
-    .then(function(dateInterests) {
-      console.log(dateInterests);
-      res.send(dateInterests);
-    })  
-  })
-})
-
+  });
+});
 
 app.listen(3000, function() {
   console.log("Server running on 3000");
