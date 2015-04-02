@@ -12,6 +12,10 @@ module.exports = function(sequelize, DataTypes) {
           through: "interests_users",
           foreignKey: "interest_id"
         });
+        intersts.belongsToMany(models.dates, {
+          through: "dates_users",
+          foreignLey: "interest_id"
+        }); 
       }
     }
   });
