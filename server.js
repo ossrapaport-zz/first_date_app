@@ -28,7 +28,8 @@ var factual = new Factual(process.env.FACTUAL_KEY, process.env.FACTUAL_SECRET);
 
 app.use(logger("dev"));
 app.use(bodyParser());
-//app.use(express.static(path.join(application_root, "public")));
+//I connected this path to a test HTML folder
+app.use(express.static(path.join(application_root, "public_TO_TEST"))); 
 app.use(express.static(path.join(application_root, "browser")));
 
 //User Routes
@@ -265,11 +266,18 @@ app.get("/search_for_date", function(req, res) {
 
 //Factual Search -- For Example Only, Not Functional With Search
 
-app.get("/search_for_restaurant/:price/:neighborhood", function(req, res) {
-  
+app.get("/search_for_restaurant/:date_id/:price/:neighborhood", function(req, res) {
+  var dateID = req.params.id;
   var price = req.params.price;
   var neighborhood = req.params.neighborhood;
   var cuisine = "TO BE SET";
+  
+  Date
+  .findOne(dateID, {include: [Interest]}
+    )
+  .then(function(date) {
+
+  })
 
   factual.get('/t/restaurants-us', {filters:
     {"$and":[{"locality":"new york", "price":3, "alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"soho"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}]}},
@@ -278,6 +286,17 @@ app.get("/search_for_restaurant/:price/:neighborhood", function(req, res) {
   });
 })
 
+app.get("/interests_test/:id", function(req, res) {
+  Date
+  .findOne(req.params.id, { include: [Interest] })
+  .then(function(date) {
+    date
+    .getInterests()
+    .then(function(interests) {
+      res.send(interests);
+    });
+  });
+});
 
 app.listen(3000, function() {
   console.log("Server running on 3000");
