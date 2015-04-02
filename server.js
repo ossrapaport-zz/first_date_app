@@ -11,6 +11,7 @@ var application_root = __dirname,
 //Models 
 var User = models.users;
 var Interest = models.interests;
+var Date = models.dates;
 
 var app = express();
 environment.load();
@@ -185,6 +186,67 @@ app.delete("/interests/:id", function(req ,res) {
   });
 });
 
+//Date Routes
+
+app.get("/dates", function(req, res) {
+  Date
+  .findAll({ include: [Interest]})
+  .then(function(dates) {
+    res.send(dates);
+  });
+});
+
+app.get("/dates/:id", function(req, res) {
+  var dateID = req.params.id;
+  Date
+  .findOne( dateID, { include: [Interest] })
+  .then(function(date) {
+    res.send(date);
+  });
+});
+
+app.post("/dates", function(req, res) {
+  var dateParams = req.body;
+  Date
+  .create(dateParams)
+  .then(function(newDate) {
+    res.send(newDate);
+  });
+});
+
+app.delete("/dates/:id", function(req, res) {
+  var dateID = req.params.id;
+  Date
+  .findOne(dateID)
+  .then(function(date) {
+    date
+    .destroy()
+    .then(function() {
+      res.send(date);
+    });
+  });
+});
+
+//Adding interests to dates
+
+app.put("/dates/:id/add_interest", function(req, res) {
+  var dateID = req.params.id;
+  var interestID = req.body.interest_id;
+
+  Date
+  .findOne(dateID, { include : [Interest] })
+  .then(function(date) {
+    Interest
+    .findOne(interestID)
+    .then(function(interest) {
+      date
+      .addInterest(interest)
+      .then(function(info) {
+        res.send(info);
+      });
+    });
+  });
+});
 
 /*//Restaurant Search
 
@@ -219,8 +281,4 @@ app.get("/search_for_restaurant/:price/:neighborhood", function(req, res) {
 
 app.listen(3000, function() {
   console.log("Server running on 3000");
-});
- 
-	
-
-
+}); 
