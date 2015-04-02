@@ -1,4 +1,7 @@
 App.Collection.Interests = Backbone.Collection.extend({
-	url:'interests',
+	
+  //Needs initialize function
+
+  url:'/interests',
 	model: App.Models.Interest
 })
