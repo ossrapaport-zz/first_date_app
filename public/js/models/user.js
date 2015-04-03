@@ -10,7 +10,7 @@ App.Models.User = Backbone.Model.extend({
 		personality: 'personality',
 		password: 'password'
 	},
-	
+	//No need for the code below
 	getUsers: function() {
 		console.log('getting users');
 		$.ajax({
