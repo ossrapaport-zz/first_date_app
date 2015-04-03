@@ -15,7 +15,8 @@ App.Views.Interests = Backbone.View.extend({
   delete: function() {
     this.model.destroy();
   },
-	//Maybe move this one up after removing delete, and it should take an argument "model" 
+	//Maybe move this one up after removing delete, and it should take an argument "model".
+	//Also, append - don't send the html.
   renderOne: function() {
   	//Template is used here
 	this.$el.html(this.template(this.model.toJSON() ));
