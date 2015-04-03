@@ -6,6 +6,12 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     timestamps: false,
 
+    instanceMethods: {
+      getID: function() {
+        return this.id;
+      }
+    },
+
     classMethods: {
       associate: function(models) {
         dates.belongsToMany(models.interests, {

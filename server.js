@@ -6,6 +6,7 @@ var application_root = __dirname,
     models = require("./models"),
     path = require("path"),
     environment = require("dotenv"),
+    algorithm = require("./lib/algorithm.js"),
     request = require("request");
 
 //Models 
@@ -24,18 +25,20 @@ environment.load();
 });*/
 
 var Factual = require("factual-api");
-var factual = new Factual(process.env.FACTUAL_KEY, process.env.FACTUAL_SECRET);
+var factual = new Factual(process.env.FACTUAL_KEY_2, process.env.FACTUAL_SECRET_2);
 
 app.use(logger("dev"));
 app.use(bodyParser());
-//app.use(express.static(path.join(application_root, "public")));
+
+//I connected this path to a test HTML folder
+app.use(express.static(path.join(application_root, "public_TO_TEST"))); 
 app.use(express.static(path.join(application_root, "browser")));
 
 //User Routes
 
 app.get("/users", function(req, res) {
   User
-  .findAll({include: [Interest] })
+  .findAll({ include: [Interest] })
   .then(function(users) {
     res.send(users);
   });
@@ -265,19 +268,72 @@ app.get("/search_for_date", function(req, res) {
 
 //Factual Search -- For Example Only, Not Functional With Search
 
-app.get("/search_for_restaurant/:price/:neighborhood", function(req, res) {
-  
+app.get("/test_call/:price/:neighborhood", function(req, res) {
+
   var price = req.params.price;
   var neighborhood = req.params.neighborhood;
-  var cuisine = "TO BE SET";
-
+  
   factual.get('/t/restaurants-us', {filters:
-    {"$and":[{"locality":"new york", "price":3, "alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"soho"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}]}},
-    function (error, response) {
-  res.send(response.data);
+    {"$and":[{"alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"park slope"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}, {"$or":[{"price":3}, {"price":4}]}]}},
+  function (error, response) {
+    res.send(response.data);
   });
 })
 
+//I need to integrate the above code with the code below,
+//and that will yield our algorithm. Where I am responding
+//typesArray right now is where the above code belongs in
+//a modified form.
+
+app.post("/date_and_search/:price/:neighborhood", function(req, res) {
+  var price = req.query.price;
+  var neighborhood = req.query.neighborhood;
+  var dateParams = {
+    firstName: req.body.firstName,
+    personality: req.body.personality
+  };
+  var interestIDArray = req.body.interest_ids; //These names have to be in front end
+  var count = 0;
+
+  //Make new date
+  Date
+  .create(dateParams)
+  .then(function(date) {
+    //Add all the date's interests with a counter to avoid asynchronous issues 
+    interestIDArray.forEach(function(interestID) { 
+      Interest 
+      .findOne(interestID)
+      .then(function(interest) {        
+        date
+        .addInterest(interest)
+        .then(function() {
+          count ++;
+          //Once all are added, get those interests
+          if (count === interestIDArray.length) { 
+            date
+            .getInterests()
+             //Look at those interests
+            .then(function(dateInterests) {
+              var typesArray = [];
+              for (var i = 0; i < dateInterests.length; i ++) {
+                //Creates an array of the types of the date's interests
+                typesArray.push(dateInterests[i].type); 
+              }
+              //Makes query string
+              var factualQuery = algorithm.buildSearchQuery(price, neighborhood, typesArray); 
+              factual.get("/t/restaurants-us", {filters:
+                factualQuery //TODO: Set full filter in algorithm.js
+              }, function(error, response) {
+                console.log(response.data);
+                res.send(response.data);
+              });
+            });
+          }
+        });
+      });
+    });
+  });
+});
 
 app.listen(3000, function() {
   console.log("Server running on 3000");
