@@ -1,7 +1,9 @@
 App.Collection.Interests = Backbone.Collection.extend({
-	
-  //Needs initialize function
+	initialize: function() {
+		console.log('Interest Collection created');
+	},	
 
-  url:'/interests',
-	model: App.Models.Interest
+  	url:'/interests',
+	model: App.Models.Interest,
 })
+

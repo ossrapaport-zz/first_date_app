@@ -1,11 +1,11 @@
-//When would we need this single Interest view?
-
+// We may not need single interest view
 App.Views.Interest = Backbone.View.extend({
+	//Might need an el
 	initialize: function() {
-		this.template = Handlebars.compile($(/*Place class or id name*/).html());
+		this.template = Handlebars.compile($('#interest-template').html());
 		this.render();
 	},
 	render: function() {
-		this.$el.html( this.template( this.model.toJSON() ) );
+		this.$el.html(this.template(this.model.toJSON() ));
 	}
 })

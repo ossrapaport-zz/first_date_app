@@ -299,7 +299,7 @@ form input[type=password] {
 .app-wrapper {
 	display: block;
 	width: 920px;
-	height: 400px;
+	height: 460px;
 	padding: 20px;
 	margin: 50px auto;
 	background: #ff6b57;
@@ -348,6 +348,26 @@ form input[type=password] {
 	padding: 20px 0;
 }
 
+/*select price*/
+.price {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  font-size: 25px;
+  color: #fff;
+  float: left;
+  margin-top: 8px;
+}
+.price > span {
+  display: inline-block;
+  position: relative;
+  width: 1.2em;
+}
+.price > span:hover:before,
+.price > span:hover ~ span:before {
+   content: "$";
+   position: absolute;
+   color: #b2dad7;
+}
 
 /*Rating*/
 .rating {
