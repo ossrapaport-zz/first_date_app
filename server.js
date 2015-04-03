@@ -17,14 +17,6 @@ var Date = models.dates;
 var app = express();
 environment.load();
 
-//Yelp is here
-/*var yelp = require("yelp").createClient ({
-  consumer_key: process.env.YELP_CONSUMER_KEY,
-  consumer_secret: process.env.YELP_CONSUMER_SECRET,
-  token: process.env.YELP_TOKEN,
-  token_secret: process.env.YELP_TOKEN_SECRET
-});*/
-
 var Factual = require("factual-api");
 var factual = new Factual(process.env.FACTUAL_KEY_2, process.env.FACTUAL_SECRET_2);
 
@@ -252,21 +244,6 @@ app.put("/dates/:id/add_interest", function(req, res) {
   });
 });
 
-/*//Restaurant Search - Yelp is Here
-
-app.get("/search_for_date", function(req, res) {
-
-  yelp.search({term: "food", location: "New York City"}, function(error, data) {
-    res.send(data);
-  });
-
-  //Then, once we've gotten the search term,
-  yelp.business(RESTAURANT_ID, function(error, data) {
-    res.send(data);
-  });
-});*/
-
-
 //Factual Search -- For Example Only, Not Functional With Search
 
 app.get("/test_call/:price/:neighborhood", function(req, res) {
@@ -274,8 +251,34 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
   var price = req.params.price;
   var neighborhood = req.params.neighborhood;
   
-  factual.get('/t/restaurants-us', {filters:
-    {"$and":[{"alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"park slope"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}, {"$or":[{"price":3}, {"price":4}]}]}},
+  factual.get('/t/restaurants-us', 
+  { filters:
+    { "$and":
+      [
+        {
+          "alcohol":"true", 
+          "meal_dinner":true, 
+          "neighborhood":
+            { 
+              "$includes":"park slope"
+            }
+        },
+        { "$or":
+            [
+              { "rating":"4" },
+              { "rating":"5" },
+              { "rating":"4.5" }
+            ]
+        }, 
+        { "$or":
+          [
+            { "price":3 }, 
+            { "price":4 }
+          ]
+        }
+      ]
+    }
+  },
   function (error, response) {
     res.send(response.data);
   });
@@ -289,11 +292,12 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
 app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   var price = req.query.price;
   var neighborhood = req.query.neighborhood;
+  //Front end will need to have this structure
   var dateParams = {
     firstName: req.body.firstName,
     personality: req.body.personality
   };
-  var interestIDArray = req.body.interest_ids; //These names have to be in front end
+  var interestIDArray = req.body.interest_ids;
   var count = 0;
 
   //Make new date
@@ -320,11 +324,11 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
                 //Creates an array of the types of the date's interests
                 typesArray.push(dateInterests[i].type); 
               }
-              //Makes query string
-              var factualQuery = algorithm.buildSearchQuery(price, neighborhood, typesArray); 
-              factual.get("/t/restaurants-us", {filters:
-                factualQuery //TODO: Set full filter in algorithm.js
-              }, function(error, response) {
+              //Makes Factual filters
+              var factualFilter = algorithm.buildSearchFilter(price, neighborhood, typesArray); 
+              factual.get("/t/restaurants-us", 
+                factualFilter,
+              function(error, response) {
                 console.log(response.data);
                 res.send(response.data);
               });
