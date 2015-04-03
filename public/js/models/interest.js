@@ -21,7 +21,7 @@ App.Models.Interest = Backbone.Model.extend({
 			})
 			.done(this.addInterests.bind(this));
 		},
-
+	//No need for the code below
 	addInterests: function(interests) {
 		console.log('adding interests');
 		App.Interests.reset();
