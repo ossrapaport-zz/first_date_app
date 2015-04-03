@@ -4,27 +4,16 @@ App.Views.User = Backbone.View.extend({
 	initialize: function() {
 		this.template = Handlebars.compile($('#single-user-template').html() );
 		this.listenTo(this.model, 'add', this.renderOne);
-		this.render();
+		//Preference is not to render this immediately
+    //this.render();
 	},
 	render: function() {
-		this.$el.html( this.template(this.model.toJSON()) );
+    var compiledTemplate = this.template( this.model.toJSON() );
+		this.$el.html( compiledTemplate.html() );
 	},
- 
-  	setUser: function(user) {
-  		this.model.set(user.toJSON() );
-  		this.model.getUser();
-  	},
-
-  	updateUser: function(updatedUser) {
-  		var updateThis = updatedUser.id;
-  		var newUpdatedUser = App.collection.findWhere({id: updateThis});
-  		newUpdatedUser.set({
-  			username: user.username,
-				name: user.name,
-				date_of_birth: user.date_of_birth,
-				personality: user.personality,
-				password: user.password
-			});
-  	}
-
+  setUser: function(user) {
+    this.model = user;
+    //TODO: Evaluate function below in context
+    this.render();
+  }
 });
