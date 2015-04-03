@@ -6,3 +6,8 @@
 };
 */
 //Make onload function
+
+$(function() {
+
+
+});
