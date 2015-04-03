@@ -17,6 +17,7 @@ var Date = models.dates;
 var app = express();
 environment.load();
 
+//Yelp is here
 /*var yelp = require("yelp").createClient ({
   consumer_key: process.env.YELP_CONSUMER_KEY,
   consumer_secret: process.env.YELP_CONSUMER_SECRET,
@@ -251,7 +252,7 @@ app.put("/dates/:id/add_interest", function(req, res) {
   });
 });
 
-/*//Restaurant Search
+/*//Restaurant Search - Yelp is Here
 
 app.get("/search_for_date", function(req, res) {
 
