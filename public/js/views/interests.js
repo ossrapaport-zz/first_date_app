@@ -3,25 +3,19 @@ App.Views.Interests = Backbone.View.extend({
   el: '#interests',
 
   initialize: function() {
-  	console.log('all interests view');
+  	console.log('All Interests view');
     this.listenTo(this.collection, 'reset', this.renderAll);
     this.listenTo(this.collection, 'add', this.renderOne);
     this.template = Handlebars.compile($('#interest-list-template').html());
-    this.render();
+    //Preference not to render immediately, so below is commented
+    //this.renderAll();
   },
   renderAll: function() {
     this.$el.empty();
-    this.collection.each(this.renderOne, this)
+    this.collection.each(this.renderOne.bind(this));
   },
-  renderOne: function() {
-  this.$el.append(new App.Views.Interest({model: interest}).$el);
-	},
-    events: {
-    'click .add':'addInterest',
-    'click .remove': 'deleteIterest',
-  },
-
-  // Need to add "addInterest" and "deleteIterest" functions
-
-
+  renderOne: function(interest) {
+  var compiledTemplate = this.template( interest.toJSON() );
+  this.$el.append( compiledTemplate.html() );
+	}
 });

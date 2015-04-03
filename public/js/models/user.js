@@ -9,5 +9,6 @@ App.Models.User = Backbone.Model.extend({
 		location: 'location',
 		personality: 'personality',
 		password: 'password'
-	},
-})
+	}
+
+});
