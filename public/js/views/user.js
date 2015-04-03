@@ -1,7 +1,8 @@
 App.Views.User = Backbone.View.extend({
+  	el: '#single-user',
+
 	initialize: function() {
-		console.log('single user view')
-		this.template = Handlebars.compile($(#single-user-template).html());
+		this.template = Handlebars.compile($('#single-user-template').html() );
 		this.listenTo(this.model, 'add', this.renderOne);
 		this.render();
 	},
@@ -9,7 +10,7 @@ App.Views.User = Backbone.View.extend({
 		this.$el.html( this.template(this.model.toJSON()) );
 	},
  
-  	setUser: function() {
+  	setUser: function(user) {
   		this.model.set(user.toJSON() );
   		this.model.getUser();
   	},
