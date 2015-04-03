@@ -6,7 +6,7 @@ var application_root = __dirname,
     models = require("./models"),
     path = require("path"),
     environment = require("dotenv"),
-    algorithm = require("./lib/algorithm.js"),
+    filterBuilder = require("./lib/filterBuilder.js"),
     request = require("request");
 
 //Models 
@@ -18,7 +18,7 @@ var app = express();
 environment.load();
 
 var Factual = require("factual-api");
-var factual = new Factual(process.env.FACTUAL_KEY_2, process.env.FACTUAL_SECRET_2);
+var factual = new Factual(process.env.FACTUAL_KEY, process.env.FACTUAL_SECRET);
 
 app.use(logger("dev"));
 app.use(bodyParser());
@@ -258,10 +258,15 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
         {
           "alcohol": "true", 
           "meal_dinner": true, 
-          "neighborhood":
-            { 
-              "$includes":"upper east side"
-            }
+          "neighborhood": { 
+              "$includes": "upper west side"
+          },
+          "cuisine": {
+            "$excludes_any": ["Tapas", "Gastropub"]
+          },
+          "category_labels": {
+            "$excludes_any": ["Music and Show Venues", "Night Clubs", "Movie Theatres"]
+          }
         },
         { "$or":
             [
@@ -329,7 +334,7 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
                 typesArray.push(dateInterests[i].type); 
               }
               //Makes Factual filters
-              var factualFilter = algorithm.buildSearchFilter(price, neighborhood, typesArray); 
+              var factualFilter = filterBuilder.buildSearchFilter(price, neighborhood, typesArray); 
               factual.get("/t/restaurants-us?limit=50", 
                 factualFilter,
               function(error, response) {
