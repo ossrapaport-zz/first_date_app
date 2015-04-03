@@ -4,7 +4,6 @@ var App = {
   Views: {},
   Routers: {}
 };
-
 App.Models.Interest = Backbone.Model.extend({
 	initialize: function() {
 		console.log("New Interest Model created");
@@ -13,7 +12,6 @@ App.Models.Interest = Backbone.Model.extend({
 		name: 'Name',
 		type: 'Type'
 	},
-	
 	getInterests: function() {
 			$.ajax({
 				url:'/interests',
@@ -21,16 +19,5 @@ App.Models.Interest = Backbone.Model.extend({
 			})
 			.done(this.addInterests.bind(this));
 		},
-
-	addInterests: function(interests) {
-		console.log('adding interests');
-		App.Interests.reset();
-		interests.forEach(function(interest) {
-			App.Interests.add ({
-				name: interest.name,
-				type: interest.type
-			});
-		})
-	}
-
 })
+
