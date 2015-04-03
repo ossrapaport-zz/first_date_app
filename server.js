@@ -251,29 +251,33 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
   var price = req.params.price;
   var neighborhood = req.params.neighborhood;
   
-  factual.get('/t/restaurants-us', 
+  factual.get('/t/restaurants-us?limit=50', 
   { filters:
     { "$and":
       [
         {
-          "alcohol":"true", 
-          "meal_dinner":true, 
+          "alcohol": "true", 
+          "meal_dinner": true, 
           "neighborhood":
             { 
-              "$includes":"park slope"
+              "$includes":"upper east side"
             }
         },
         { "$or":
             [
-              { "rating":"4" },
-              { "rating":"5" },
-              { "rating":"4.5" }
+              { "rating": "4" },
+              { "rating": "5" },
+              { "rating": "4.5" }, 
+              { "rating": "3.5"},
+              { "rating": "3"}
             ]
         }, 
         { "$or":
           [
-            { "price":3 }, 
-            { "price":4 }
+            { "price": 3 },
+            { "price": 5 },
+            { "price": 2 }, 
+            { "price": 4 }
           ]
         }
       ]
@@ -326,7 +330,7 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
               }
               //Makes Factual filters
               var factualFilter = algorithm.buildSearchFilter(price, neighborhood, typesArray); 
-              factual.get("/t/restaurants-us", 
+              factual.get("/t/restaurants-us?limit=50", 
                 factualFilter,
               function(error, response) {
                 console.log(response.data);
