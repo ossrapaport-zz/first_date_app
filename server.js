@@ -324,19 +324,21 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
           }
         });
       });
-    })
+    });
   });
 });
 
-app.get("/test", function(req, res) {
-  var array = [1,2];
-  var factualQuery = algorithm.buildSearchQuery(1, 1, array); //Makes query string
-  factual.get("/t/restaurants-us", {filters:
-    factualQuery
-  }, function(error, response) {
+//This is for testing the Factual API - it is not in the MVP
+app.get("/test_call", function(req, res) {
+
+  console.log("Works");
+
+  factual.get('/t/restaurants-us', {filters:
+    {"$and":[{"alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"park slope"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}, {"$or":[{"price":3}, {"price":4}]}]}},
+  function (error, response) {
     res.send(response.data);
   });
-})
+});
 
 app.listen(3000, function() {
   console.log("Server running on 3000");
