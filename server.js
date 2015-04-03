@@ -6,7 +6,7 @@ var application_root = __dirname,
     models = require("./models"),
     path = require("path"),
     environment = require("dotenv"),
-    algorithm = require("./algorithm.js"),
+    algorithm = require("./lib/algorithm.js"),
     request = require("request");
 
 //Models 
@@ -29,6 +29,7 @@ var factual = new Factual(process.env.FACTUAL_KEY_2, process.env.FACTUAL_SECRET_
 
 app.use(logger("dev"));
 app.use(bodyParser());
+
 //I connected this path to a test HTML folder
 app.use(express.static(path.join(application_root, "public_TO_TEST"))); 
 app.use(express.static(path.join(application_root, "browser")));
@@ -37,7 +38,7 @@ app.use(express.static(path.join(application_root, "browser")));
 
 app.get("/users", function(req, res) {
   User
-  .findAll({include: [Interest] })
+  .findAll({ include: [Interest] })
   .then(function(users) {
     res.send(users);
   });
@@ -267,16 +268,15 @@ app.get("/search_for_date", function(req, res) {
 
 //Factual Search -- For Example Only, Not Functional With Search
 
-app.get("/search_for_restaurant/:date_id/:price/:neighborhood", function(req, res) {
-  var dateID = req.params.id;
+app.get("/test_call/:price/:neighborhood", function(req, res) {
+
   var price = req.params.price;
   var neighborhood = req.params.neighborhood;
-  var cuisine = "TO BE SET";
   
   factual.get('/t/restaurants-us', {filters:
-    {"$and":[{"price":3, "alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"park slope"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}]}},
-    function (error, response) {
-  res.send(response.data);
+    {"$and":[{"alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"park slope"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}, {"$or":[{"price":3}, {"price":4}]}]}},
+  function (error, response) {
+    res.send(response.data);
   });
 })
 
@@ -295,10 +295,12 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   var interestIDArray = req.body.interest_ids; //These names have to be in front end
   var count = 0;
 
+  //Make new date
   Date
-  .create(dateParams) //Make new date
+  .create(dateParams)
   .then(function(date) {
-    interestIDArray.forEach(function(interestID) { //Add all the date's interests with a counter to avoid asynchronous issues 
+    //Add all the date's interests with a counter to avoid asynchronous issues 
+    interestIDArray.forEach(function(interestID) { 
       Interest 
       .findOne(interestID)
       .then(function(interest) {        
@@ -306,37 +308,30 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
         .addInterest(interest)
         .then(function() {
           count ++;
-          if (count == interestIDArray.length) { //Once all are added, get those interests
-           date
+          //Once all are added, get those interests
+          if (count === interestIDArray.length) { 
+            date
             .getInterests()
-            .then(function(dateInterests) { //Look at those interests
+             //Look at those interests
+            .then(function(dateInterests) {
               var typesArray = [];
               for (var i = 0; i < dateInterests.length; i ++) {
-                typesArray.push(dateInterests[i].type); //Creates an array of the types of the date's interests
+                //Creates an array of the types of the date's interests
+                typesArray.push(dateInterests[i].type); 
               }
-              var factualQuery = algorithm.buildSearchQuery(price, neighborhood, typesArray); //Makes query string
+              //Makes query string
+              var factualQuery = algorithm.buildSearchQuery(price, neighborhood, typesArray); 
               factual.get("/t/restaurants-us", {filters:
-                factualQuery
+                factualQuery //TODO: Set full filter in algorithm.js
               }, function(error, response) {
+                console.log(response.data);
                 res.send(response.data);
-              })
+              });
             });
           }
         });
       });
     });
-  });
-});
-
-//This is for testing the Factual API - it is not in the MVP
-app.get("/test_call", function(req, res) {
-
-  console.log("Works");
-
-  factual.get('/t/restaurants-us', {filters:
-    {"$and":[{"alcohol":"true", "meal_dinner":true, "neighborhood":{"$includes":"park slope"}},{"$or":[{"rating":"4"},{"rating":"5"},{"rating":"4.5"}]}, {"$or":[{"price":3}, {"price":4}]}]}},
-  function (error, response) {
-    res.send(response.data);
   });
 });
 
