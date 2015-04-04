@@ -1,6 +1,6 @@
 App.Models.User = Backbone.Model.extend({
 	initialize: function() {
-		console.log("New User Model created");
+		console.log('New User Model Created');
 	},
 	defaults: {
 		username: 'username',
@@ -9,6 +9,5 @@ App.Models.User = Backbone.Model.extend({
 		location: 'location',
 		personality: 'personality',
 		password: 'password'
-	}
-
+	},
 });
