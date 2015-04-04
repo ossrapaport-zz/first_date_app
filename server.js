@@ -7,6 +7,7 @@ var application_root = __dirname,
     path = require("path"),
     environment = require("dotenv"),
     filterBuilder = require("./lib/filterBuilder.js"),
+    responseOptimizer = require("./lib/responseOptimizer.js"),
     request = require("request");
 
 //Models 
@@ -257,12 +258,10 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
       [
         {
           "alcohol": "true", 
+          "price": 3,
           "meal_dinner": true, 
           "neighborhood": { 
-              "$includes": "upper west side"
-          },
-          "cuisine": {
-            "$excludes_any": ["Tapas", "Gastropub"]
+              "$includes": "soho"
           },
           "category_labels": {
             "$excludes_any": ["Music and Show Venues", "Night Clubs", "Movie Theatres"]
@@ -276,7 +275,7 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
               { "rating": "3.5"},
               { "rating": "3"}
             ]
-        }, 
+        }/*, 
         { "$or":
           [
             { "price": 3 },
@@ -284,7 +283,7 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
             { "price": 2 }, 
             { "price": 4 }
           ]
-        }
+        }*/
       ]
     }
   },
@@ -299,8 +298,9 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
 //a modified form.
 
 app.post("/date_and_search/:price/:neighborhood", function(req, res) {
-  var price = req.query.price;
-  var neighborhood = req.query.neighborhood;
+  var price = req.params.price;
+  var neighborhood = req.params.neighborhood;
+
   //Front end will need to have this structure
   var dateParams = {
     firstName: req.body.firstName,
@@ -338,8 +338,12 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
               factual.get("/t/restaurants-us?limit=50", 
                 factualFilter,
               function(error, response) {
-                console.log(response.data);
-                res.send(response.data);
+                //Finds the single best spot for the date
+                //console.log(response.data);
+                var bestRestaurantIndex = responseOptimizer.optimizeResponse(price, dateParams.personality, response.data); 
+                console.log(bestRestaurantIndex);
+                console.log(response.data[bestRestaurantIndex]);
+                res.send(response.data[bestRestaurantIndex]);
               });
             });
           }
