@@ -301,6 +301,8 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
 app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   var price = req.query.price;
   var neighborhood = req.query.neighborhood;
+  console.log(price);
+  console.log(neighborhood);
   //Front end will need to have this structure
   var dateParams = {
     firstName: req.body.firstName,
