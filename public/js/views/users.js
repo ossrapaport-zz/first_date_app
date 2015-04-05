@@ -1,5 +1,11 @@
 App.Views.Users = Backbone.View.extend({
+   
    el: '#user-list',
+
+     events: {
+    'click .create-user':'createUser',
+    'click .update-user':'updateUser',
+  },
 
   initialize: function() {
   	console.log('all users View');
