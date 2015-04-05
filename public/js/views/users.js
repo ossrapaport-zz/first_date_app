@@ -20,22 +20,6 @@ App.Views.Users = Backbone.View.extend({
   var compiledTemplate = this.template( user.toJSON() );
   this.$el.append( compiledTemplate.html() );
 	},
-<<<<<<< HEAD
-
-  createUser: function() {
-     if (this.$('.user').val()) {
-      var data = {
-        username: this.$('.username').val(),
-        date_of_birth: this.$('.dob').val(),
-        location: this.$('.location').val(),
-        personality: this.$('.personality').val(),
-        password: this.$('.password').val()
-      }
-      App.users.create(data);
-    }
-  }
-
-=======
   createUser: function() {
     var data = {
       username: this.$('.username').val(),
@@ -50,5 +34,4 @@ App.Views.Users = Backbone.View.extend({
     'click .create-user':'createUser',
     'click .update-user':'updateUser',
   }
->>>>>>> b80976d73da37f94aca18d02e1dbfc669aa917a4
 });

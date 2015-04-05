@@ -33,7 +33,6 @@ app.use(logger("dev"));
 app.use(bodyParser());
 
 //I connected this path to a test HTML folder
-<<<<<<< HEAD
 app.use(express.static(path.join(application_root, "public_TO_TEST"))); 
 app.use(express.static(path.join(application_root, "browser")));
 
