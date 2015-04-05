@@ -8,9 +8,5 @@ App.Views.Result = Backbone.View.extend({
 		$('#search-results').empty();
 		this.$el.html(this.template(this.model.toJSON()))
 
-	},
-	events: {
-		'click': 'render'
 	}
-
 })
