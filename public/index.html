@@ -32,11 +32,55 @@
 		<!-- START app wrapper -->
 		 <div class="app-wrapper">
 
+			<!-- START single user template -->
+			<template id="single-user">
+				<div id="name"><h1 align="center">Hello {{ name }}</h1></div>
+
+			</template>
+			<!-- END single user template -->
+
 			<!-- START edit user template -->
-			<div id="edit-user-template">
+			<template id="edit-user-template">
 				<h1 align="center"> Edit Your Profile</h1>
+				<div id="form-main">
+				  <div id="form-div">
+				    <form class="form" id="form1">		      
+				       <p class="username">
+				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="{{ Username }}" id="username" />
+				      </p>
+				       <p class="password">
+				        <input name="password" type="text" class="validate[required,custom[email]] feedback-input" id="password" placeholder="{{ Password }}" />
+				      </p>
 
+				      <p class="name">
+				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="{{ Name }}" id="name" />
+				      </p>
+				      
+				      <p class="p-dob">
+				        <input name="dob" type="text" class="validate[required,custom[email]] feedback-input" id="dob" placeholder="{{ date_of_birth }}" />
+				      </p>
+				      <div class="clear"></div>
+				      <label><span class="form-label">Your Personality: </span></label>
+				        	<select id = "personality-list">
+					     			<option> {{ personality }} </option>
+	
+					        </select>
+				      <div class="clear"></div>
+				      <label><span class="form-label">Your Interests: </span></label>
+				      <div class="interest-list">
 
+				      {{#each Interest }}
+
+				  </ul>
+				  </div>
+				      
+				      <div class="submit">
+				        <input type="submit" value="SUBMIT" id="button-blue"/>
+				        <div class="ease"></div>
+				      </div>
+				    </form>
+				  </template>
+				  <!-- END user edit template -->
 
 				<!-- START edit user placeholder -->
 				<div id="form-main">
@@ -71,95 +115,80 @@
 					        </select>
 				      <div class="clear"></div>
 				      <label><span class="form-label">Your Interests: </span></label>
-				      <div class="interest-list">
-
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				      <li>Interest</li>
-				  </ul>
-				  </div>
-				      
+				      <ul id="interests"></ul>				      
 				      <div class="submit">
 				        <input type="submit" value="SUBMIT" id="button-blue"/>
 				        <div class="ease"></div>
 				      </div>
 				    </form>
 				  </div>
-				  <!-- END edit user template -->
-
-
-
-			</div>
+			</template>
 			<!-- END edit user template -->
-			
-			<!-- START single user template -->
-			<div id="single-user">
-				
-			</div>
-			<!-- END single user template -->
 
-			<!-- START search for date placeholder -->
-			<!-- <h1 align="center">Search for Your First Date</h1>
+			<!-- START search template -->
+			<template id="search-template">
+			<h1 align="center">Search for Your First Date</h1>
 			<h2>Tell us what you know about the person.</h2>
 			<div class="clear"></div>
 			<form>
-				<label><span class="form-label">Sex: </span></label>
-				<input type="radio" name="sex" value="male" checked> Male
-				<input type="radio" name="sex" value="female"> Female
-				<div class="clear"></div>
+				<label><span class="form-label">Your Date's Name: </span></label>
+				<input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Enter Name Here" id="date-name" />
 				<label><span class="form-label">Personality: </span></label>
-	             <select id = "info-list">
-	     			<option value="Milk">Bitchy</option>
-					<option value="Cheese">Boring</option>
-					<option value="Bread">Shy</option>
+	             <select id = "personality-list">
+	             		<option>Outgoing</option>
+						<option>Reserved</option>
+						<option>Traditional</option>
+						<option>Materialistic</option>
+						<option>Spiritual</option>
 	             </select>
 				<div class="clear"></div>
-				<label><span class="form-label">Interests: </span></label>
-	             <div id="interests"></div>
-	             <div class="clear"></div>
-				<label><span class="form-label">Favorite Food: </span></label>
-	             <select id = "info-list">
-	     			<option value="Milk">Thai</option>
-					<option value="Cheese">Mexican</option>
-					<option value="Bread">Turkish</option>
-	             </select>
+				<label><span class="form-label">Your Interests: </span></label>
+				    <ul id="interests">
+					</ul>
 	             <div class="clear"></div>
 				<label><span class="form-label">Preferred Date Location: </span></label>
-	             <select id = "info-list">
-	     			<option value="Milk">Lower East Side</option>
-					<option value="Cheese">Bushwick</option>
-					<option value="Bread">Harlem</option>
+	             <select id = "neighborhood-list">
+					<option>Location goes here</option>
 	             </select>
 	             <div class="clear"></div>
 	             <label><span class="form-label">Select price: </span></label>
 	             <br />
-         	<div class="price">
+				<label><span class="form-label">Price Range: </span></label>
+	             <select id = "price-list">
+	             		<option id="1">$15 or less</option>
+						<option id="2">$15-$30</option>
+						<option id="3">$30-$50</option>
+						<option id="4">$50-$75</option>
+						<option id="5">$75+</option>
+	             </select>
+         	<!-- <div class="price">
 					<span>$</span><span>$</span><span>$</span><span>$</span><span>$</span>
-					</div>
+				 </div> -->
          	</form>
+			</template>
+			<!-- END search template -->
+
+			<!-- START interest list template -->
+			<template id="interest-checkbox">
+				<div class="interest-list">
+				<input type="checkbox" value="{{ id }}">{{ name }}<br>
+				</div>
+			</template>
+			<!-- END interest list template -->
+
          	 <div class="clear"></div>
-         	<a href="#" id="search-btn">Search</a> -->
+         	<a href="#" class="search-btn">Search</a>
          	<!-- END search for date placeholder -->
 		
 		 </div>       
 		<!-- end app wrapper -->
 
-    <!-- results Template -->
-<!--       <template id="search-result">
+    <!-- START results template -->
+      <template id="search-result">
       	<h1><img src="http://www.iconsdb.com/icons/preview/lime/check-mark-3-xxl.png" width="50"> We found the perfect place!</h1>
 		<div class="one-third">
-			<h2> {{place}} </h2>
-			<p> {{description}} </p>
+			<h2> {{ name }} </h2>
+			<p> {{ description }} </p>
 			<div id="img-gallery"> {{gallery}} </div>
 		</div>
 		<div class="one-third-last">
@@ -170,56 +199,16 @@
 			<h2 align="center">Don't like this place?<br />
 			<a href="#" id="suggestion-btn">Get Another Suggestion</a></h2>		
 		</div>
-      </template> -->
-
-		<!-- start resulst wrapper -->
-		<!-- <div id="results-wrapper">
-			<h1><img src="http://www.iconsdb.com/icons/preview/lime/check-mark-3-xxl.png" width="50"> We found the perfect place!</h1>
-			<div class="one-third">
-					<h2>Grape and Grain</h2>
-					<p>The brunch items are simple and fresh. I ordered the truffle eggs with bacon, which were both bomb. The bacon was perfectly crisp, not burnt nor soggy. My friend ordered the Francisco plate which just looked alright.</p>
-
-					<p>This place was empty on a Sunday during prime brunch time, which I thought was a bit strange at first, but it actually made our experience much better.</p>
-
-					<p>The bathroom is decked out with door knobs. They even try to trick you on the door going in! You'll need to check this place out to see what I mean.</p>
-					
-					<div id="img-gallery">
-					<img src="http://s3-media2.fl.yelpassets.com/bphoto/K_inPNND8TpAK5NJ_Ci5bQ/ms.jpg"> <img src="http://s3-media2.fl.yelpassets.com/bphoto/LB_zLHzw0E2jwR9_B5olXA/ms.jpg"> <img src="http://s3-media3.fl.yelpassets.com/bphoto/w2sQKfmxj3XwXhMFrnAwAw/ms.jpg"> <img src="http://s3-media3.fl.yelpassets.com/bphoto/SCOxs8_-qyfP26n3ZzsxYA/ms.jpg"> 
-					<img src="http://s3-media2.fl.yelpassets.com/bphoto/K_inPNND8TpAK5NJ_Ci5bQ/ms.jpg"> <img src="http://s3-media2.fl.yelpassets.com/bphoto/LB_zLHzw0E2jwR9_B5olXA/ms.jpg"> <img src="http://s3-media3.fl.yelpassets.com/bphoto/w2sQKfmxj3XwXhMFrnAwAw/ms.jpg"> <img src="http://s3-media3.fl.yelpassets.com/bphoto/SCOxs8_-qyfP26n3ZzsxYA/ms.jpg"> 
-
-					</div>
-			</div>
-
-			<div class="one-third-last">
-					
-					<div class="rating">
-					<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-					</div>
-					<div class="clear"></div>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script><div style="overflow:hidden;height:400px;width:400px;"><div id="gmap_canvas" style="height:400px;width:400px;"></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style><a class="google-map-code" href="http://premium-wordpress-themes.org" id="get-map-data">premium-wordpress-themes.org</a></div><script type="text/javascript"> function init_map(){var myOptions = {zoom:14,center:new google.maps.LatLng(40.805478,-73.96522499999998),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(40.805478, -73.96522499999998)});infowindow = new google.maps.InfoWindow({content:"<b>The Breslin</b><br/>2880 Broadway<br/> New York" });google.maps.event.addListener(marker, "click", function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
-
-			</div>
-				<div class="fixed-width">
-					<div class="clear"></div>
-					<h2 align="center">Don't like this place?<br />
-					<a href="#" id="suggestion-btn">Get Another Suggestion</a></h2>
-					
-				</div>
-			</div> -->
-			<!-- end results wrapper -->
-			
-			<!-- <div style="width: 900px; margin: auto">
-				<h2 style="color: #fff">Make a Reservation:</h2>
-				<img align="middle" src="http://reservationlinks.opentable.com/img/screenshots/frontdoor_wide.png">
-			</div>
-
+      </template>
+		<!-- END results template -->
+						
 			<div id="buttons">
 			<div class="fixed-width">
 					<div class="clear"></div>
 					<h2 align="center" style="color: #fff">Ready for the perfect first date?<br />
 					<a href="#" id="post-btn">Schedule it Now!</a></h2>					
 			</div>
-			</div> -->
+			</div>
 			
 	</div>
 	<!-- end inner page -->

@@ -268,7 +268,7 @@ form input[type=password] {
   color: #fff;
 }
 
-#search-btn {
+.search-btn {
   display: inline-block;
   margin: 20px 0;
   padding: 20px 30px;
@@ -285,7 +285,7 @@ form input[type=password] {
   float: right;
 }
 
-#search-btn:hover {
+.search-btn:hover {
   background: #E74C3C;
   color: #fff;
 }
@@ -338,6 +338,10 @@ form input[type=password] {
 
 #info-list {
 	font-size: 40px;
+}
+
+#personality-list {
+  font-size: 40px;
 }
 
 .date-wrapper {
@@ -471,7 +475,6 @@ form input[type=password] {
 .feedback-input:focus{
   background: #fff;
   box-shadow: 0;
-  border: 3px solid #3498db;
   color: #3498db;
   outline: none;
 
@@ -479,7 +482,6 @@ form input[type=password] {
 
 .focused{
   color:#30aed6;
-  border:#30aed6 solid 3px;
 }
 
 
@@ -493,6 +495,7 @@ textarea {
 input:hover, textarea:hover,
 input:focus, textarea:focus {
   background-color:white;
+  outline: none;
 }
 
 #button-blue{
@@ -560,3 +563,7 @@ input:focus, textarea:focus {
   font-size: 20px
 }
 
+.interest-list li:focus, li:hover {
+  background: #E74C3C;
+  color: #fff;
+}
