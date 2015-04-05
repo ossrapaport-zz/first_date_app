@@ -1,5 +1,6 @@
 App.Views.User = Backbone.View.extend({
-  	el: '#single-user',
+  
+  el: '#single-user',
 
 	initialize: function() {
 		this.template = Handlebars.compile($('#single-user-template').html());
