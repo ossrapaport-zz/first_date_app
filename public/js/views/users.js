@@ -1,6 +1,11 @@
 App.Views.Users = Backbone.View.extend({
    el: '#user-list',
 
+     events: {
+    'click .create-user':'createUser',
+    'click .update-user':'updateUser',
+  },
+
   initialize: function() {
   	console.log('all users View');
     this.listenTo(this.collection, 'reset', this.renderAll);
@@ -13,5 +18,19 @@ App.Views.Users = Backbone.View.extend({
 	renderOne: function(user) {
   var compiledTemplate = this.template( user.toJSON() );
   this.$el.append( compiledTemplate.html() );
-	}
+	},
+
+  createUser: function() {
+     if (this.$('.user').val()) {
+      var data = {
+        username: this.$('.username').val(),
+        date_of_birth: this.$('.dob').val(),
+        location: this.$('.location').val(),
+        personality: this.$('.personality').val(),
+        password: this.$('.password').val()
+      }
+      App.users.create(data);
+    }
+  }
+
 });
