@@ -14,6 +14,7 @@ var application_root = __dirname,
 var User = models.users;
 var Interest = models.interests;
 var Date = models.dates;
+var Result = models.results;
 
 
 var app = express();
@@ -40,7 +41,7 @@ app.use(express.static(path.join(application_root, "browser")));
 
 app.get("/users", function(req, res) {
   User
-  .findAll({ include: [Interest] })
+  .findAll({ include: [Interest], include: Result })
   .then(function(users) {
     res.send(users);
   });
@@ -51,7 +52,8 @@ app.get("/users/:id", function(req, res) {
   User
   .findOne({
     where: {id: userID},
-    include: [Interest]
+    include: [Interest],
+    include: Result
   })
   .then(function(user) {
     res.send(user);
@@ -253,6 +255,75 @@ app.put("/dates/:id/add_interest", function(req, res) {
   });
 });
 
+//Result Routes
+
+app.get("/results", function(req, res) {
+
+  Result
+  .findAll()
+  .then(function(results) {
+    res.send(results);
+  });
+});
+
+app.get("/resuts/:id", function(req, res) {
+  var resultID = req.params.id;
+
+  Result
+  .findOne(resultID)
+  .then(function(result) {
+    res.send(result);
+  });
+});
+
+app.post("/users/:id/results", function(req, res) {
+  var userID = req.params.id;
+  var data = req.body;
+
+  User
+  .findOne(userID)
+  .then(function(user) {
+    Result
+    .create(data)
+    .then(function(newResult) {
+      user
+      .addResult(newResult)
+      .then(function(result) {
+        res.send(result);
+      });
+    });
+  });
+});
+
+app.put("/results/:id", function(req, res) {
+  var resultID = req.params.id;
+  var data =req.body;
+
+  Result
+  .findOne(resultID)
+  .then(function(result) {
+    result
+    .update(data)
+    .then(function(updatedResult) {
+      res.send(updatedResult);
+    });
+  });
+});
+
+app.delete("/results/:id", function(req, res) {
+  var resultID = req.params.id;
+
+  Result
+  .findOne(resultID)
+  .then(function(result) {
+    result
+    .destroy()
+    .then(function() {
+      res.send(result);
+    });
+  });
+});
+
 //Factual Search -- For Example Only, Not Functional With Search
 
 app.get("/test_call/:price/:neighborhood", function(req, res) {
@@ -299,11 +370,6 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
     res.send(response.data);
   });
 })
-
-//I need to integrate the above code with the code below,
-//and that will yield our algorithm. Where I am responding
-//typesArray right now is where the above code belongs in
-//a modified form.
 
 app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   var price = req.params.price;
