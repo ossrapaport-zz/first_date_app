@@ -16,6 +16,11 @@ module.exports = function(sequelize, DataTypes) {
           through: "interests_users",
           foreignKey: "user_id"
         });
+        users.hasMany(models.results, {
+          foreignKey: "user_id",
+          onDelete: "cascade",
+          hooks: true
+        });
       }
     }
   });
