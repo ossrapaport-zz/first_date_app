@@ -1,4 +1,5 @@
 App.Views.Users = Backbone.View.extend({
+   
    el: '#user-list',
 
   initialize: function() {
