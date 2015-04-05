@@ -15,8 +15,16 @@ var User = models.users;
 var Interest = models.interests;
 var Date = models.dates;
 
+
 var app = express();
 environment.load();
+
+var yelp = require("yelp").createClient ({
+  consumer_key: process.env.YELP_CONSUMER_KEY,
+  consumer_secret: process.env.YELP_CONSUMER_SECRET,
+  token: process.env.YELP_TOKEN,
+  token_secret: process.env.YELP_TOKEN_SECRET
+});
 
 var Factual = require("factual-api");
 var factual = new Factual(process.env.FACTUAL_KEY, process.env.FACTUAL_SECRET);
@@ -351,6 +359,22 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
         });
       });
     });
+  });
+});
+
+//Restaurant Search for a Photo - Yelp is Here
+app.get("/search_for_photo/:name/:neighborhood", function(req, res) {
+  var restaurantName = req.params.name;
+  var restaurantNeighborhood = req.params.neighborhood;
+  var imageObject = {
+    yelp_image_url: "",
+    yelp_snippet_image_url: "",
+    left_scraped_image_url: "",
+    middle_scraped_image_url: ""
+  }
+  yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood}, function(error, data) {
+    imageObject.yelp_image_url = data.businesses.image_url;
+    imageObject.snippet_image_url = data.businesses.yelp_snippet_image_url;
   });
 });
 
