@@ -375,7 +375,7 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   var price = req.params.price;
   var neighborhood = req.params.neighborhood;
 
-  //Front end will need to have this structure
+  //TODO: Make sure this works with the front-end structure
   var dateParams = {
     firstName: req.body.firstName,
     personality: req.body.personality
