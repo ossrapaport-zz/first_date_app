@@ -13,5 +13,19 @@ App.Views.Users = Backbone.View.extend({
 	renderOne: function(user) {
   var compiledTemplate = this.template( user.toJSON() );
   this.$el.append( compiledTemplate.html() );
-	}
+	},
+  createUser: function() {
+    var data = {
+      username: this.$('.username').val(),
+      date_of_birth: this.$('.dob').val(),
+      location: this.$('.location').val(),
+      personality: this.$('.personality').val(),
+      password: this.$('.password').val()
+    }
+    App.users.create(data);
+  },
+  events: {
+    'click .create-user':'createUser',
+    'click .update-user':'updateUser',
+  }
 });
