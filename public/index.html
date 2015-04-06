@@ -131,8 +131,8 @@
 					        </select>
 				      <div class="clear"></div>
 				      <label><span class="form-label">Tell us some of your Interests: </span></label>
-				      <ul class="interest-list"></ul>
-				   <div class="submit">
+				      <ul id="interests-list"></ul>
+				   		<div class="submit">
 				        <input type="submit" value="SUBMIT" id="register-btn"/>
 				        <div class="ease"></div>
 				      </div>
@@ -173,7 +173,7 @@
 					        </select>
 				      <div class="clear"></div>
 				      <label><span class="form-label">Your Interests: </span></label>
-				  
+				  	
 				  </div>				      
 				      <div class="submit">
 				        <input type="submit" value="SUBMIT" id="register-btn"/>
@@ -200,7 +200,7 @@
 						<option>Spiritual</option>
 	             </select>
 				<div class="clear"></div>
-				<label><span class="form-label">Your Interests: </span></label>
+				<label><span class="form-label">Select some of your date's interests: </span></label>
 				    <ul id="interests-list">
 					</ul>
 	             <div class="clear"></div>
@@ -353,7 +353,7 @@
 			<!-- END search template -->
 
 			<!-- START interest list template -->
-			<template id="interest-list-template">
+			<template id="interest-list-template">				
 				<li ><input type="checkbox" name="interest-checkbox" value="{{ id }}">{{ name }}</li>
 			</template>
 			<!-- END interest list template -->
