@@ -19,7 +19,7 @@ App.Views.ModalView = Backbone.View.extend({
 	},
 
 	showExistingUsers: function() {
-		App.user.fetch();
+		App.users.fetch();
 	},
 
 	show: function() {
