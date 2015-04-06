@@ -1,5 +1,5 @@
 App.Views.Search = Backbone.View.extend({
-  el: ".app-wrapper",
+  el: "#app-wrapper",
 
   initialize: function() {
     this.template = Handlebars.compile($("#search-template").html());
