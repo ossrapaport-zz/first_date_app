@@ -7,7 +7,6 @@ App.Views.Search = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template);
     App.interestsView = new App.Views.Interests ({ collection: App.interests });
-    debugger
     App.interestsView.renderAll();
   },
   getCheckedBoxesID: function(checkboxName) {
