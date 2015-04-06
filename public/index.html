@@ -62,8 +62,8 @@
 	<!-- header template -->
 	<template id="header-template">
 		<div id="logo">First Date Generator</div>
-		<a href="#" class="nav-search"></a>
-		<a href="#" class="nav-profile"></a>
+		<a href="#" class="nav-search">Search</a>
+		<a href="#" class="nav-profile">Profile</a>
 	</template>
 
 	 	<template id="account-modal-template">
@@ -102,21 +102,22 @@
 
 			<!-- START create user template -->
 			<template id="create-user-template">
+				<div id="account-wrapper">
 				<h1 align="center"> Create Your Profile</h1>
 				<div id="form-main">
 				  <div id="form-div">
 				    <form class="form" id="form1">
-				       <p class="username">
+				       <p class="username"> Username: 
 				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ username }} " placeholder="{{ username }}" id="username" required/>
 				      </p>
-				       <p class="password">
+				       <p class="password"> Password: 
 				        <input name="password" type="text" class="validate[required,custom[email]] feedback-input" id="password" value=" {{ password }} " placeholder="{{ password }}" required/>
 				      </p>
 
-				      <p class="name">
+				      <p class="name"> Name: 
 				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ name }} " placeholder="{{ name }}" id="name" required/>
 				      </p>			      
-				      <p class="p-dob">
+				      <p class="p-dob"> Date of Birth
 				        <input name="dob" type="text" class="validate[required,custom[email]] feedback-input" id="dob" value=" {{ date_of_birth }} " placeholder="{{ date_of_birth }}" required/>
 				      </p>
 				      <div class="clear"></div>
@@ -138,6 +139,7 @@
 				        <div class="ease"></div>
 				      </div>
 				    </form>
+				</div>
 				  </template>
 				  <!-- END create user template -->
 
