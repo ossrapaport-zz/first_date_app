@@ -612,3 +612,24 @@ input:focus, textarea:focus {
   box-sizing: border-box;
   padding-top: 60px;
 }
+
+#account-wrapper {
+  position: relative;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #2d292d;
+  width: 600px;
+  height: 510px;
+  left: 50%;
+  margin-left: -300px;
+}
+
+.one-half {
+  width:50%;
+  float: left;
+}
+
+.one-half-last {
+  width: 50%;
+  float: right;
+}
