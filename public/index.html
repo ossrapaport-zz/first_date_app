@@ -26,17 +26,38 @@
 
    <script src="js/app.js"></script>
 
-
+<!--          _             _     
+  __ _  __| | ___  _ __ (_)___ 
+ / _` |/ _` |/ _ \| '_ \| / __|
+| (_| | (_| | (_) | | | | \__ \
+ \__,_|\__,_|\___/|_| |_|_|___/
+                                -->
 </head>
 <body>
-	<div id="header">
-		<div id="logo">First Date Generator</div>
-		<!-- TODO: Button to view profile -->
-	</div>
+	<div id="header"></div>
+	<template="header-template">
+		<div id="logo"></div>
+		<a href="#" class="nav-search"></a>
+		<a href="#" class="nav-profile"></a>
+	</template>
 	<!-- START inner page -->
 	<div id="inner-page">
 		<!-- START app wrapper -->
 		 <div class="app-wrapper">
+			<div id="account-modal"></div>
+		 	<template="account-modal-template">
+		 		<div class="one-half">
+		 			<h4> Select Your Username:</h4>
+					<div id="user-list"></div>
+		 		</div>
+				<div class="one-half-last">
+					<h4>Don't have an account yet?</h4>
+					<div class="submit">
+				    	<input type="submit" value="SUBMIT" id="create-acct-btn"/>
+				    	<div class="ease"></div>
+				    </div>
+				</div>
+		 	</template>
 
 			<!-- START single user template -->
 			<template id="single-user">
@@ -45,12 +66,57 @@
 				<h4> Date of Birth: {{ date_of_birth }} </h4>
 				<h4> Your Personality: {{ location }} </h4>
 				<h4> Location: {{ location }} </h4>
+				<h4> Interests: {{#each interests}}</h4>
 
 				<h1>Your Date history</h1>
-<!-- 				TODO: Add spot for interests with {{#each interests}} -->
+				<p>History goes here</p>
 
 			</template>
 			<!-- END single user template -->
+
+			<!-- START create user template -->
+			<template id="edit-user-template">
+				<h1 align="center"> Create Your Profile</h1>
+				<div id="form-main">
+				  <div id="form-div">
+				    <form class="form" id="form1">
+				       <p class="username">
+				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ username }} " placeholder="{{ username }}" id="username" required/>
+				      </p>
+				       <p class="password">
+				        <input name="password" type="text" class="validate[required,custom[email]] feedback-input" id="password" value=" {{ password }} " placeholder="{{ password }}" required/>
+				      </p>
+
+				      <p class="name">
+				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ name }} " placeholder="{{ name }}" id="name" required/>
+				      </p>
+				      
+				      <p class="p-dob">
+				        <input name="dob" type="text" class="validate[required,custom[email]] feedback-input" id="dob" value=" {{ date_of_birth }} " placeholder="{{ date_of_birth }}" required/>
+				      </p>
+				      <div class="clear"></div>
+				      <label><span class="form-label">Select your personality: </span></label>
+				        	<select id = "personality-list">
+							    <option>Outgoing</option>
+								<option>Reserved</option>
+								<option>Traditional</option>
+								<option>Materialistic</option>
+								<option>Spiritual</option>
+					        </select>
+				      <div class="clear"></div>
+				      <label><span class="form-label">Tell us some of your Interests: </span></label>
+				      <div class="interest-list">
+							<!-- TODO: Fix #each interests -->
+				      {{#each interests}}
+				  </ul>
+				  </div>				      
+				      <div class="submit">
+				        <input type="submit" value="SUBMIT" id="register-btn"/>
+				        <div class="ease"></div>
+				      </div>
+				    </form>
+				  </template>
+				  <!-- END create user template -->
 
 			<!-- START edit user template -->
 			<template id="edit-user-template">
@@ -58,39 +124,37 @@
 				<div id="form-main">
 				  <div id="form-div">
 				    <form class="form" id="form1">
-				    <!-- TODO: Set value of input to be {{username}} or {{name}} or {{date_of_birth}} -->		      
 				       <p class="username">
-				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="{{ Username }}" id="username" required/>
+				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ username }} " placeholder="{{ username }}" id="username" required/>
 				      </p>
 				       <p class="password">
-				        <input name="password" type="text" class="validate[required,custom[email]] feedback-input" id="password" placeholder="{{ Password }}" required/>
+				        <input name="password" type="text" class="validate[required,custom[email]] feedback-input" id="password" value=" {{ password }} " placeholder="{{ password }}" required/>
 				      </p>
 
 				      <p class="name">
-				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="{{ Name }}" id="name" required/>
+				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ name }} " placeholder="{{ name }}" id="name" required/>
 				      </p>
 				      
 				      <p class="p-dob">
-				        <input name="dob" type="text" class="validate[required,custom[email]] feedback-input" id="dob" placeholder="{{ date_of_birth }}" required/>
+				        <input name="dob" type="text" class="validate[required,custom[email]] feedback-input" id="dob" value=" {{ date_of_birth }} " placeholder="{{ date_of_birth }}" required/>
 				      </p>
 				      <div class="clear"></div>
-				      <!-- TODO: Put in personality dropdown -->
 				      <label><span class="form-label">Your Personality: </span></label>
 				        	<select id = "personality-list">
-					     			<option> {{ personality }} </option>
-	
+							    <option>Outgoing</option>
+								<option>Reserved</option>
+								<option>Traditional</option>
+								<option>Materialistic</option>
+								<option>Spiritual</option>
 					        </select>
 				      <div class="clear"></div>
 				      <label><span class="form-label">Your Interests: </span></label>
 				      <div class="interest-list">
-							<!-- TODO: Fix #each interests -->
 				      {{#each interests}}
-
 				  </ul>
-				  </div>
-				      
+				  </div>				      
 				      <div class="submit">
-				        <input type="submit" value="SUBMIT" id="button-blue"/>
+				        <input type="submit" value="SUBMIT" id="register-btn"/>
 				        <div class="ease"></div>
 				      </div>
 				    </form>
@@ -265,10 +329,9 @@
 			<!-- END search template -->
 
 			<!-- START interest list template -->
-			<!-- TODO: Change template to li and set name of li as "interest-checkbox" -->
 			<template id="interest-checkbox">
 				<div class="interest-list">
-				<input type="checkbox" value="{{ id }}">{{ name }}<br>
+				<li><input type="checkbox" value="{{ id }}">{{ name }}</li>
 				</div>
 			</template>
 			<!-- END interest list template -->
@@ -288,11 +351,9 @@
 		<div class="one-third">
 			<h2> {{ name }} </h2>
 			<p> {{ description }} </p>
-			<!-- TODO: Change gallery to two img tags with appropriate Handlebars -->
-			<div id="img-gallery"> {{gallery}} </div>
+			<div id="img-gallery"><img src=" {{img_url_1}} " /> <img src=" {{img_url_2}} " /></div>
 		</div>
-		<div class="one-third-last">
-			
+		<div class="one-third-last">			
 		</div>
 		<!-- <div class="fixed-width">
 			<div class="clear"></div>
