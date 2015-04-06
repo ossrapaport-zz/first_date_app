@@ -19,8 +19,11 @@
    <script src="js/views/interests.js"></script>
    <script src="js/views/user.js"></script>
    <script src="js/views/users.js"></script>
+   <script src="js/views/search.js"></script>
+   <script src="js/views/result.js"></script>
 
    <script src="js/app.js"></script>
+
 
 </head>
 <body>
@@ -35,6 +38,12 @@
 			<!-- START single user template -->
 			<template id="single-user">
 				<div id="name"><h1 align="center">Hello {{ name }}</h1></div>
+				<h4> Username: {{ username }} </h4>
+				<h4> Date of Birth: {{ date_of_birth }} </h4>
+				<h4> Your Personality: {{ location }} </h4>
+				<h4> Location: {{ location }} </h4>
+
+				<h1>Your Date history</h1>
 
 			</template>
 			<!-- END single user template -->
@@ -46,18 +55,18 @@
 				  <div id="form-div">
 				    <form class="form" id="form1">		      
 				       <p class="username">
-				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="{{ Username }}" id="username" />
+				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="{{ Username }}" id="username" required/>
 				      </p>
 				       <p class="password">
-				        <input name="password" type="text" class="validate[required,custom[email]] feedback-input" id="password" placeholder="{{ Password }}" />
+				        <input name="password" type="text" class="validate[required,custom[email]] feedback-input" id="password" placeholder="{{ Password }}" required/>
 				      </p>
 
 				      <p class="name">
-				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="{{ Name }}" id="name" />
+				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="{{ Name }}" id="name" required/>
 				      </p>
 				      
 				      <p class="p-dob">
-				        <input name="dob" type="text" class="validate[required,custom[email]] feedback-input" id="dob" placeholder="{{ date_of_birth }}" />
+				        <input name="dob" type="text" class="validate[required,custom[email]] feedback-input" id="dob" placeholder="{{ date_of_birth }}" required/>
 				      </p>
 				      <div class="clear"></div>
 				      <label><span class="form-label">Your Personality: </span></label>
@@ -82,49 +91,6 @@
 				  </template>
 				  <!-- END user edit template -->
 
-				<!-- START edit user placeholder -->
-				<div id="form-main">
-				  <div id="form-div">
-				    <form class="form" id="form1">
-				      
-				       <p class="name">
-				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Username" id="name" />
-				      </p>
-				       <p class="email">
-				        <input name="email" type="text" class="validate[required,custom[email]] feedback-input" id="email" placeholder="Password" />
-				      </p>
-				      <p class="email">
-				        <input name="email" type="text" class="validate[required,custom[email]] feedback-input" id="email" placeholder="Re-Type Password" />
-				      </p>
-
-				      <p class="name">
-				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Name" id="name" />
-				      </p>
-				      
-				      <p class="email">
-				        <input name="email" type="text" class="validate[required,custom[email]] feedback-input" id="email" placeholder="Date of Birth (mm/dd/yyyy)" />
-				      </p>
-				      <div class="clear"></div>
-				      <label><span class="form-label">Your Personality: </span></label>
-				        	<select id = "info-list">
-					     			<option>Outgoing</option>
-									<option>Reserved</option>
-									<option>Traditional</option>
-									<option>Materialistic</option>
-									<option>Spiritual</option>
-					        </select>
-				      <div class="clear"></div>
-				      <label><span class="form-label">Your Interests: </span></label>
-				      <ul id="interests"></ul>				      
-				      <div class="submit">
-				        <input type="submit" value="SUBMIT" id="button-blue"/>
-				        <div class="ease"></div>
-				      </div>
-				    </form>
-				  </div>
-			</template>
-			<!-- END edit user template -->
-
 			<!-- START search template -->
 			<template id="search-template">
 			<h1 align="center">Search for Your First Date</h1>
@@ -143,12 +109,136 @@
 	             </select>
 				<div class="clear"></div>
 				<label><span class="form-label">Your Interests: </span></label>
-				    <ul id="interests">
+				    <ul id="interests-list">
 					</ul>
 	             <div class="clear"></div>
 				<label><span class="form-label">Preferred Date Location: </span></label>
 	             <select id = "neighborhood-list">
-					<option>Location goes here</option>
+						<option>Alphabet City</option>
+						<option>Astor Row</option>
+						<option>Battery Park City</option>
+						<option>Bowery</option>
+						<option>Carnegie Hill</option>
+						<option>Chelsea</option>
+						<option>Chinatown</option>
+						<option>Civic Center</option>
+						<option>Columbus Circle</option>
+						<option>Cooperative Village</option>
+						<option>Diamond District</option>
+						<option>East Harlem</option>
+						<option>East Village</option>
+						<option>Ellis Island</option>
+						<option>Essex Crossing</option>
+						<option>Financial District</option>
+						<option>Five Points</option>
+						<option>Flatiron District</option>
+						<option>Garment District</option>
+						<option>Gashouse District</option>
+						<option>Governors Island</option>
+						<option>Gramercy Park</option>
+						<option>Greenwich Village</option>
+						<option>Hamilton Heights</option>
+						<option>Harlem</option>
+						<option>Hell's Kitchen</option>
+						<option>Herald Square</option>
+						<option>Hudson Heights</option>
+						<option>Hudson Square</option>
+						<option>Hudson Yards</option>
+						<option>Inwood</option>
+						<option>Kips Bay</option>
+						<option>Koreatown</option>
+						<option>Lenox Hill</option>
+						<option>Liberty Island</option>
+						<option>Lincoln Square</option>
+						<option>Little Fuzhou</option>
+						<option>Little Germany</option>
+						<option>Little Italy</option>
+						<option>Little Spain</option>
+						<option>Little Syria</option>
+						<option>Lower East Side</option>
+						<option>Lower Manhattan</option>
+						<option>Madison Square</option>
+						<option>Manhattan Valley</option>
+						<option>Manhattantown</option>
+						<option>Manhattanville</option>
+						<option>Marble Hill</option>
+						<option>Marcus Garvey Park</option>
+						<option>Meatpacking District</option>
+						<option>Midtown Manhattan</option>
+						<option>Morningside Heights</option>
+						<option>Murray Hill</option>
+						<option>NoHo</option>
+						<option>Nolita</option>
+						<option>NoMad</option>
+						<option>Penn South</option>
+						<option>Peter Cooper Village</option>
+						<option>Pomander Walk</option>
+						<option>Radio Row</option>
+						<option>Randalls Island</option>
+						<option>Riverside South</option>
+						<option>Roosevelt Island</option>
+						<option>Rose Hill</option>
+						<option>Silicon Alley</option>
+						<option>SoHo</option>
+						<option>South Street Seaport</option>
+						<option>South Village</option>
+						<option>Stuyvesant Square</option>
+						<option>Stuyvesant Town</option>
+						<option>Sugar Hill</option>
+						<option>Sutton Place</option>
+						<option>Sylvan</option>
+						<option>Tenderloin</option>
+						<option>Theater District</option>
+						<option>Times Square</option>
+						<option>Tribeca</option>
+						<option>Tudor City</option>
+						<option>Turtle Bay</option>
+						<option>Two Bridges</option>
+						<option>Union Square</option>
+						<option>Upper East Side</option>
+						<option>Upper Manhattan</option>
+						<option>Upper West Side</option>
+						<option>Wards Island</option>
+						<option>Washington Heights</option>
+						<option>Waterside Plaza</option>
+						<option>West Village</option>
+						<option>World Trade Center</option>
+						<option>Yorkville</option>
+						<option>Bushwick</option>
+						<option>Greenpoint</option>
+						<option>Willliamsburg</option>
+						<option>Bushwick</option>
+						<option>Cypress Hills</option>
+						<option>East New York</option>
+						<option>Canarsie</option>
+						<option>Brownsville</option>
+						<option>Bergen Beach</option>
+						<option>Mill Basin</option>
+						<option>East Flatbush</option>
+						<option>Flatlands</option>
+						<option>Marine Park</option>
+						<option>Sheepshead Bay</option>
+						<option>Brighton Beach</option>
+						<option>Manhattan Beach</option>
+						<option>Coney Island</option>
+						<option>Sea Gate</option>
+						<option>Gravesend</option>
+						<option>Bath Beach</option>
+						<option>Fort Hamilton</option>
+						<option>Bay Ridge</option>
+						<option>Sunset Park</option> 
+						<option>Prospect Park South</option>
+						<option>Flatbush</option> 
+						<option>Prospect Park</option> 
+						<option>Windsor Terrace</option>
+						<option>Park Slope</option>
+						<option>Gowanus</option>
+						<option>Prospect Heights</option>
+						<option>Broom hills</option>
+						<option>Downtown Brooklyn</option>
+						<option>Carroll Gardens</option>
+						<option>Cobble Hill</option>
+						<option>DUMBO</option> 
 	             </select>
 	             <div class="clear"></div>
 	             <label><span class="form-label">Select price: </span></label>
@@ -183,8 +273,10 @@
 		 </div>       
 		<!-- end app wrapper -->
 
+		<div id="search-result"></div>
+
     <!-- START results template -->
-      <template id="search-result">
+      <template id="search-result-template">
       	<h1><img src="http://www.iconsdb.com/icons/preview/lime/check-mark-3-xxl.png" width="50"> We found the perfect place!</h1>
 		<div class="one-third">
 			<h2> {{ name }} </h2>
@@ -192,13 +284,13 @@
 			<div id="img-gallery"> {{gallery}} </div>
 		</div>
 		<div class="one-third-last">
-			<div class="rating"> {{rating}} </div>
+			
 		</div>
-		<div class="fixed-width">
+		<!-- <div class="fixed-width">
 			<div class="clear"></div>
 			<h2 align="center">Don't like this place?<br />
 			<a href="#" id="suggestion-btn">Get Another Suggestion</a></h2>		
-		</div>
+		</div> -->
       </template>
 		<!-- END results template -->
 						
