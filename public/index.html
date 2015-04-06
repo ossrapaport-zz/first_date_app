@@ -29,8 +29,6 @@
    <script src="js/views/topbar.js"></script>
    <script src="js/views/modal_view.js"></script>
 
-
-
 <!--          _             _     
   __ _  __| | ___  _ __ (_)___ 
  / _` |/ _` |/ _ \| '_ \| / __|
@@ -332,10 +330,8 @@
 			<!-- END search template -->
 
 			<!-- START interest list template -->
-			<template id="interest-checkbox">
-				<div class="interest-list">
-				<li><input type="checkbox" value="{{ id }}">{{ name }}</li>
-				</div>
+			<template id="interest-list-template">
+				<li ><input type="checkbox" name="interest-checkbox" value="{{ id }}">{{ name }}</li>
 			</template>
 			<!-- END interest list template -->
 
