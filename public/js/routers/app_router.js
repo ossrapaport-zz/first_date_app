@@ -13,7 +13,7 @@ App.Routers.Main = Backbone.Router.extend({
     App.interestsView = new App.Views.Interests({ collection: App.interests });
     App.interests.fetch({ reset: true });
 
-    App.userView = new App.Views.User();
+    App.userView = new App.Views.User({ model: new App.Models.User });
 
     App.modalView = new App.Views.ModalView();
 
