@@ -338,7 +338,7 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
         {
           "alcohol": "true", 
           "price": 3,
-          "meal_dinner": true, 
+          "meal_dinner": true,  
           "neighborhood": { 
               "$includes": "soho"
           },
@@ -354,6 +354,12 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
               { "rating": "3.5"},
               { "rating": "3"}
             ]
+        },
+        { "$or": 
+          [
+            { "locality": "New York"},
+            { "locality": "Brooklyn"}
+          ]
         }/*, 
         { "$or":
           [
