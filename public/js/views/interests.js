@@ -1,6 +1,6 @@
 App.Views.Interests = Backbone.View.extend({
 
-  el: '.interest-list',
+  el: '#interests-list',
 
   initialize: function() {
   	console.log('All Interests view');

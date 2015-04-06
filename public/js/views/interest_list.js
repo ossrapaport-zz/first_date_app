@@ -1,5 +1,6 @@
 App.Views.InterestList = Backbone.View.extend({
   initialize: function() {
+    console.log("Made interest list");
     this.template = Handlebars.compile( $("#interest-list-template").html() );
   },
   render: function() {
