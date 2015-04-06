@@ -599,7 +599,7 @@ input:focus, textarea:focus {
 
 /*modal view*/
 
-#account-modal-template {
+#account-modal {
   position: fixed;
   background-color: white;
   z-index: 1000;
