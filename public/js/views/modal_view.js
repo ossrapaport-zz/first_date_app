@@ -13,7 +13,6 @@ App.Views.ModalView = Backbone.View.extend({
 	},
 
 	createNewUser: function() {
-		this.$el.fadeOut(300);
 		var newUserView = new App.Views.User({ model: user });
 		newUserView.$el.appendTo($('#account-modal'));
 
