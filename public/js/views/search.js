@@ -5,7 +5,6 @@ App.Views.Search = Backbone.View.extend({
     this.template = Handlebars.compile($("#search-template").html());
   },
   render: function() {
-    debugger
     this.$el.html(this.template);
     App.interestsView = new App.Views.Interests ({ collection: App.interests });
     App.interestsView.renderAll();
