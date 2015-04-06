@@ -498,7 +498,7 @@ input:focus, textarea:focus {
   outline: none;
 }
 
-#button-blue{
+#register-btn{
   float:left;
   width: 100%;
   border: #fbfbfb solid 4px;
@@ -515,7 +515,29 @@ input:focus, textarea:focus {
   font-weight:700;
 }
 
-#button-blue:hover{
+#register-btn:hover{
+  background-color: rgba(0,0,0,0);
+  color: #0493bd;
+}
+
+#create-acct-btn {
+  float:left;
+  width: 100%;
+  border: #fbfbfb solid 4px;
+  cursor:pointer;
+  background-color: #E74C3C;
+  color:white;
+  font-size:24px;
+  padding-top:22px;
+  padding-bottom:22px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
+
+#create-acct-btn:hover {
   background-color: rgba(0,0,0,0);
   color: #0493bd;
 }
@@ -540,30 +562,18 @@ input:focus, textarea:focus {
   background-color:white;
 }
 
-@media only screen and (max-width: 580px) {
-  #form-div{
-    left: 3%;
-    margin-right: 3%;
-    width: 88%;
-    margin-left: 0;
-    padding-left: 3%;
-    padding-right: 3%;
-  }
-}
+/*modal view*/
 
-.interest-list {
-  margin: 20px 0;
-  height:100px; 
+#account-modal-template {
+  position: fixed;
+  background-color: white;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  display: none;
+  height: 100%;
   width: 100%;
-  background: #fff;
-  overflow:hidden; 
-  overflow-y:scroll;
-  list-style: none;
-  padding-left: 20px;
-  font-size: 20px
-}
-
-.interest-list li:focus, li:hover {
-  background: #E74C3C;
-  color: #fff;
+  background: #b2dad7;
+  box-sizing: border-box;
+  padding-top: 60px;
 }
