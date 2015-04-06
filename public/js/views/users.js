@@ -1,11 +1,6 @@
 App.Views.Users = Backbone.View.extend({
    
-   el: '.user-list',
-
-     events: {
-    'click .create-user':'createUser',
-    'click .update-user':'updateUser',
-  },
+  el: '.user-list',
 
   initialize: function() {
   	console.log('all users View');
@@ -18,7 +13,10 @@ App.Views.Users = Backbone.View.extend({
 	renderOne: function(user) {
   var compiledTemplate = this.template( user.toJSON() );
   this.$el.append( compiledTemplate.html() );
-	},
+	}
+  //TODO: Make event when this is the modal. Take event
+  //from where it is in the modal View.
+  /*,
   createUser: function() {
     var data = {
       username: this.$('.username').val(),
@@ -32,5 +30,5 @@ App.Views.Users = Backbone.View.extend({
   events: {
     'click .create-user':'createUser',
     'click .update-user':'updateUser',
-  }
+  }*/
 });

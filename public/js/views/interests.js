@@ -9,7 +9,6 @@ App.Views.Interests = Backbone.View.extend({
     this.template = Handlebars.compile($('#interest-list-template').html());
   },
   renderAll: function() {
-    this.$el.empty();
     this.collection.each(this.renderOne.bind(this));
   },
   renderOne: function(interest) {
