@@ -1,7 +1,6 @@
 App.Views.ModalView = Backbone.View.extend({
 	el: '#account-modal',
 	initialize: function() {
-		this.listenTo(this.model, 'change', this.render);
 		this.newUserTemplate = Handlebars.compile( $('#create-user-template').html() );
 		this.template = Handlebars.compile( $('#account-modal-template').html() );
 	},
@@ -57,15 +56,8 @@ App.Views.ModalView = Backbone.View.extend({
 		}).bind(this);
 		App.router.navigate("/search" + userID);
 	},
-	selectUser: function(event) {
-		var userID = $(event.currentTarget).id;
-		App.searchView.render();
-		this.hide();
-		App.router.navigate("search/" + userID);
-	},
 	events: {
 		'click #create-acct-btn':'showNewUser',
-		"click #register-btn": "createNewUser",
-		"click .user-li": "selectUser"
+		"click #register-btn": "createNewUser"
 	}
 })
