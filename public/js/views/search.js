@@ -20,8 +20,10 @@ App.Views.Search = Backbone.View.extend({
     }
     return checkedBoxesIDs;
   },
+  //Searches based on interests
   searchForAResult: function() {
-    //HOW TO GET ALL OF THESE??
+    //Takes the name, personality, neighborhood, interests,
+    // and price and uses those to search.
     var dateName = this.find("");
     var personalityList = this.find("#personality-list");
     var datePersonality = personalityList.options[personalityList.selectedIndex].value;
@@ -31,6 +33,7 @@ App.Views.Search = Backbone.View.extend({
     var priceList = this.find("#price-list");
     var price = parseInt( priceList.options[priceList.selectedIndex].value );
     var baseURL = "/date_and_search/" + price + "/" + neighborhood;
+    //Makes AJAX request with those attributes as data
     $.ajax({
       url: baseURL,
       method: "POST",
@@ -42,12 +45,35 @@ App.Views.Search = Backbone.View.extend({
     })
     .done(this.fleshOutResult);
   },
+  //Gets more information about the restaurant with Yelp
   fleshOutResult: function(data) {
-    var restaurantName = data.name;
+    var restaurantName = encodeURI( data.name );
     var telephoneNumber = data.tel;
     var restaurantWebsite = data.website;
-      
-  }
+    var neighborhood = encodeURI( data.neighborhood[0] );
+    var baseURL = "/yelp_for_more/" + restaurantName + "/" + neighborhood;
+    $.ajax({
+      url: baseURL,
+      method: "GET",
+    }).done(this.displayResult);
+  },
+  //Takes Yelp data and makes a new result model from it.
+  //Then, renders the model.
+  displayResult: function(data) {
+    //TODO: Somehow get ID from router for the data 
+    var restaurantInfo = data.business[0];
+    var resultData = {
+      restaurant_name: restaurantInfo.name,
+      yelp_image_url: restaurantInfo.image_url,
+      yelp_snippet_image_url: restaurantInfo.snippet_image_url,
+      description: restaurantInfo.snippet_text.split(".")[0] + ".",
+      telephone_number: restaurantInfo.display_phone,
+      address: restaurantInfo.location.display_address.join(", ") 
+    }
+    App.results.create(resultData);
+    var newResultView = new App.Views.Result ({ model: App.results.last() });
+    newResultView.render();
+  },
   events: {
     "click .search-btn": "searchForAResult"
   }
