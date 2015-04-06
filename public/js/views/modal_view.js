@@ -27,8 +27,9 @@ App.Views.ModalView = Backbone.View.extend({
 		var usersName = this.$el.find( $("#name").val() );
 		var userDOB = this.$el.find("#dob").val();
 		var personalityList = this.$el.find("#personality-list");
-		var userPersonality = personalityList.options[personalityList.selectedIndex].value;
-		var interestsIDArray = this.getCheckedBoxesID("interest-checkbox"); 
+		var userPersonality = personalityList.find(":selected").text();
+		debugger;
+		var interestsIDArray = this.getCheckedBoxesID.find("interest-checkbox"); 
 		var data = {
 			username: userName,
 			password: userPassword,
