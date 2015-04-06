@@ -20,6 +20,7 @@ App.Views.ModalView = Backbone.View.extend({
 		this.$el.html( this.newUserTemplate );
 		App.interestsView = new App.Views.Interests ({ collection: App.interests });
 		App.interestsView.renderAll();
+		App.router.navigate("newprofile");
 	},
 	createNewUser: function() {
 		var userName = this.$el.find( $("#username").val() );
