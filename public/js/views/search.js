@@ -27,6 +27,7 @@ App.Views.Search = Backbone.View.extend({
     var dateName = this.find("#date-name").val();
     var personalityList = this.find("#personality-list");
     var datePersonality = personalityList.options[personalityList.selectedIndex].value;
+    //See how to use interestsIDArray because its a nested nested view.
     var interestsIDArray = this.getCheckedBoxesID("interest-checkbox");
     var neighborhoodList = this.find("#neighborhood-list");
     var neighborhood = encodeURI( neighborhoodList.options[neighborhoodList.selectedIndex].text );
