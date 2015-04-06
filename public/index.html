@@ -11,6 +11,8 @@
   <script src="http://backbonejs.org/backbone-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
    
+   <script src="js/app.js"></script>
+   <script src="js/routers/app_router.js"></script>
    <script src="js/models/interest.js"></script>
    <script src="js/models/user.js"></script>
    <script src="js/models/result.js"></script>
@@ -24,12 +26,10 @@
    <script src="js/views/search.js"></script>
    <script src="js/views/result.js"></script>
    <script src="js/views/result.js"></script>
-   <script src="js/routers/app_router.js"></script>
-   <script src="js/routers/topbar.js"></script>
-   <script src="js/routers/modal_view.js"></script>
+   <script src="js/views/topbar.js"></script>
+   <script src="js/views/modal_view.js"></script>
 
 
-   <script src="js/app.js"></script>
 
 <!--          _             _     
   __ _  __| | ___  _ __ (_)___ 
@@ -40,7 +40,7 @@
 </head>
 <body>
 	<div id="header"></div>
-	<template="header-template">
+	<template id="header-template">
 		<div id="logo"></div>
 		<a href="#" class="nav-search"></a>
 		<a href="#" class="nav-profile"></a>
@@ -50,7 +50,7 @@
 		<!-- START app wrapper -->
 		 <div class="app-wrapper">
 			<div id="account-modal"></div>
-		 	<template="account-modal-template">
+		 	<template id="account-modal-template">
 		 		<div class="one-half">
 		 			<h4> Select Your Username:</h4>
 					<ul class="user-list"></ul>
