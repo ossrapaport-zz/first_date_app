@@ -31,7 +31,7 @@ App.Views.Search = Backbone.View.extend({
     var neighborhoodList = this.$el.find("#neighborhood-list");
     var neighborhood = encodeURI( neighborhoodList.find(":selected").text() );
     var priceList = this.$el.find("#price-list");
-    var price = parseInt( priceList.find(":selected").get("id") );
+    var price = parseInt( priceList.find(":selected").value() );
     //See how to use interestsIDArray because its a nested nested view.
     debugger
     var interestsIDArray = this.getCheckedBoxesID("interest-checkbox");
