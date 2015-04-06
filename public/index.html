@@ -39,18 +39,38 @@
                                 -->
 </head>
 <body>
-	<div id="header"></div>
-	<template id="header-template">
-		<div id="logo">First Date Generator</div>
-		<a href="#" class="nav-search"></a>
-		<a href="#" class="nav-profile"></a>
-	</template>
+	<div id="header"></div>	
 	<!-- START inner page -->
 	<div id="inner-page">
 		<!-- START app wrapper -->
 		 <div class="app-wrapper">
 			<div id="account-modal"></div>
-		 	<template id="account-modal-template">
+
+         	 <div class="clear"></div>
+         	<a href="#" class="search-btn">Search</a>
+		
+		 </div>       
+		<!-- end app wrapper -->
+					
+			<!-- <div id="buttons">
+			<div class="fixed-width">
+					<div class="clear"></div>
+					<h2 align="center" style="color: #fff">Ready for the perfect first date?<br />
+					<a href="#" id="post-btn">Schedule it Now!</a></h2>					
+			</div>
+			</div> -->		
+	</div>
+	<!-- end inner page -->
+
+	<!-- TEMPLATES -->
+	<!-- header template -->
+	<template id="header-template">
+		<div id="logo">First Date Generator</div>
+		<a href="#" class="nav-search"></a>
+		<a href="#" class="nav-profile"></a>
+	</template>
+
+	 	<template id="account-modal-template">
 		 		<div id="account-wrapper">
 		 		<div class="one-half">
 		 			<h4> Select Your Username:</h4>
@@ -339,15 +359,8 @@
 			</template>
 			<!-- END interest list template -->
 
-         	 <div class="clear"></div>
-         	<a href="#" class="search-btn">Search</a>
-         	<!-- END search for date placeholder -->
-		
-		 </div>       
-		<!-- end app wrapper -->
-
-    <!-- START results template -->
-      <template id="search-result-template">
+			<!-- START results template -->
+      	<template id="search-result-template">
       	<h1><img src="http://www.iconsdb.com/icons/preview/lime/check-mark-3-xxl.png" width="50"> We found the perfect place!</h1>
 		<div class="one-third">
 			<h2> {{ name }} </h2>
@@ -363,17 +376,6 @@
 		</div> -->
       </template>
 		<!-- END results template -->
-						
-			<!-- <div id="buttons">
-			<div class="fixed-width">
-					<div class="clear"></div>
-					<h2 align="center" style="color: #fff">Ready for the perfect first date?<br />
-					<a href="#" id="post-btn">Schedule it Now!</a></h2>					
-			</div>
-			</div> -->
-			
-	</div>
-	<!-- end inner page -->
 
 </body>
 </html>
