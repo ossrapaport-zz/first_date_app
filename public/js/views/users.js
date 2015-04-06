@@ -11,7 +11,6 @@ App.Views.Users = Backbone.View.extend({
   	console.log('all users View');
     this.listenTo(this.collection, 'reset', this.renderAll);
     this.template = Handlebars.compile($('#user-list-template').html());
-
   },
   renderAll: function() {
     this.collection.each(this.renderOne.bind(this));

@@ -34,7 +34,7 @@ app.use(logger("dev"));
 app.use(bodyParser());
 
 //I connected this path to a test HTML folder
-app.use(express.static(path.join(application_root, "public"))); 
+app.use(express.static(path.join(application_root, "public_TO_TEST"))); 
 app.use(express.static(path.join(application_root, "browser")));
 
 //User Routes
@@ -428,18 +428,12 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
 });
 
 //Restaurant Search for a Photo - Yelp is Here
-app.get("/search_for_photo/:name/:neighborhood", function(req, res) {
+app.get("/yelp_for_more/:name/:neighborhood", function(req, res) {
   var restaurantName = req.params.name;
   var restaurantNeighborhood = req.params.neighborhood;
-  var imageObject = {
-    yelp_image_url: "",
-    yelp_snippet_image_url: "",
-    left_scraped_image_url: "",
-    middle_scraped_image_url: ""
-  }
+  
   yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood}, function(error, data) {
-    imageObject.yelp_image_url = data.businesses.image_url;
-    imageObject.snippet_image_url = data.businesses.yelp_snippet_image_url;
+    res.send(data);
   });
 });
 

@@ -8,4 +8,5 @@ $(function() {
   App.interestsView = new App.Views.Interests({ collection: App.interests });
   App.interests.fetch({ reset: true });
 
+  //TODO: initialize results collection App.results
 });
