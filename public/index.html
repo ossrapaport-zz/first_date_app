@@ -48,7 +48,7 @@
 		 	<template="account-modal-template">
 		 		<div class="one-half">
 		 			<h4> Select Your Username:</h4>
-					<div id="user-list"></div>
+					<ul class="user-list"></ul>
 		 		</div>
 				<div class="one-half-last">
 					<h4>Don't have an account yet?</h4>
@@ -57,6 +57,10 @@
 				    	<div class="ease"></div>
 				    </div>
 				</div>
+		 	</template>
+
+		 	<template id="user-list-template">
+		 		<li class="user-li" data-id="{{id}}"> {{ name }} </li>
 		 	</template>
 
 			<!-- START single user template -->
@@ -70,7 +74,6 @@
 
 				<h1>Your Date history</h1>
 				<p>History goes here</p>
-
 			</template>
 			<!-- END single user template -->
 
@@ -89,8 +92,7 @@
 
 				      <p class="name">
 				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ name }} " placeholder="{{ name }}" id="name" required/>
-				      </p>
-				      
+				      </p>			      
 				      <p class="p-dob">
 				        <input name="dob" type="text" class="validate[required,custom[email]] feedback-input" id="dob" value=" {{ date_of_birth }} " placeholder="{{ date_of_birth }}" required/>
 				      </p>
@@ -105,10 +107,8 @@
 					        </select>
 				      <div class="clear"></div>
 				      <label><span class="form-label">Tell us some of your Interests: </span></label>
-				      <div class="interest-list">
-							<!-- TODO: Fix #each interests -->
-				      {{#each interests}}
-				  </ul>
+				      <ul class="interest-list"></ul>
+				   
 				  </div>				      
 				      <div class="submit">
 				        <input type="submit" value="SUBMIT" id="register-btn"/>
@@ -149,9 +149,7 @@
 					        </select>
 				      <div class="clear"></div>
 				      <label><span class="form-label">Your Interests: </span></label>
-				      <div class="interest-list">
-				      {{#each interests}}
-				  </ul>
+				  
 				  </div>				      
 				      <div class="submit">
 				        <input type="submit" value="SUBMIT" id="register-btn"/>
