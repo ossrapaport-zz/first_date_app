@@ -34,7 +34,7 @@ app.use(logger("dev"));
 app.use(bodyParser());
 
 //I connected this path to a test HTML folder
-app.use(express.static(path.join(application_root, "public_TO_TEST"))); 
+app.use(express.static(path.join(application_root, "public"))); 
 app.use(express.static(path.join(application_root, "browser")));
 
 //User Routes
@@ -381,6 +381,7 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
     personality: req.body.personality
   };
   var interestIDArray = req.body.interest_ids;
+  console.log(interestIDArray);
   var count = 0;
 
   //Make new date

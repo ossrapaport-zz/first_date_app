@@ -1,6 +1,6 @@
 App.Views.User = Backbone.View.extend({
   
-  el: '#single-user',
+  el: '.app-wrapper',
 
 	initialize: function() {
 		this.template = Handlebars.compile($('#single-user-template').html());
@@ -18,6 +18,7 @@ App.Views.User = Backbone.View.extend({
   },
   editUser: function() {
     this.$el.html(this.editTemplate( this.model.toJSON() ));
+    App.router.navigate("editprofile/" + this.model.id);
   },
   updateUser: function() {
     this.model.save({
@@ -27,6 +28,7 @@ App.Views.User = Backbone.View.extend({
       personality: this.$('.personality').val(),
       password: this.$('.password').val()
     });
+    App.router.navigate("profile/" + this.model.id);
   },
   events: {
     "click .edit-user": "editUser",

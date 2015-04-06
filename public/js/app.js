@@ -1,5 +1,5 @@
 $(function() {
-
+  //Change this to reflect new modal
   App.users = new App.Collections.Users;
   App.usersView = new App.Views.Users({ collection: App.users });
   App.users.fetch({ reset: true });
