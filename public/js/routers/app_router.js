@@ -2,7 +2,22 @@ App.Routers.Main = Backbone.Router.extend({
 
   initialize: function() {
     console.log("New router initialized");
-    //TODO: Move initialize from app to here
+
+    App.topBar = new App.Views.TopBar
+
+    App.users = new App.Collections.Users;
+    App.usersView = new App.Views.Users({ collection: App.users });
+    App.users.fetch({ reset: true });
+
+    App.interests = new App.Collections.Interests;
+    App.interestsView = new App.Views.Interests({ collection: App.interests });
+    App.interests.fetch({ reset: true });
+
+    App.userView = new App.Views.User();
+
+    App.modalView = new App.Views.ModalView();
+
+    App.searchView = new App.Views.Search();
   },
   routes: {
     "": "modalHome",
@@ -13,7 +28,6 @@ App.Routers.Main = Backbone.Router.extend({
     "result/:userID/:resultID": "searchResult" 
   },
   modalHome: function() {
-    //TODO: Check name of modal and that show is a function
     App.modalView.show();
     $(".app-wrapper").empty();
   },
