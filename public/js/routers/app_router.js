@@ -33,7 +33,7 @@ App.Routers.Main = Backbone.Router.extend({
   },
   newUser: function() {
     App.modalView.show();
-    App.modalView.newUser();
+    App.modalView.showNewUser();
   },
   editUser: function(userID) {
     App.modalView.hide();

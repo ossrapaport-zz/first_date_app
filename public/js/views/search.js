@@ -25,15 +25,16 @@ App.Views.Search = Backbone.View.extend({
     //Takes the name, personality, neighborhood, interests,
     // and price and uses those to search.
     //TODO: check date name
-    var dateName = this.find("#date-name").val();
-    var personalityList = this.find("#personality-list");
-    var datePersonality = personalityList.options[personalityList.selectedIndex].value;
+    var dateName = this.$el.find("#date-name").val();
+    var personalityList = this.$el.find("#personality-list");
+    var datePersonality = personalityList.find(":selected").text();
+    var neighborhoodList = this.$el.find("#neighborhood-list");
+    var neighborhood = encodeURI( neighborhoodList.find(":selected").text() );
+    var priceList = this.$el.find("#price-list");
+    var price = parseInt( priceList.find(":selected").value() );
     //See how to use interestsIDArray because its a nested nested view.
+    debugger
     var interestsIDArray = this.getCheckedBoxesID("interest-checkbox");
-    var neighborhoodList = this.find("#neighborhood-list");
-    var neighborhood = encodeURI( neighborhoodList.options[neighborhoodList.selectedIndex].text );
-    var priceList = this.find("#price-list");
-    var price = parseInt( priceList.options[priceList.selectedIndex].value );
     var baseURL = "/date_and_search/" + price + "/" + neighborhood;
     //Makes AJAX request with those attributes as data
     $.ajax({
