@@ -5,8 +5,7 @@ App.Views.Search = Backbone.View.extend({
     this.template = Handlebars.compile($("#search-template").html());
   },
   render: function() {
-    this.$el.empty();
-    this.$el.append(this.template.html());
+    this.$el.html( this.template.html() );
     App.interestsView.renderAll();
   },
   getCheckedBoxesID: function(checkboxName) {
@@ -60,6 +59,7 @@ App.Views.Search = Backbone.View.extend({
   //Then, renders the model.
   displayResult: function(data) {
     //TODO: Somehow get ID from router for the data 
+    var userID = Backbone.history.getFragment(userID);
     var restaurantInfo = data.business[0];
     var resultData = {
       restaurant_name: restaurantInfo.name,
@@ -69,9 +69,16 @@ App.Views.Search = Backbone.View.extend({
       telephone_number: restaurantInfo.display_phone,
       address: restaurantInfo.location.display_address.join(", ") 
     }
-    App.results.create(resultData);
+    var baseURL = "/users/" + userID + "results";
+    $.ajax({
+      url: baseURL,
+      method: "POST",
+      data: resultData 
+    }).done(function() {
+    App.results.fetch();
     var newResultView = new App.Views.Result ({ model: App.results.last() });
     newResultView.render();
+    });
   },
   events: {
     "click .search-btn": "searchForAResult"

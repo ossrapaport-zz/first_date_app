@@ -7,9 +7,9 @@ App.Routers.Main = Backbone.Router.extend({
   routes: {
     "": "modalHome",
     "newprofile": "newUser",
-    "editprofile/:id": "editUser",
-    "profile/:id": "showProfile",
-    "search/:id": "userSearch",
+    "editprofile/:userID": "editUser",
+    "profile/:userID": "showProfile",
+    "search/:userID": "userSearch",
     "result/:userID/:resultID": "searchResult" 
   },
   modalHome: function() {
@@ -21,20 +21,19 @@ App.Routers.Main = Backbone.Router.extend({
     App.modalView.show();
     App.modalView.newUser();
   },
-  editUser: function(id) {
-    var user = App.users.get(id);
-    //TODO: See if this should be new or use setUser
-    //setUser will have less views hanging around
+  editUser: function(userID) {
+    var user = App.users.get(userID);
+    //TODO: Make App.userView onload
     App.userView.setUser(user);
     userView.editUser();
   },
-  showProfile: function(id) {
-    //TODO: Make empty App.userView somewhere
-    var user = App.users.get(id);
+  showProfile: function(userID) {
+    //TODO: Make empty App.userView onload
+    var user = App.users.get(userID);
     App.userView.setUser(user);
   },
-  userSearch: function(id) {
-    //TODO: Make searchView, not rendered, somewhere
+  userSearch: function(userID) {
+    //TODO: Make searchView, not rendered, onload
     App.searchView.render();
   },
   searchResult: function(userID, resultID) {

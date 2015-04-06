@@ -5,6 +5,7 @@ App.Views.Result = Backbone.View.extend({
 	},
 	render: function() {
 		this.$el.html(this.template( this.model.toJSON() ));
+    App.router.navigate("result/" + this.model.id)
 	},
   setResult: function(result) {
     this.model = result;
