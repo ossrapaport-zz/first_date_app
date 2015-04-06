@@ -31,6 +31,7 @@
 <body>
 	<div id="header">
 		<div id="logo">First Date Generator</div>
+		<!-- TODO: Button to view profile -->
 	</div>
 	<!-- START inner page -->
 	<div id="inner-page">
@@ -46,6 +47,7 @@
 				<h4> Location: {{ location }} </h4>
 
 				<h1>Your Date history</h1>
+<!-- 				TODO: Add spot for interests with {{#each interests}} -->
 
 			</template>
 			<!-- END single user template -->
@@ -55,7 +57,8 @@
 				<h1 align="center"> Edit Your Profile</h1>
 				<div id="form-main">
 				  <div id="form-div">
-				    <form class="form" id="form1">		      
+				    <form class="form" id="form1">
+				    <!-- TODO: Set value of input to be {{username}} or {{name}} or {{date_of_birth}} -->		      
 				       <p class="username">
 				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="{{ Username }}" id="username" required/>
 				      </p>
@@ -71,6 +74,7 @@
 				        <input name="dob" type="text" class="validate[required,custom[email]] feedback-input" id="dob" placeholder="{{ date_of_birth }}" required/>
 				      </p>
 				      <div class="clear"></div>
+				      <!-- TODO: Put in personality dropdown -->
 				      <label><span class="form-label">Your Personality: </span></label>
 				        	<select id = "personality-list">
 					     			<option> {{ personality }} </option>
@@ -79,8 +83,8 @@
 				      <div class="clear"></div>
 				      <label><span class="form-label">Your Interests: </span></label>
 				      <div class="interest-list">
-
-				      {{#each Interest }}
+							<!-- TODO: Fix #each interests -->
+				      {{#each interests}}
 
 				  </ul>
 				  </div>
@@ -283,6 +287,7 @@
 		<div class="one-third">
 			<h2> {{ name }} </h2>
 			<p> {{ description }} </p>
+			<!-- TODO: Change gallery to two img tags with appropriate Handlebars -->
 			<div id="img-gallery"> {{gallery}} </div>
 		</div>
 		<div class="one-third-last">
