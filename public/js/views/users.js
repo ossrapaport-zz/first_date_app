@@ -7,7 +7,7 @@ App.Views.Users = Backbone.View.extend({
     this.listenTo(this.collection, 'reset', this.renderAll);
   },
   renderAll: function() {
-    this.collection.each(this.renderOne);
+    this.collection.each(this.renderOne.bind(this));
   },
 	renderOne: function(user) {
     var newUserView = new App.Views.UserList({ model: user });
