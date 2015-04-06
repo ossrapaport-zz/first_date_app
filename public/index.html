@@ -11,6 +11,8 @@
   <script src="http://backbonejs.org/backbone-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
    
+   <script src="js/app.js"></script>
+   <script src="js/routers/app_router.js"></script>
    <script src="js/models/interest.js"></script>
    <script src="js/models/user.js"></script>
    <script src="js/models/result.js"></script>
@@ -23,8 +25,11 @@
    <script src="js/views/users.js"></script>
    <script src="js/views/search.js"></script>
    <script src="js/views/result.js"></script>
-
-   <script src="js/app.js"></script>
+   <script src="js/views/result.js"></script>
+   <script src="js/views/topbar.js"></script>
+   <script src="js/views/modal_view.js"></script>
+   <script src="js/views/interest_list.js"></script>
+   <script src="js/views/user_list.js"></script>
 
 <!--          _             _     
   __ _  __| | ___  _ __ (_)___ 
@@ -35,8 +40,8 @@
 </head>
 <body>
 	<div id="header"></div>
-	<template="header-template">
-		<div id="logo"></div>
+	<template id="header-template">
+		<div id="logo">First Date Generator</div>
 		<a href="#" class="nav-search"></a>
 		<a href="#" class="nav-profile"></a>
 	</template>
@@ -45,7 +50,8 @@
 		<!-- START app wrapper -->
 		 <div class="app-wrapper">
 			<div id="account-modal"></div>
-		 	<template="account-modal-template">
+		 	<template id="account-modal-template">
+		 		<div id="account-wrapper">
 		 		<div class="one-half">
 		 			<h4> Select Your Username:</h4>
 					<ul class="user-list"></ul>
@@ -53,10 +59,11 @@
 				<div class="one-half-last">
 					<h4>Don't have an account yet?</h4>
 					<div class="submit">
-				    	<input type="submit" value="SUBMIT" id="create-acct-btn"/>
+				    	<input type="submit" value="CREATE" id="create-acct-btn"/>
 				    	<div class="ease"></div>
 				    </div>
 				</div>
+			</div>
 		 	</template>
 
 		 	<template id="user-list-template">
@@ -156,8 +163,8 @@
 				        <div class="ease"></div>
 				      </div>
 				    </form>
-				  </template>
-				  <!-- END user edit template -->
+			</template>
+			<!-- END user edit template -->
 
 			<!-- START search template -->
 			<template id="search-template">
@@ -327,10 +334,8 @@
 			<!-- END search template -->
 
 			<!-- START interest list template -->
-			<template id="interest-checkbox">
-				<div class="interest-list">
-				<li><input type="checkbox" value="{{ id }}">{{ name }}</li>
-				</div>
+			<template id="interest-list-template">
+				<li ><input type="checkbox" name="interest-checkbox" value="{{ id }}">{{ name }}</li>
 			</template>
 			<!-- END interest list template -->
 
@@ -340,8 +345,6 @@
 		
 		 </div>       
 		<!-- end app wrapper -->
-
-		<div id="search-result"></div>
 
     <!-- START results template -->
       <template id="search-result-template">
@@ -361,13 +364,13 @@
       </template>
 		<!-- END results template -->
 						
-			<div id="buttons">
+			<!-- <div id="buttons">
 			<div class="fixed-width">
 					<div class="clear"></div>
 					<h2 align="center" style="color: #fff">Ready for the perfect first date?<br />
 					<a href="#" id="post-btn">Schedule it Now!</a></h2>					
 			</div>
-			</div>
+			</div> -->
 			
 	</div>
 	<!-- end inner page -->

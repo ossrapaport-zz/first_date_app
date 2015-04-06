@@ -6,16 +6,15 @@ App.Routers.Main = Backbone.Router.extend({
     App.topBar = new App.Views.TopBar
 
     App.users = new App.Collections.Users;
-    App.usersView = new App.Views.Users({ collection: App.users });
     App.users.fetch({ reset: true });
 
     App.interests = new App.Collections.Interests;
-    App.interestsView = new App.Views.Interests({ collection: App.interests });
     App.interests.fetch({ reset: true });
 
-    App.userView = new App.Views.User();
+    App.userView = new App.Views.User({ model: new App.Models.User });
 
     App.modalView = new App.Views.ModalView();
+    App.modalView.render();
 
     App.searchView = new App.Views.Search();
   },

@@ -52,13 +52,26 @@ h4 {
   margin: 0 auto;
 }
 
+/* Header */
 #header {
   width: 100%;
   background: #E74C3C;
-  height: 50px;
+  height: 40px;
   position: relative;
   top:0;
   z-index: 1
+}
+
+#top-menu {
+  float: right;
+  padding: 10px 16px;
+}
+
+#top-menu a {
+  padding: 5px;
+  font-size: 22px;
+  color: #fff;
+  text-decoration: none
 }
 
 #logo {
@@ -586,7 +599,7 @@ input:focus, textarea:focus {
 
 /*modal view*/
 
-#account-modal-template {
+#account-modal {
   position: fixed;
   background-color: white;
   z-index: 1000;
@@ -598,4 +611,25 @@ input:focus, textarea:focus {
   background: #b2dad7;
   box-sizing: border-box;
   padding-top: 60px;
+}
+
+#account-wrapper {
+  position: relative;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #2d292d;
+  width: 600px;
+  height: 510px;
+  left: 50%;
+  margin-left: -300px;
+}
+
+.one-half {
+  width:50%;
+  float: left;
+}
+
+.one-half-last {
+  width: 50%;
+  float: right;
 }
