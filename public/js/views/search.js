@@ -48,10 +48,7 @@ App.Views.Search = Backbone.View.extend({
   },
   //Gets more information about the restaurant with Yelp
   fleshOutResult: function(data) {
-    //TODO: Remove number and website
     var restaurantName = encodeURI( data.name );
-    var telephoneNumber = data.tel;
-    var restaurantWebsite = data.website;
     var neighborhood = encodeURI( data.neighborhood[0] );
     var baseURL = "/yelp_for_more/" + restaurantName + "/" + neighborhood;
     $.ajax({
