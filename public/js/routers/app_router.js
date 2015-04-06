@@ -3,7 +3,8 @@ App.Routers.Main = Backbone.Router.extend({
   initialize: function() {
     console.log("New router initialized");
 
-    App.topBar = new App.Views.TopBar
+    App.topBar = new App.Views.TopBar();
+    App.topBar.render();
 
     App.users = new App.Collections.Users;
     App.users.fetch({ reset: true });
@@ -27,29 +28,30 @@ App.Routers.Main = Backbone.Router.extend({
     "result/:userID/:resultID": "searchResult" 
   },
   modalHome: function() {
-    App.modalView.show();
-    $(".app-wrapper").empty();
+    //$(".app-wrapper").empty();
+    App.modalView.render();
   },
   newUser: function() {
     App.modalView.show();
     App.modalView.newUser();
   },
   editUser: function(userID) {
+    App.modalView.hide();
     var user = App.users.get(userID);
-    //TODO: Make App.userView onload
     App.userView.setUser(user);
     userView.editUser();
   },
   showProfile: function(userID) {
-    //TODO: Make empty App.userView onload
+    App.modalView.hide();
     var user = App.users.get(userID);
     App.userView.setUser(user);
   },
   userSearch: function(userID) {
-    //TODO: Make searchView, not rendered, onload
+    App.modalView.hide();
     App.searchView.render();
   },
   searchResult: function(userID, resultID) {
+    App.modalView.hide();
     var result = App.results.get(resultID);
     App.resultView.setResult(result);
   }

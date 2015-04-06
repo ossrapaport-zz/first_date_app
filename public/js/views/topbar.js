@@ -5,7 +5,7 @@ App.Views.TopBar = Backbone.View.extend({
     this.template = Handlebars.compile( $("#header-template").html() );
   },
   render: function() {
-    this.$el.html( this.template.html() );
+    this.$el.html(this.template);
   },
   toSearch: function() {
     var userID = Backbone.history.getFragment(userID);
