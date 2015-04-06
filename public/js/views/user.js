@@ -3,10 +3,10 @@ App.Views.User = Backbone.View.extend({
   el: '.app-wrapper',
 
 	initialize: function() {
-		this.template = Handlebars.compile($('#single-user-template').html());
+		this.template = Handlebars.compile($('#single-user').html());
 		this.listenTo(this.model, 'add', this.renderOne);
     //TODO: Make edit template
-    this.editTemplate = Handlebars.compile($("#SOME_TEMPLATE").html());
+    this.editTemplate = Handlebars.compile($("#edit-user-template").html());
 	},
 	render: function() {
     var compiledTemplate = this.template( this.model.toJSON() );
