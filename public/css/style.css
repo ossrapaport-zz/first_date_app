@@ -30,14 +30,14 @@ h2 {
   font-size: 32px;
   color: #fff;
   font-weight: 400;
-  padding: 12px;
+  padding: 12px 0;
 }
 
 h4 {
   font-size: 24px;
   color: #fff;
   font-weight: 400;
-  padding: 12px;
+  padding: 12px 0;
 
 }
 
@@ -171,9 +171,7 @@ ul {
   padding-bottom: 10px;
   line-height: 25px;
 }
-form {
-  padding-right: 20px !important;
-}
+
 form input[type=text],
 form input[type=password],
 form input[type=submit] {
@@ -356,11 +354,11 @@ form input[type=password] {
 
 .app-wrapper {
   display: block;
-  width: 920px;
-  height: 100%;
+  width: 620px;
+  height: auto;
   padding: 20px;
   margin: 50px auto;
-  background: #86E2D5;
+  background: #41c3ac;
   border-radius: 8px
 }
 
@@ -368,7 +366,8 @@ form input[type=password] {
   font-size: 24px;
   color: #fff;
   font-weight: 400;
-  padding: 12px;
+  margin-top: 15px;
+  padding: 12px 0;
 }
 
 #info-list {
@@ -382,6 +381,26 @@ form input[type=password] {
 .date-wrapper {
   width: 900px;
   margin: 20px auto;
+}
+
+#interests-list {
+  margin-top: 10px;
+  padding-top: 10px;
+  height: 300px; 
+  background: #fff;
+  overflow-y: scroll;
+  overflow-x: hidden
+}
+
+#interests-list li {
+  color: #32526e;
+  font-size: 18px;
+  padding: 4px;
+
+}
+
+input[type=checkbox] {
+  font-size: 50px;
 }
 
 #search-result {  
@@ -464,8 +483,9 @@ form input[type=password] {
 
 /*user form*/
 
-.user-list {
+.user-li {
   font-size: 30px;
+  color: #fff;
 }
 
 #feedback-page{
@@ -542,7 +562,7 @@ input:focus, textarea:focus {
   width: 100%;
   border: #fbfbfb solid 4px;
   cursor:pointer;
-  background-color: #E74C3C;
+  background-color: #41c3ac;
   color:white;
   font-size:24px;
   padding-top:22px;
@@ -556,7 +576,7 @@ input:focus, textarea:focus {
 
 #register-btn:hover{
   background-color: rgba(0,0,0,0);
-  color: #0493bd;
+  color: #ff884d;
 }
 
 #create-acct-btn {
@@ -564,7 +584,7 @@ input:focus, textarea:focus {
   width: 100%;
   border: #fbfbfb solid 4px;
   cursor:pointer;
-  background-color: #E74C3C;
+  background-color: #41c3ac;
   color:white;
   font-size:24px;
   padding-top:22px;
@@ -578,7 +598,7 @@ input:focus, textarea:focus {
 
 #create-acct-btn:hover {
   background-color: rgba(0,0,0,0);
-  color: #0493bd;
+  color: #ff884d;
 }
   
 .submit {
@@ -616,7 +636,7 @@ input:focus, textarea:focus {
   display: none;
   height: 100%;
   width: 100%;
-  background: #b2dad7;
+  background: #ff6b57;
   box-sizing: border-box;
   padding-top: 60px;
 }
@@ -625,7 +645,7 @@ input:focus, textarea:focus {
   position: relative;
   border-radius: 5px;
   padding: 20px;
-  background-color: #6C7A89;
+  background-color: #41c3ac;
   width: 600px;
   height: 200px;
   left: 50%;
@@ -636,12 +656,14 @@ input:focus, textarea:focus {
   position: relative;
   border-radius: 5px;
   padding: 20px;
-  background-color: #b2dad7;
+  background-color: #41c3ac;
   width: 600px;
   height: 500px;
   left: 50%;
   margin-left: -300px;
-  overflow: scroll; 
+  overflow-y: scroll;
+  overflow-x: hidden;
+  color: #32526e;
 }
 
 .one-half {
