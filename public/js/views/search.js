@@ -24,7 +24,8 @@ App.Views.Search = Backbone.View.extend({
   searchForAResult: function() {
     //Takes the name, personality, neighborhood, interests,
     // and price and uses those to search.
-    var dateName = this.find("");
+    //TODO: check date name
+    var dateName = this.find("#date-name").val();
     var personalityList = this.find("#personality-list");
     var datePersonality = personalityList.options[personalityList.selectedIndex].value;
     var interestsIDArray = this.getCheckedBoxesID("interest-checkbox");
@@ -47,6 +48,7 @@ App.Views.Search = Backbone.View.extend({
   },
   //Gets more information about the restaurant with Yelp
   fleshOutResult: function(data) {
+    //TODO: Remove number and website
     var restaurantName = encodeURI( data.name );
     var telephoneNumber = data.tel;
     var restaurantWebsite = data.website;
@@ -78,10 +80,3 @@ App.Views.Search = Backbone.View.extend({
     "click .search-btn": "searchForAResult"
   }
 })
-
-
-
-
-
-
-
