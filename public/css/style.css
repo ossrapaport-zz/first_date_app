@@ -541,15 +541,17 @@ input[type=checkbox] {
 }
 
 #phone {
-
+  
 }
 
 #reviews {
   padding-bottom: 4px;
 }
 
-#reviews:before {
-  content: ' " ' 
+#single-review:before {
+  content: ' “ ' ;
+  font-size: 60px;
+  font-family: serif;
 }
 
 #img-gallery {
@@ -563,7 +565,7 @@ input[type=checkbox] {
 }
 
 .one-third-last {
-  width: 45%;
+  width: 50%;
   float: right;
   padding: 20px 0;
 }
