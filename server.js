@@ -472,6 +472,6 @@ app.get("/yelp_for_more/:name/:neighborhood1/:neighborhood2/:neighborhood3", fun
   });
 });
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log("Server running on 3000");
 }); 
