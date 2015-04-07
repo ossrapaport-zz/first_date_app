@@ -8,6 +8,7 @@ App.Views.User = Backbone.View.extend({
     this.editTemplate = Handlebars.compile($("#edit-user-template").html());
 	},
 	render: function() {
+    debugger
     var compiledTemplate = this.template( this.model.toJSON() );
 		this.$el.html( compiledTemplate );
 	},
@@ -22,18 +23,15 @@ App.Views.User = Backbone.View.extend({
   updateUser: function() {
     debugger
     this.model.save({
-      username: this.$('.username').val(),
-      date_of_birth: this.$('.dob').val(),
-      location: this.$('.location').val(),
-      personality: this.$('.personality').val(),
-      password: this.$('.password').val()
+      username: this.$('#username').val().trim(),
+      date_of_birth: this.$('#dob').val().trim(),
+      password: this.$('#password').val().trim()
     });
+    this.render();
     App.router.navigate("profile/" + this.model.id);
   },
   events: {
     "click #edit-profile": "editUser",
-    //TODO: Review this with McK - similar problem to 
-    //creating a new user
-    "click .update-user": "updateUser"
+    "click #update-btn": "updateUser"
   }
 });
