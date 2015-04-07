@@ -8,9 +8,11 @@ App.Views.Search = Backbone.View.extend({
     this.$el.html(this.template);
     App.interestsView = new App.Views.Interests ({ collection: App.interests });
     App.interestsView.renderAll();
+    //Saves user id for later use
   },
   getCheckedBoxesID: function(checkboxName) {
-    var checkboxes = this.getElementsByName(checkboxName);
+    var findTerm = "[name=" + checkboxName + "]";
+    var checkboxes = this.$el.find(findTerm);
     var checkedBoxesIDs = [];
 
     for (var i = 0; i < checkboxes.length; i++) {
@@ -25,15 +27,15 @@ App.Views.Search = Backbone.View.extend({
     //Takes the name, personality, neighborhood, interests,
     // and price and uses those to search.
     //TODO: check date name
+    this.userID = parseInt( Backbone.history.fragment.split("/")[1] );
     var dateName = this.$el.find("#date-name").val();
     var personalityList = this.$el.find("#personality-list");
     var datePersonality = personalityList.find(":selected").text();
     var neighborhoodList = this.$el.find("#neighborhood-list");
     var neighborhood = encodeURI( neighborhoodList.find(":selected").text() );
     var priceList = this.$el.find("#price-list");
-    var price = parseInt( priceList.find(":selected").value() );
+    var price = parseInt( priceList.find(":selected").val() );
     //See how to use interestsIDArray because its a nested nested view.
-    debugger
     var interestsIDArray = this.getCheckedBoxesID("interest-checkbox");
     var baseURL = "/date_and_search/" + price + "/" + neighborhood;
     //Makes AJAX request with those attributes as data
@@ -43,27 +45,33 @@ App.Views.Search = Backbone.View.extend({
       data: {
         firstName: dateName,
         personality: datePersonality,
-        interests_ids: interestsIDArray
+        interest_ids: interestsIDArray
       }
     })
-    .done(this.fleshOutResult);
+    .done(this.fleshOutResult.bind(this));
   },
   //Gets more information about the restaurant with Yelp
   fleshOutResult: function(data) {
     var restaurantName = encodeURI( data.name );
-    var neighborhood = encodeURI( data.neighborhood[0] );
-    var baseURL = "/yelp_for_more/" + restaurantName + "/" + neighborhood;
+    var neighborhood1 = encodeURI( data.neighborhood[0] );
+    var neighborhood2 = encodeURI( data.neighborhood[1] );
+    if (data.neighborhood[2] === undefined) {
+      var neighborhood3 = notest;
+    } else {
+      var neighborhood3 = encodeURI( data.neighborhood[2] );
+    }
+    var baseURL = "/yelp_for_more/" + restaurantName + "/" + neighborhood1 + "/" + neighborhood2 + "/" + neighborhood3;
     $.ajax({
       url: baseURL,
-      method: "GET",
-    }).done(this.displayResult);
+      method: "GET"
+    }).done(this.displayResult.bind(this));
   },
   //Takes Yelp data and makes a new result model from it.
   //Then, renders the model.
   displayResult: function(data) {
-    //TODO: Somehow get ID from router for the data 
-    var userID = Backbone.history.getFragment(userID);
-    var restaurantInfo = data.business[0];
+    var currentID = this.userID; 
+    console.log(currentID);
+    var restaurantInfo = data.businesses[0];
     var resultData = {
       restaurant_name: restaurantInfo.name,
       yelp_image_url: restaurantInfo.image_url,
@@ -72,16 +80,18 @@ App.Views.Search = Backbone.View.extend({
       telephone_number: restaurantInfo.display_phone,
       address: restaurantInfo.location.display_address.join(", ") 
     }
-    var baseURL = "/users/" + userID + "results";
+    var baseURL = "/users/" + currentID + "/results";
     $.ajax({
       url: baseURL,
       method: "POST",
       data: resultData 
-    }).done(function() {
-    App.results.fetch();
-    var newResultView = new App.Views.Result ({ model: App.results.last() });
-    newResultView.render();
-    });
+    }).done(function(newResult) {
+      App.results.create(newResult);
+      var newResultView = new App.Views.Result ({ model: App.results.last() });
+      var resultID = App.results.last().id;
+      newResultView.render();
+      App.router.navigate("search/" + this.userID + "/" + resultID);
+    }.bind(this));
   },
   events: {
     "click .search-btn": "searchForAResult"

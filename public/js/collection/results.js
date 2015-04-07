@@ -4,5 +4,6 @@ App.Collections.Results = Backbone.Collection.extend({
 	initialized: function(){
 		console.log("Result collection created")
 	},
-	url: '/results'
+	url: '/results',
+  model: App.Models.Result
 })
