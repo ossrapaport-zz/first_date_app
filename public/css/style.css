@@ -44,6 +44,10 @@ a {
   text-decoration: none
 }
 
+.highlight {
+  color: #32526e;
+}
+
 .clear {
   clear: both;
   padding-top: 20px;
@@ -208,6 +212,7 @@ form input[type=password] {
   border: none;
   color: #fff;
   outline: none;
+  border-bottom: 2px solid #fff;
 /*  border-bottom: 2px solid white;*/
 }
 
@@ -382,7 +387,7 @@ select, option {
 .app-wrapper {
   display: block;
   width: 620px;
-  height: 830px;
+  height: auto;
   padding: 20px;
   margin: 100px auto;
   background: #41c3ac;
@@ -437,10 +442,29 @@ input[type=checkbox] {
   position: relative;
   padding: 20px;
   margin: 50px auto;
-  background: #E74C3C;
+  background: #32526e;
   border-radius: 8px
 }
 
+#restaurant {
+  font-size: 40px;
+}
+
+#address {
+
+}
+
+#website {
+
+}
+
+#phone {
+
+}
+
+#reviews {
+  padding-bottom: 4px;
+}
 
 #img-gallery {
   margin-top: 10px;
