@@ -94,7 +94,7 @@ App.Views.Search = Backbone.View.extend({
     }.bind(this));
   },
   //Builds the SRC for the Google Map iframe
-  buildMapSRC = function(restaurantName) {
+  buildMapSRC: function(restaurantName) {
     var base = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCwnxlkHNmO8y1NFmMP2VnWhG2K271rBZ0&q=";
     var compiledSRC = base + encodeURI(restaurantName) + ",New+York+NY";
     return compiledSRC;
