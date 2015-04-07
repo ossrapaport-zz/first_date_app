@@ -106,7 +106,12 @@
 				<h4> Location: {{ location }} </h4>
 				<div class="clear"></div>
 				<h1>Your Date history</h1>
-				<p>No current date history.</p>
+				{{#each results}}
+					<p> {{ restaurant_name }} </p>
+					<p> {{ address }} <p>
+					<p> {{ telephone_number }}</p>
+					<p> {{ website }} </p>
+				{{/each}}
 			</template>
 			<!-- END single user template -->
 
@@ -183,7 +188,6 @@
 						<option>Tribeca</option>
 						<option>Union Square</option>
 						<option>Upper East Side</option>
-						<option>Upper Manhattan</option>
 						<option>Upper West Side</option>
 						<option>Washington Heights</option>
 						<option>Waterside Plaza</option>
@@ -231,8 +235,6 @@
 				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ username }} " placeholder="{{ username }}" id="username" required/> <br>
 				       <label><span class="form-label">Password: </span></label>
 				        <input name="password" type="text" class="validate[required,custom[email]] feedback-input" id="password" value=" {{ password }} " placeholder="{{ password }}" required/><br />
-				      
-
 				      <label><span class="form-label">Name: </span></label>
 				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ name }} " placeholder="{{ name }}" id="name" required/><br />
 				      
@@ -384,6 +386,7 @@
 
 			<div id="img-gallery"><img src=" {{yelp_image_url}} " /> <img src=" {{yelp_snippet_image_url}} " /></div>
 			<div class="clear"></div>
+			<a class="schedule-btn">Schedule Date</a>
          	<a class="search-again-btn">Search Again</a>
          	<div class="clear"></div>
 		</div>
