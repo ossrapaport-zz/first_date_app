@@ -58,7 +58,7 @@ App.Views.ModalView = Backbone.View.extend({
 				console.log(this)
 			}
 		}).bind(this);
-		App.router.navigate("/search" + userID);
+		App.router.navigate("/search/" + userID);
 	},
 	events: {
 		'click #create-acct-btn':'showNewUser',
