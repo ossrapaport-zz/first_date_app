@@ -44,7 +44,8 @@
 	<div id="inner-page">
 		<!-- START app wrapper -->
 		 <div class="app-wrapper">
-			<div id="account-modal"></div>
+			<div id="account-modal">
+			</div>
 		 </div>       
 		<!-- end app wrapper -->
 					
@@ -61,7 +62,7 @@
 	<!-- TEMPLATES -->
 	<!-- header template -->
 	<template id="header-template">
-		<div id="logo">First Date Generator</div>
+		<a href="/" id="logo">First Date Generator</a>
 		<nav id="top-menu">
 		<a href="#" class="nav-search">Search</a>
 		<a href="#" class="nav-profile">Profile</a>
@@ -69,15 +70,17 @@
 	</template>
 
 	 	<template id="account-modal-template">
+	 			<h2 align="center">First Date Suggestion App</h2>
 		 		<div id="account-wrapper">
 		 		<div class="one-half">
-		 			<h4> Select Your Username:</h4>
+		 			<h4> Select Your Account:</h4>
 					<ul class="user-list"></ul>
 		 		</div>
+
 				<div class="one-half-last">
 					<h4>Don't have an account yet?</h4>
 					<div class="submit">
-				    	<input type="submit" value="CREATE" id="create-acct-btn"/>
+				    	<input type="submit" value="CREATE ACCOUNT" id="create-acct-btn"/>
 				    	<div class="ease"></div>
 				    </div>
 				</div>
@@ -90,14 +93,16 @@
 
 			<!-- START single user template -->
 			<template id="single-user">
-				<div id="name"><h1 align="center">Hello {{ name }}</h1></div>
+				<div id="name"><h1 align="center">Hey There, {{ name }}!</h1></div>
+				<h2 align="center">This is your personal information.</h2>
+				<div class="clear"></div>
 				<h4> Username: {{ username }} </h4>
 				<h4> Date of Birth: {{ date_of_birth }} </h4>
 				<h4> Personality: {{ personality }} </h4>
 				<h4> Location: {{ location }} </h4>
-
+				<div class="clear"></div>
 				<h1>Your Date history</h1>
-				<p>History goes here</p>
+				<p>No current date history.</p>
 			</template>
 			<!-- END single user template -->
 
@@ -203,7 +208,7 @@
 						<option>Spiritual</option>
 	             </select>
 				<div class="clear"></div>
-				<label><span class="form-label">Select some of your date's interests: </span></label>
+				<label><span class="form-label">Select Some of Your Date's Interests: </span></label>
 				    <ul id="interests-list">
 					</ul>
 	             <div class="clear"></div>
@@ -353,7 +358,7 @@
 
 			<!-- START interest list template -->
 			<template id="interest-list-template">				
-				<li ><input type="checkbox" name="interest-checkbox" value="{{ id }}">{{ name }}</li>
+				<li><input type="checkbox" name="interest-checkbox" value="{{ id }}">{{ name }}</li>
 			</template>
 			<!-- END interest list template -->
 
