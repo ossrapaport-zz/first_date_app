@@ -21,10 +21,14 @@ App.Views.ModalView = Backbone.View.extend({
 		this.stopListening();
 	},
 	showNewUser: function() {
+		App.router.navigate("newprofile");
+		this.$el.html( new App.Views.NewUser().$el );
+    App.interestsView = new App.Views.Interests({ collection: App.interests });
+    App.interestsView.renderAll();
+		/*
 		var newUserView = new App.Views.NewUser();
 		newUserView.render();
 		this.exit();
-		/*
 		this.$el.html( this.newUserTemplate );
 		App.interestsView = new App.Views.Interests ({ collection: App.interests });
 		App.interestsView.renderAll();

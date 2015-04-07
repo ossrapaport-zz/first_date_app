@@ -8,7 +8,7 @@ App.Views.Interests = Backbone.View.extend({
     this.listenTo(this.collection, 'add', this.renderOne);
   },
   renderAll: function() {
-    this.collection.each(this.renderOne.bind(this));
+    this.collection.each(this.renderOne, this);
   },
   renderOne: function(interest) {
     var newInterestView = new App.Views.InterestList({ model: interest });

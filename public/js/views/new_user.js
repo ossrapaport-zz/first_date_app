@@ -2,24 +2,24 @@
 
 App.Views.NewUser = Backbone.View.extend({
 
-  el: "#account-modal",
+  //el: "#account-modal",
   initialize: function() {
     this.template = Handlebars.compile( $('#create-user-template').html() );
+    this.render();
   },
   render: function() {
-    this.$el.empty();
+    //this.$el.empty();
     this.$el.html( this.template );
     //this.delegateEvents({"click #register-btn": "createNewUser"});
-    App.interestsView = new App.Views.Interests ({ collection: App.interests });
-    App.interestsView.renderAll();
-    App.router.navigate("newprofile");
-  },
+    //this.show();
+    //App.router.navigate("newprofile");
+  },/*
   show: function() {
-    this.$el.show();
+    this.$el.fadeIn(500);
   },
   hide: function() {
     this.$el.fadeOut(200);
-  },
+  },*/
   getCheckedBoxesID: function(checkboxName) {
     var findTerm = "[name=" + checkboxName + "]";
     var checkboxes = this.$el.find(findTerm);
@@ -32,9 +32,7 @@ App.Views.NewUser = Backbone.View.extend({
     }
     return checkedBoxesIDs;
   },
-  createNewUser: function() {
-    debugger
-    console.log("I'm here");
+  createNewUser: function(event) {
     var userName = this.$el.find("#username").val().trim();
     var userPassword = this.$el.find("#password").val().trim();
     var usersName = this.$el.find("#name").val().trim();
@@ -53,7 +51,12 @@ App.Views.NewUser = Backbone.View.extend({
       personality: userPersonality,
       location: userLocation
     };
-    console.log(data);
+
+    App.users.create(data, {
+      success: function(data) {
+
+      }
+    });
     $.ajax({
       url: "/users",
       method: "POST",
@@ -78,7 +81,7 @@ App.Views.NewUser = Backbone.View.extend({
       App.router.navigate("/search/" + userID);
     }.bind(this));
   },
-  testFn: function() {
-    console.log("Tested");
+  events: {
+    "click #register-btn": "createNewUser"
   }
 });
