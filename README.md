@@ -6,8 +6,8 @@ The main focus for this app is the ability to suggest first date ideas based on 
 
 -- APIs used --
 Yelp API (for place suggestions)
-Uber API (for transportation option)
-Hopstop (for transportation option)
+Factual API (for transportation option)
+
 
 -- User Stories --
 1- As a user I want to be able to make and log into a profile with my name, birthdate, location, 
