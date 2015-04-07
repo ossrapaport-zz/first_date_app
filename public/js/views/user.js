@@ -31,7 +31,7 @@ App.Views.User = Backbone.View.extend({
     App.router.navigate("profile/" + this.model.id);
   },
   events: {
-    "click .edit-user": "editUser",
+    "click #edit-profile": "editUser",
     "click .update-user": "updateUser",
   }
 });
