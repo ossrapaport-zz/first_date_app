@@ -1,24 +1,11 @@
-//TODO: Look at this with McK
-
 App.Views.NewUser = Backbone.View.extend({
 
-  el: "#account-modal",
   initialize: function() {
     this.template = Handlebars.compile( $('#create-user-template').html() );
+    this.render();
   },
   render: function() {
-    this.$el.empty();
     this.$el.html( this.template );
-    //this.delegateEvents({"click #register-btn": "createNewUser"});
-    App.interestsView = new App.Views.Interests ({ collection: App.interests });
-    App.interestsView.renderAll();
-    App.router.navigate("newprofile");
-  },
-  show: function() {
-    this.$el.show();
-  },
-  hide: function() {
-    this.$el.fadeOut(200);
   },
   getCheckedBoxesID: function(checkboxName) {
     var findTerm = "[name=" + checkboxName + "]";
@@ -32,9 +19,7 @@ App.Views.NewUser = Backbone.View.extend({
     }
     return checkedBoxesIDs;
   },
-  createNewUser: function() {
-    debugger
-    console.log("I'm here");
+  createNewUser: function(event) {
     var userName = this.$el.find("#username").val().trim();
     var userPassword = this.$el.find("#password").val().trim();
     var usersName = this.$el.find("#name").val().trim();
@@ -53,32 +38,31 @@ App.Views.NewUser = Backbone.View.extend({
       personality: userPersonality,
       location: userLocation
     };
-    console.log(data);
-    $.ajax({
-      url: "/users",
-      method: "POST",
-      data: data
-    }).done(function(newUserData) {
-      var userID = newUserData.id;
-      var count = 0;
-      interestsIDArray.forEach(function(interestID) {
-        count ++;
-        $.ajax({
-          url: "/users/" + userID + "/add_interest",
-          method: "PUT",
-          data: {
-            interest_id: interestID
+
+    App.users.create(data, {
+      success: function(data) {
+        debugger
+        var userID = data.id;
+        var count = 0;
+        interestsIDArray.forEach(function(interestID) {
+          count ++;
+          $.ajax({
+            url: "/users/" + userID + "/add_interest",
+            method: "PUT",
+            data: {
+              interest_id: interestID
+            }
+          })
+          if (count === interestsIDArray.length) {
+            App.searchView.render();
+            App.modalView.hide();
           }
-        })
-        if (count === interestsIDArray.length) {
-          this.hide();
-          App.searchView.render();
-        }
-      }.bind(this));
-      App.router.navigate("/search/" + userID);
-    }.bind(this));
+        }.bind(this));
+        App.router.navigate("/search/" + userID);
+      }
+    });
   },
-  testFn: function() {
-    console.log("Tested");
+  events: {
+    "click #register-btn": "createNewUser"
   }
 });

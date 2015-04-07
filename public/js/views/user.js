@@ -5,7 +5,6 @@ App.Views.User = Backbone.View.extend({
 	initialize: function() {
 		this.template = Handlebars.compile($('#single-user').html());
 		this.listenTo(this.model, 'add', this.renderOne);
-    //TODO: Make edit template
     this.editTemplate = Handlebars.compile($("#edit-user-template").html());
 	},
 	render: function() {
@@ -21,6 +20,7 @@ App.Views.User = Backbone.View.extend({
     App.router.navigate("editprofile/" + this.model.id);
   },
   updateUser: function() {
+    debugger
     this.model.save({
       username: this.$('.username').val(),
       date_of_birth: this.$('.dob').val(),
@@ -32,6 +32,8 @@ App.Views.User = Backbone.View.extend({
   },
   events: {
     "click #edit-profile": "editUser",
-    "click .update-user": "updateUser",
+    //TODO: Review this with McK - similar problem to 
+    //creating a new user
+    "click .update-user": "updateUser"
   }
 });
