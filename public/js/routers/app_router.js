@@ -22,17 +22,14 @@ App.Routers.Main = Backbone.Router.extend({
     App.results = new App.Collections.Results();
   },
   routes: {
-    "": "modalHome",
+    "search/:userID": "userSearch",
     "newprofile": "newUser",
     "editprofile/:userID": "editUser",
     "profile/:userID": "showProfile",
-    "search/:userID": "userSearch",
-    "result/:userID/:resultID": "searchResult" 
+    "result/:userID/:resultID": "searchResult", 
+    "": "modalHome"
   },
-  modalHome: function() {
-    //$(".app-wrapper").empty();
-    App.modalView.render();
-  },
+  //TODO: Change route below
   newUser: function() {
     App.modalView.show();
     App.modalView.showNewUser();
@@ -42,20 +39,29 @@ App.Routers.Main = Backbone.Router.extend({
     var user = App.users.get(userID);
     App.userView.setUser(user);
     userView.editUser();
+    console.log("Big Route 2");
   },
   showProfile: function(userID) {
     //TODO: Make this work
     App.modalView.hide();
     var user = App.users.get(userID);
     App.userView.setUser(user);
+    console.log("Big Route 3");
   },
   userSearch: function(userID) {
     App.modalView.hide();
     App.searchView.render();
+    console.log("Big Route 4");
   },
   searchResult: function(userID, resultID) {
     App.modalView.hide();
     var result = App.results.get(resultID);
     App.resultView.setResult(result);
+    console.log("Big Route 5");
+  },
+  modalHome: function() {
+    //$(".app-wrapper").empty();
+    App.modalView.render();
+    console.log("Big Route 1");
   }
 }) 

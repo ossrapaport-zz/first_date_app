@@ -1,14 +1,24 @@
+//TODO: Look at this with McK
+
 App.Views.NewUser = Backbone.View.extend({
 
-  el; "#account-modal",
+  el: "#account-modal",
   initialize: function() {
     this.template = Handlebars.compile( $('#create-user-template').html() );
   },
   render: function() {
-    this.$el.html( this.newUserTemplate );
+    this.$el.empty();
+    this.$el.html( this.template );
+    //this.delegateEvents({"click #register-btn": "createNewUser"});
     App.interestsView = new App.Views.Interests ({ collection: App.interests });
     App.interestsView.renderAll();
     App.router.navigate("newprofile");
+  },
+  show: function() {
+    this.$el.show();
+  },
+  hide: function() {
+    this.$el.fadeOut(200);
   },
   getCheckedBoxesID: function(checkboxName) {
     var findTerm = "[name=" + checkboxName + "]";
@@ -23,6 +33,7 @@ App.Views.NewUser = Backbone.View.extend({
     return checkedBoxesIDs;
   },
   createNewUser: function() {
+    debugger
     console.log("I'm here");
     var userName = this.$el.find("#username").val().trim();
     var userPassword = this.$el.find("#password").val().trim();
@@ -31,14 +42,17 @@ App.Views.NewUser = Backbone.View.extend({
     var personalityList = this.$el.find("#personality-list");
     var userPersonality = personalityList.find(":selected").text();
     var interestsIDArray = this.getCheckedBoxesID("interest-checkbox"); 
+    var locationList = this.$el.find("#neighborhood-list");
+    var userLocation = locationList.find(":selected").text();
+    
     var data = {
       username: userName,
       password: userPassword,
       name: usersName,
       date_of_birth: userDOB,
-      personality: userPersonality
+      personality: userPersonality,
+      location: userLocation
     };
-    debugger;
     console.log(data);
     $.ajax({
       url: "/users",
@@ -64,7 +78,7 @@ App.Views.NewUser = Backbone.View.extend({
       App.router.navigate("/search/" + userID);
     }.bind(this));
   },
-  events: {
-    "click #register-btn": "createNewUser"
+  testFn: function() {
+    console.log("Tested");
   }
 });

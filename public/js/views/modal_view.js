@@ -16,9 +16,14 @@ App.Views.ModalView = Backbone.View.extend({
 		App.usersView.renderAll();
 		this.show();
 	},
+	exit: function() {
+		this.undelegateEvents();
+		this.stopListening();
+	},
 	showNewUser: function() {
 		var newUserView = new App.Views.NewUser();
 		newUserView.render();
+		this.exit();
 		/*
 		this.$el.html( this.newUserTemplate );
 		App.interestsView = new App.Views.Interests ({ collection: App.interests });

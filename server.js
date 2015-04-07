@@ -29,7 +29,7 @@ var yelp = require("yelp").createClient ({
 });
 
 var Factual = require("factual-api");
-var factual = new Factual(process.env.FACTUAL_KEY, process.env.FACTUAL_SECRET);
+var factual = new Factual(process.env.FACTUAL_KEY_2, process.env.FACTUAL_SECRET_2);
 
 app.use(logger("dev"));
 app.use(bodyParser());

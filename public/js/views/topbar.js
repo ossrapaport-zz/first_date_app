@@ -9,14 +9,17 @@ App.Views.TopBar = Backbone.View.extend({
   },
   toSearch: function() {
     var userID = parseInt( Backbone.history.fragment.split("/")[1] );
-    App.searchView.render();
-    App.router.navigate("BROOO" + userID);
+    /*App.searchView.render();
+    debugger;*/
+    App.router.navigate("search/" + userID, {trigger: true});
   },
   viewProfile: function() {
     var userID = parseInt( Backbone.history.fragment.split("/")[1] );
     var user = App.users.get(userID);
     App.userView.setUser(user);
-    App.router.navigate("profile/" + userID);
+    var route = "profile/" + userID;
+    App.router.navigate(route, {trigger: true});
+    debugger;
   },
   events: {
     "click .nav-search": "toSearch",
