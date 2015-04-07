@@ -10,6 +10,7 @@ App.Views.Search = Backbone.View.extend({
     App.interestsView.renderAll();
   },
   getCheckedBoxesID: function(checkboxName) {
+    console.log(checkboxName);
     var checkboxes = this.getElementsByName(checkboxName);
     var checkedBoxesIDs = [];
 
@@ -33,7 +34,6 @@ App.Views.Search = Backbone.View.extend({
     var priceList = this.$el.find("#price-list");
     var price = parseInt( priceList.find(":selected").value() );
     //See how to use interestsIDArray because its a nested nested view.
-    debugger
     var interestsIDArray = this.getCheckedBoxesID("interest-checkbox");
     var baseURL = "/date_and_search/" + price + "/" + neighborhood;
     //Makes AJAX request with those attributes as data
