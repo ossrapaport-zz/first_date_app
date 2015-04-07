@@ -22,6 +22,18 @@ App.Views.ModalView = Backbone.View.extend({
 		App.interestsView.renderAll();
 		App.router.navigate("newprofile");
 	},
+	getCheckedBoxesID: function(checkboxName) {
+    var findTerm = "[name=" + checkboxName + "]";
+    var checkboxes = this.$el.find(findTerm);
+    var checkedBoxesIDs = [];
+
+    for (var i = 0; i < checkboxes.length; i++) {
+       if (checkboxes[i].checked) {
+          checkedBoxesIDs.push( parseInt( checkboxes[i].value) );
+       }
+    }
+    return checkedBoxesIDs;
+  },
 	createNewUser: function() {
 		var userName = this.$el.find( $("#username").val() );
 		var userPassword = this.$el.find( $("#password").val() )
@@ -29,8 +41,8 @@ App.Views.ModalView = Backbone.View.extend({
 		var userDOB = this.$el.find("#dob").val();
 		var personalityList = this.$el.find("#personality-list");
 		var userPersonality = personalityList.find(":selected").text();
-		var interestsIDArray = this.getCheckedBoxesID.find("interest-checkbox");
-		debugger; 
+		var interestsIDArray = this.getCheckedBoxesID("interest-checkbox");				
+		debugger;
 		var data = {
 			username: userName,
 			password: userPassword,
@@ -38,7 +50,6 @@ App.Views.ModalView = Backbone.View.extend({
 			date_of_birth: userDOB,
 			personality: userPersonality
 		};
-		console.log(data)
 		App.users.create(data);
 		var userID = App.users.last().id;
 		var count = 0;

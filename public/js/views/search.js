@@ -11,13 +11,9 @@ App.Views.Search = Backbone.View.extend({
     //Saves user id for later use
   },
   getCheckedBoxesID: function(checkboxName) {
-<<<<<<< HEAD
-    console.log(checkboxName);
     var checkboxes = this.getElementsByName(checkboxName);
-=======
     var findTerm = "[name=" + checkboxName + "]";
     var checkboxes = this.$el.find(findTerm);
->>>>>>> b3014e1c7f61804d823b405123ab81da3b576fdc
     var checkedBoxesIDs = [];
 
     for (var i = 0; i < checkboxes.length; i++) {
