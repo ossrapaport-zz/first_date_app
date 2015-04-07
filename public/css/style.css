@@ -93,6 +93,14 @@ a {
   color: #ff884d;
 }
 
+.nav-search {
+  cursor: pointer
+}
+
+.nav-profile {
+  cursor: pointer
+}
+
 #logo {
   float: left;
   color: #fff;
@@ -129,7 +137,6 @@ a {
   height: 340px;
   position: relative;
   font-family: 'Roboto';
-
 }
 
 ul {
@@ -348,6 +355,7 @@ select, option {
   border-radius: 3px;
   text-decoration: none;
   float: right;
+  cursor: pointer
 }
 
 .search-btn:hover {
@@ -355,11 +363,34 @@ select, option {
   color: #fff;
 }
 
+.schedule-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 20px 30px;
+  background-color: #32526e;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  -webkit-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+  border-radius: 3px;
+  text-decoration: none;
+  float: left;
+  cursor: pointer
+}
+
+.schedule-btn:hover {
+  background: #ff6b57;
+  color: #fff;
+}
+
 .search-again-btn {
   display: inline-block;
   margin-top: 20px;
   padding: 20px 30px;
-  background-color: #ff6b57;
+  background-color: #32526e;
   border: none;
   color: #fff;
   text-align: center;
@@ -370,10 +401,11 @@ select, option {
   border-radius: 3px;
   text-decoration: none;
   float: right;
+  cursor: pointer
 }
 
 .search-again-btn:hover {
-  background: #32526e;
+  background: #ff6b57;
   color: #fff;
 }
 
@@ -487,9 +519,13 @@ input[type=checkbox] {
   position: relative;
   padding: 20px;
   margin: 50px auto;
-  background: #32526e;
+  background: #ecf0f1;
   border-radius: 8px;
   height: auto;
+}
+
+#results-inner p, h2, h4 {
+  color: #32526e;
 }
 
 #restaurant {
@@ -510,6 +546,10 @@ input[type=checkbox] {
 
 #reviews {
   padding-bottom: 4px;
+}
+
+#reviews:before {
+  content: ' " ' 
 }
 
 #img-gallery {
@@ -567,8 +607,6 @@ input[type=checkbox] {
    content: "\2605";
    position: absolute;
 }
-
-
 
 /*user form*/
 
