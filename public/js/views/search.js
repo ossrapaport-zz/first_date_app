@@ -8,7 +8,6 @@ App.Views.Search = Backbone.View.extend({
     this.$el.html(this.template);
     App.interestsView = new App.Views.Interests ({ collection: App.interests });
     App.interestsView.renderAll();
-    //Saves user id for later use
   },
   getCheckedBoxesID: function(checkboxName) {
     var findTerm = "[name=" + checkboxName + "]";
@@ -26,7 +25,6 @@ App.Views.Search = Backbone.View.extend({
   searchForAResult: function() {
     //Takes the name, personality, neighborhood, interests,
     // and price and uses those to search.
-    //TODO: check date name
     this.userID = parseInt( Backbone.history.fragment.split("/")[1] );
     var dateName = this.$el.find("#date-name").val();
     var personalityList = this.$el.find("#personality-list");
