@@ -1,25 +1,12 @@
-//TODO: Look at this with McK
-
 App.Views.NewUser = Backbone.View.extend({
 
-  //el: "#account-modal",
   initialize: function() {
     this.template = Handlebars.compile( $('#create-user-template').html() );
     this.render();
   },
   render: function() {
-    //this.$el.empty();
     this.$el.html( this.template );
-    //this.delegateEvents({"click #register-btn": "createNewUser"});
-    //this.show();
-    //App.router.navigate("newprofile");
-  },/*
-  show: function() {
-    this.$el.fadeIn(500);
   },
-  hide: function() {
-    this.$el.fadeOut(200);
-  },*/
   getCheckedBoxesID: function(checkboxName) {
     var findTerm = "[name=" + checkboxName + "]";
     var checkboxes = this.$el.find(findTerm);
@@ -54,32 +41,26 @@ App.Views.NewUser = Backbone.View.extend({
 
     App.users.create(data, {
       success: function(data) {
-
+        debugger
+        var userID = data.id;
+        var count = 0;
+        interestsIDArray.forEach(function(interestID) {
+          count ++;
+          $.ajax({
+            url: "/users/" + userID + "/add_interest",
+            method: "PUT",
+            data: {
+              interest_id: interestID
+            }
+          })
+          if (count === interestsIDArray.length) {
+            App.searchView.render();
+            App.modalView.hide();
+          }
+        }.bind(this));
+        App.router.navigate("/search/" + userID);
       }
     });
-    $.ajax({
-      url: "/users",
-      method: "POST",
-      data: data
-    }).done(function(newUserData) {
-      var userID = newUserData.id;
-      var count = 0;
-      interestsIDArray.forEach(function(interestID) {
-        count ++;
-        $.ajax({
-          url: "/users/" + userID + "/add_interest",
-          method: "PUT",
-          data: {
-            interest_id: interestID
-          }
-        })
-        if (count === interestsIDArray.length) {
-          this.hide();
-          App.searchView.render();
-        }
-      }.bind(this));
-      App.router.navigate("/search/" + userID);
-    }.bind(this));
   },
   events: {
     "click #register-btn": "createNewUser"
