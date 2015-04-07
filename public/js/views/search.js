@@ -57,7 +57,7 @@ App.Views.Search = Backbone.View.extend({
     var neighborhood1 = encodeURI( data.neighborhood[0] );
     var neighborhood2 = encodeURI( data.neighborhood[1] );
     if (data.neighborhood[2] === undefined) {
-      var neighborhood3 = notest;
+      var neighborhood3 = "notest";
     } else {
       var neighborhood3 = encodeURI( data.neighborhood[2] );
     }
