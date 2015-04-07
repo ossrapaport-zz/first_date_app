@@ -88,8 +88,16 @@ App.Views.Search = Backbone.View.extend({
       var newResultView = new App.Views.Result ({ model: App.results.last() });
       var resultID = App.results.last().id;
       newResultView.render();
+      var mapSRC = this.buildMapSRC(newResult.restaurant_name);
+      newResultView.$el.find("iframe").attr("src", mapSRC);
       App.router.navigate("search/" + this.userID + "/" + resultID);
     }.bind(this));
+  },
+  //Builds the SRC for the Google Map iframe
+  buildMapSRC = function(restaurantName) {
+    var base = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCwnxlkHNmO8y1NFmMP2VnWhG2K271rBZ0&q=";
+    var compiledSRC = base + encodeURI(restaurantName) + ",New+York+NY";
+    return compiledSRC;
   },
   events: {
     "click .search-btn": "searchForAResult"
