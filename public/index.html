@@ -30,6 +30,8 @@
    <script src="js/views/modal_view.js"></script>
    <script src="js/views/interest_list.js"></script>
    <script src="js/views/user_list.js"></script>
+   <script src="js/views/new_user.js"></script>
+
 
 <!--          _             _     
   __ _  __| | ___  _ __ (_)___ 
@@ -44,7 +46,8 @@
 	<div id="inner-page">
 		<!-- START app wrapper -->
 		 <div class="app-wrapper">
-			<div id="account-modal"></div>
+			<div id="account-modal">
+			</div>
 		 </div>       
 		<!-- end app wrapper -->
 					
@@ -61,23 +64,26 @@
 	<!-- TEMPLATES -->
 	<!-- header template -->
 	<template id="header-template">
-		<div id="logo">First Date Generator</div>
+		<a href="/" id="logo">1stDate.</a>
 		<nav id="top-menu">
 		<a href="#" class="nav-search">Search</a>
 		<a href="#" class="nav-profile">Profile</a>
-	</nav>
+		</nav>
 	</template>
 
 	 	<template id="account-modal-template">
+		<div id="modal-header"><span id="modal-logo">1stDate.</span></div>		 			
 		 		<div id="account-wrapper">
+		 			<h1 align="center">Welcome to 1stDate.</h1>
 		 		<div class="one-half">
-		 			<h4> Select Your Username:</h4>
+		 			<h4> Select Your Account:</h4>
 					<ul class="user-list"></ul>
 		 		</div>
+
 				<div class="one-half-last">
 					<h4>Don't have an account yet?</h4>
 					<div class="submit">
-				    	<input type="submit" value="CREATE" id="create-acct-btn"/>
+				    	<input type="submit" value="CREATE ACCOUNT" id="create-acct-btn"/>
 				    	<div class="ease"></div>
 				    </div>
 				</div>
@@ -90,14 +96,17 @@
 
 			<!-- START single user template -->
 			<template id="single-user">
-				<div id="name"><h1 align="center">Hello {{ name }}</h1></div>
+				<a href = "#" id="edit-profile">Edit Profile</a>
+				<div id="name"><h1 align="center">Hey There, {{ name }}!</h1></div>
+				<h2 align="center">This is your personal information.</h2>
+				<div class="clear"></div>
 				<h4> Username: {{ username }} </h4>
 				<h4> Date of Birth: {{ date_of_birth }} </h4>
 				<h4> Personality: {{ personality }} </h4>
 				<h4> Location: {{ location }} </h4>
-
+				<div class="clear"></div>
 				<h1>Your Date history</h1>
-				<p>History goes here</p>
+				<p>No current date history.</p>
 			</template>
 			<!-- END single user template -->
 
@@ -134,9 +143,140 @@
 				      <div class="clear"></div>
 				      <label><span class="form-label">Tell us some of your Interests: </span></label>
 				      <ul id="interests-list"></ul>
+				      <div class="clear"></div>
+				      <label><span class="form-label">Your Location: </span></label>
+	             <select id = "neighborhood-list">
+						<option>Alphabet City</option>
+						<option>Astor Row</option>
+						<option>Battery Park City</option>
+						<option>Bowery</option>
+						<option>Carnegie Hill</option>
+						<option>Chelsea</option>
+						<option>Chinatown</option>
+						<option>Civic Center</option>
+						<option>Columbus Circle</option>
+						<option>Cooperative Village</option>
+						<option>Diamond District</option>
+						<option>East Harlem</option>
+						<option>East Village</option>
+						<option>Ellis Island</option>
+						<option>Essex Crossing</option>
+						<option>Financial District</option>
+						<option>Five Points</option>
+						<option>Flatiron District</option>
+						<option>Garment District</option>
+						<option>Gashouse District</option>
+						<option>Governors Island</option>
+						<option>Gramercy Park</option>
+						<option>Greenwich Village</option>
+						<option>Hamilton Heights</option>
+						<option>Harlem</option>
+						<option>Hell's Kitchen</option>
+						<option>Herald Square</option>
+						<option>Hudson Heights</option>
+						<option>Hudson Square</option>
+						<option>Hudson Yards</option>
+						<option>Inwood</option>
+						<option>Kips Bay</option>
+						<option>Koreatown</option>
+						<option>Lenox Hill</option>
+						<option>Liberty Island</option>
+						<option>Lincoln Square</option>
+						<option>Little Fuzhou</option>
+						<option>Little Germany</option>
+						<option>Little Italy</option>
+						<option>Little Spain</option>
+						<option>Little Syria</option>
+						<option>Lower East Side</option>
+						<option>Lower Manhattan</option>
+						<option>Madison Square</option>
+						<option>Manhattan Valley</option>
+						<option>Manhattantown</option>
+						<option>Manhattanville</option>
+						<option>Marble Hill</option>
+						<option>Marcus Garvey Park</option>
+						<option>Meatpacking District</option>
+						<option>Midtown Manhattan</option>
+						<option>Morningside Heights</option>
+						<option>Murray Hill</option>
+						<option>NoHo</option>
+						<option>Nolita</option>
+						<option>NoMad</option>
+						<option>Penn South</option>
+						<option>Peter Cooper Village</option>
+						<option>Pomander Walk</option>
+						<option>Radio Row</option>
+						<option>Randalls Island</option>
+						<option>Riverside South</option>
+						<option>Roosevelt Island</option>
+						<option>Rose Hill</option>
+						<option>Silicon Alley</option>
+						<option>SoHo</option>
+						<option>South Street Seaport</option>
+						<option>South Village</option>
+						<option>Stuyvesant Square</option>
+						<option>Stuyvesant Town</option>
+						<option>Sugar Hill</option>
+						<option>Sutton Place</option>
+						<option>Sylvan</option>
+						<option>Tenderloin</option>
+						<option>Theater District</option>
+						<option>Times Square</option>
+						<option>Tribeca</option>
+						<option>Tudor City</option>
+						<option>Turtle Bay</option>
+						<option>Two Bridges</option>
+						<option>Union Square</option>
+						<option>Upper East Side</option>
+						<option>Upper Manhattan</option>
+						<option>Upper West Side</option>
+						<option>Wards Island</option>
+						<option>Washington Heights</option>
+						<option>Waterside Plaza</option>
+						<option>West Village</option>
+						<option>World Trade Center</option>
+						<option>Yorkville</option>
+						<option>Bushwick</option>
+						<option>Greenpoint</option>
+						<option>Willliamsburg</option>
+						<option>Bushwick</option>
+						<option>Cypress Hills</option>
+						<option>East New York</option>
+						<option>Canarsie</option>
+						<option>Brownsville</option>
+						<option>Bergen Beach</option>
+						<option>Mill Basin</option>
+						<option>East Flatbush</option>
+						<option>Flatlands</option>
+						<option>Marine Park</option>
+						<option>Sheepshead Bay</option>
+						<option>Brighton Beach</option>
+						<option>Manhattan Beach</option>
+						<option>Coney Island</option>
+						<option>Sea Gate</option>
+						<option>Gravesend</option>
+						<option>Bath Beach</option>
+						<option>Fort Hamilton</option>
+						<option>Bay Ridge</option>
+						<option>Sunset Park</option> 
+						<option>Prospect Park South</option>
+						<option>Flatbush</option> 
+						<option>Prospect Park</option> 
+						<option>Windsor Terrace</option>
+						<option>Park Slope</option>
+						<option>Gowanus</option>
+						<option>Prospect Heights</option>
+						<option>Broom hills</option>
+						<option>Downtown Brooklyn</option>
+						<option>Carroll Gardens</option>
+						<option>Cobble Hill</option>
+						<option>DUMBO</option> 
+	             </select>
+	             		<div class="clear"></div>
 				   		<div class="submit">
 				        <input type="submit" value="CREATE" id="register-btn"/>
 				        <div class="ease"></div>
+
 				      </div>
 				  </div>				      			      
 				    </form>
@@ -192,7 +332,7 @@
 			<div class="clear2"></div>
 			<form>
 				<label><span class="form-label">Your Date's Name: </span></label>
-				<input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Enter Name Here" id="date-name" /><br />
+				<input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Enter Name Here" id="date-name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name Here'" /><br />
 				<div class="clear"></div>
 				<label><span class="form-label">Personality: </span></label>
 	             <select id = "personality-list">
@@ -203,7 +343,7 @@
 						<option>Spiritual</option>
 	             </select>
 				<div class="clear"></div>
-				<label><span class="form-label">Select some of your date's interests: </span></label>
+				<label><span class="form-label">Select Some of Your Date's Interests: </span></label>
 				    <ul id="interests-list">
 					</ul>
 	             <div class="clear"></div>
@@ -353,19 +493,21 @@
 
 			<!-- START interest list template -->
 			<template id="interest-list-template">				
-				<li ><input type="checkbox" name="interest-checkbox" value="{{ id }}">{{ name }}</li>
+				<li><input type="checkbox" name="interest-checkbox" value="{{ id }}">{{ name }}</li>
 			</template>
 			<!-- END interest list template -->
 
 			<!-- START results template -->
       	<template id="search-result-template">
       	<h1><img src="http://png-1.findicons.com/files/icons/2232/wireframe_mono/48/checkmark.png" width="50"> We found the perfect place!</h1>
-		<div class="one-third">
-			<h2> {{ name }} </h2>
+		<div id="results-inner">
+			<h2 align="center"> {{ restaurant_name }} </h2>
 			<p> {{ description }} </p>
-			<div id="img-gallery"><img src=" {{img_url_1}} " /> <img src=" {{img_url_2}} " /></div>
-		</div>
-		<div class="one-third-last">			
+			<p> {{ telephone_number }} </p>
+			<p> {{ website }} </p>
+			<p> {{ address }}
+
+			<div id="img-gallery"><img src=" {{yelp_image_url}} " /></div>
 		</div>
 		<!-- <div class="fixed-width">
 			<div class="clear"></div>
