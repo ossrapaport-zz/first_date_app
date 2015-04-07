@@ -486,7 +486,7 @@
 	             </select>
 				 <div class="clear"></div>
          	<a href="#" class="search-btn">Search</a>
-
+			<div class="clear"></div>
          	</form>
          				</template>
 			<!-- END search template -->
@@ -499,15 +499,21 @@
 
 			<!-- START results template -->
       	<template id="search-result-template">
-      	<h1><img src="http://png-1.findicons.com/files/icons/2232/wireframe_mono/48/checkmark.png" width="50"> We found the perfect place!</h1>
+      	<h1><img src="http://png-1.findicons.com/files/icons/2232/wireframe_mono/48/checkmark.png" width="50" /> We Found the Perfect Place for <span class="highlight">You</span> and {{ firstName }} !</h1>
 		<div id="results-inner">
-			<h2 align="center"> {{ restaurant_name }} </h2>
-			<p> {{ description }} </p>
-			<p> {{ telephone_number }} </p>
-			<p> {{ website }} </p>
-			<p> {{ address }}
+			<h2 align="center" id="restaurant"> {{ restaurant_name }} </h2>
+			<p align="center" id= "address"> {{ address }} </p>
+			<p align="center" id= "phone"> {{ telephone_number }} </p>
+			<div class="clear"></div>
+			<h4 id="reviews">What people are saying:<h4> 
+				<p>{{ description }} </p>
 
-			<div id="img-gallery"><img src=" {{yelp_image_url}} " /></div>
+			<p id= "website"> {{ website }} </p>
+			<p>User Photos:</p>
+
+			<div id="img-gallery"><img src=" {{yelp_image_url}} " /> <img src=" {{yelp_snippet_image_url}} " /></div>
+			<div class="clear"></div>
+         	<a href="/" class="search-again-btn">Search Again</a>
 		</div>
 		<!-- <div class="fixed-width">
 			<div class="clear"></div>
