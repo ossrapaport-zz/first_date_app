@@ -76,7 +76,8 @@ App.Views.Search = Backbone.View.extend({
       yelp_snippet_image_url: restaurantInfo.snippet_image_url,
       description: restaurantInfo.snippet_text.split(".")[0] + ".",
       telephone_number: restaurantInfo.display_phone,
-      address: restaurantInfo.location.display_address.join(", ") 
+      address: restaurantInfo.location.display_address.join(", "),
+      website: restaurantInfo.url 
     }
     var baseURL = "/users/" + currentID + "/results";
     $.ajax({
