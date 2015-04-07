@@ -29,7 +29,7 @@ var yelp = require("yelp").createClient ({
 });
 
 var Factual = require("factual-api");
-var factual = new Factual(process.env.FACTUAL_KEY_2, process.env.FACTUAL_SECRET_2);
+var factual = new Factual(process.env.FACTUAL_KEY_3, process.env.FACTUAL_SECRET_3);
 
 app.use(logger("dev"));
 app.use(bodyParser());
@@ -439,9 +439,9 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
 //Restaurant Search for a Photo - Yelp is Here
 app.get("/yelp_for_more/:name/:neighborhood1/:neighborhood2/:neighborhood3", function(req, res) {
   var restaurantName = req.params.name;
-  var restaurantNeighborhood1 = req.params.neighborhood1;
-  var restaurantNeighborhood2 = req.params.neighborhood2;
-  var restaurantNeighborhood3 = req.params.neighborhood3;
+  var restaurantNeighborhood1 = req.params.neighborhood1 + ", New York City";
+  var restaurantNeighborhood2 = req.params.neighborhood2 + ", New York City";
+  var restaurantNeighborhood3 = req.params.neighborhood3 + ", New York City";
 
   //This is the Yelp call. THe nested structure is in case the 
   //neighborhoods of Yelp and Factual don't line up.
@@ -456,7 +456,7 @@ app.get("/yelp_for_more/:name/:neighborhood1/:neighborhood2/:neighborhood3", fun
           res.send(newData);
         } else {
           if (restaurantNeighborhood3 !== "notest") {
-            yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood}, function(error, newestData) {
+            yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood3}, function(error, newestData) {
               console.log("newestData:" + newestData);
               res.send(newestData);
             });            
@@ -470,6 +470,14 @@ app.get("/yelp_for_more/:name/:neighborhood1/:neighborhood2/:neighborhood3", fun
       });
     }
   });
+});
+
+app.get("/yelp_test", function(req, res) {
+
+  yelp.search({term: "vinegar hill house", limit: 1, location: "DUMBO, New York City"}, function(error, data) {
+    res.send(data);
+  })
+
 });
 
 app.listen(process.env.PORT || 3000, function() {
