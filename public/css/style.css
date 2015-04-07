@@ -355,6 +355,7 @@ select, option {
   border-radius: 3px;
   text-decoration: none;
   float: right;
+  cursor: pointer
 }
 
 .search-btn:hover {

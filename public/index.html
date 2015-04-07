@@ -83,7 +83,7 @@
 				<div class="one-half-last">
 					<h4>Don't have an account yet?</h4>
 					<div class="submit">
-				    	<input type="submit" value="CREATE ACCOUNT" id="create-acct-btn"/>
+				    	<input type="button" value="CREATE ACCOUNT" id="create-acct-btn"/>
 				    	<div class="ease"></div>
 				    </div>
 				</div>
@@ -216,7 +216,7 @@
 	             </select>
 	             		<div class="clear"></div>
 				   		<div class="submit">
-				        <input type="submit" value="CREATE" id="register-btn"/>
+				        <input type="button" value="CREATE" id="register-btn"/>
 				        <div class="ease"></div>
 
 				      </div>
@@ -252,7 +252,7 @@
 				      <div class="clear"></div>
 				  	
 				  </div>				      
-				        <input type="submit" value="UPDATE" id="update-btn"/>
+				        <input type="button" value="UPDATE" id="update-btn"/>
 <!-- 				        <div class="ease"></div> -->
 				      </div>
 				    </form>
@@ -372,7 +372,7 @@
 
 			<!-- START results template -->
       	<template id="search-result-template">
-      	<h1><img src="http://png-1.findicons.com/files/icons/2232/wireframe_mono/48/checkmark.png" width="50" /> We Found the Perfect Place for <span class="highlight">You</span> and {{ firstName }} !</h1>
+      	<h1><img src="http://png-1.findicons.com/files/icons/2232/wireframe_mono/48/checkmark.png" width="50" /> We Found the Perfect Place for You and Your Date!</h1>
 		<div id="results-inner">
 			<h2 align="center" id="restaurant"> {{ restaurant_name }} </h2>
 			<p align="center" id= "address"> {{ address }} </p>
@@ -387,7 +387,7 @@
 			<div id="img-gallery"><img src=" {{yelp_image_url}} " /> <img src=" {{yelp_snippet_image_url}} " /></div>
 			<div class="clear"></div>
 			<a class="schedule-btn">Schedule Date</a>
-         	<a class="search-again-btn">Search Again</a>
+         	<a class="search-again-btn" href="/">Search Again</a>
          	<div class="clear"></div>
 		</div>
 		<!-- <div class="fixed-width">
