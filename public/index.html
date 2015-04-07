@@ -62,8 +62,10 @@
 	<!-- header template -->
 	<template id="header-template">
 		<div id="logo">First Date Generator</div>
+		<nav id="top-menu">
 		<a href="#" class="nav-search">Search</a>
 		<a href="#" class="nav-profile">Profile</a>
+	</nav>
 	</template>
 
 	 	<template id="account-modal-template">
@@ -107,21 +109,22 @@
 				<div id="form-main">
 				  <div id="form-div">
 				    <form class="form" id="form1">
-				       <p class="username"> Username: 
+				       <h4 class="username"> Username: 
 				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ username }} " placeholder="{{ username }}" id="username" required/>
-				      </p>
-				       <p class="password"> Password: 
+				      </h4>
+				       <h4 class="password"> Password: 
 				        <input name="password" type="text" class="validate[required,custom[email]] feedback-input" id="password" value=" {{ password }} " placeholder="{{ password }}" required/>
-				      </p>
+				      </h4>
 
-				      <p class="name"> Name: 
+				      <h4 class="name"> Name: 
 				        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" value=" {{ name }} " placeholder="{{ name }}" id="name" required/>
-				      </p>			      
-				      <p class="p-dob"> Date of Birth
+				      </h4>			      
+				      <h4 class="p-dob"> Date of Birth
 				        <input name="dob" type="text" class="validate[required,custom[email]] feedback-input" id="dob" value=" {{ date_of_birth }} " placeholder="{{ date_of_birth }}" required/>
-				      </p>
+				      </h4>
 				      <div class="clear"></div>
 				      <label><span class="form-label">Select your personality: </span></label>
+				      	<div class="clear"></div>
 				        	<select id = "personality-list">
 							    <option>Outgoing</option>
 								<option>Reserved</option>
@@ -133,7 +136,7 @@
 				      <label><span class="form-label">Tell us some of your Interests: </span></label>
 				      <ul id="interests-list"></ul>
 				   		<div class="submit">
-				        <input type="submit" value="SUBMIT" id="register-btn"/>
+				        <input type="submit" value="CREATE" id="register-btn"/>
 				        <div class="ease"></div>
 				      </div>
 				  </div>				      			      
@@ -186,11 +189,12 @@
 			<!-- START search template -->
 			<template id="search-template">
 			<h1 align="center">Search for Your First Date</h1>
-			<h2>Tell us what you know about the person.</h2>
-			<div class="clear"></div>
+			<h2 align="center">Tell us what you know about the person.</h2>
+			<div class="clear2"></div>
 			<form>
 				<label><span class="form-label">Your Date's Name: </span></label>
-				<input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Enter Name Here" id="date-name" />
+				<input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Enter Name Here" id="date-name" /><br />
+				<div class="clear"></div>
 				<label><span class="form-label">Personality: </span></label>
 	             <select id = "personality-list">
 	             		<option>Outgoing</option>
@@ -333,9 +337,7 @@
 						<option>DUMBO</option> 
 	             </select>
 	             <div class="clear"></div>
-	             <label><span class="form-label">Select price: </span></label>
-	             <br />
-				<label><span class="form-label">Price Range: </span></label>
+	             <label><span class="form-label">Select Price Range: </span></label>	             
 	             <select id = "price-list">
 	             		<option value="1">$15 or less</option>
 						<option value="2">$15-$30</option>
@@ -343,13 +345,11 @@
 						<option value="4">$50-$75</option>
 						<option value="5">$75+</option>
 	             </select>
-         	<!-- <div class="price">
-					<span>$</span><span>$</span><span>$</span><span>$</span><span>$</span>
-				 </div> -->
-         	</form>
-         	<div class="clear"></div>
+				 <div class="clear"></div>
          	<a href="#" class="search-btn">Search</a>
-			</template>
+
+         	</form>
+         				</template>
 			<!-- END search template -->
 
 			<!-- START interest list template -->
