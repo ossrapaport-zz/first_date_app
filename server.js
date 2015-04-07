@@ -387,6 +387,7 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
     firstName: req.body.firstName,
     personality: req.body.personality
   };
+  console.log(req.body);
   var interestIDArray = req.body.interest_ids;
   console.log(interestIDArray);
   var count = 0;
@@ -436,12 +437,38 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
 });
 
 //Restaurant Search for a Photo - Yelp is Here
-app.get("/yelp_for_more/:name/:neighborhood", function(req, res) {
+app.get("/yelp_for_more/:name/:neighborhood1/:neighborhood2/:neighborhood3", function(req, res) {
   var restaurantName = req.params.name;
-  var restaurantNeighborhood = req.params.neighborhood;
-  
-  yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood}, function(error, data) {
+  var restaurantNeighborhood1 = req.params.neighborhood1;
+  var restaurantNeighborhood2 = req.params.neighborhood2;
+  var restaurantNeighborhood3 = req.params.neighborhood3;
+
+  //This is the Yelp call. THe nested structure is in case the 
+  //neighborhoods of Yelp and Factual don't line up.
+  yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood1}, function(error, data) {
+    if (data !== undefined) {
+    console.log("data:" + data);
     res.send(data);
+    } else {
+      yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood}, function(error, newData) {
+        if (newData !== undefined) {
+          console.log("newData:" + newData);
+          res.send(newData);
+        } else {
+          if (restaurantNeighborhood3 !== "notest") {
+            yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood}, function(error, newestData) {
+              console.log("newestData:" + newestData);
+              res.send(newestData);
+            });            
+          } else {
+            var noData = {
+              name: "Nothing"
+            }
+            res.send(noData);
+          }
+        }
+      });
+    }
   });
 });
 

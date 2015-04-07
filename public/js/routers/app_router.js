@@ -18,6 +18,8 @@ App.Routers.Main = Backbone.Router.extend({
     App.modalView.render();
 
     App.searchView = new App.Views.Search();
+
+    App.results = new App.Collections.Results();
   },
   routes: {
     "": "modalHome",
@@ -42,6 +44,7 @@ App.Routers.Main = Backbone.Router.extend({
     userView.editUser();
   },
   showProfile: function(userID) {
+    //TODO: Make this work
     App.modalView.hide();
     var user = App.users.get(userID);
     App.userView.setUser(user);
