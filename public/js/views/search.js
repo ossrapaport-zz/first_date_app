@@ -3,6 +3,7 @@ App.Views.Search = Backbone.View.extend({
 
   initialize: function() {
     this.template = Handlebars.compile($("#search-template").html());
+    this.errorTemplate = Handlebars.compile($("#error-template").html());
   },
   render: function() {
     this.$el.html(this.template);
@@ -50,6 +51,12 @@ App.Views.Search = Backbone.View.extend({
   },
   //Gets more information about the restaurant with Yelp
   fleshOutResult: function(data) {
+    if (data === "") {
+      debugger
+      this.$el.html(this.errorTemplate);
+      return;
+    }
+    console.log("I kept going despite return");
     var restaurantName = encodeURI( data.name );
     var neighborhood1 = encodeURI( data.neighborhood[0] );
     var neighborhood2 = encodeURI( data.neighborhood[1] );
@@ -100,7 +107,13 @@ App.Views.Search = Backbone.View.extend({
     var compiledSRC = base + encodeURI(restaurantName) + ",New+York+NY";
     return compiledSRC;
   },
+  newSearch: function() {
+    this.render();
+    var userID = parseInt( Backbone.history.fragment.split("/")[1] );
+    App.router.navigate("search/" + userID);
+  },
   events: {
-    "click .search-btn": "searchForAResult"
+    "click .search-btn": "searchForAResult",
+    "click .search-again-btn": "newSearch"
   }
 })

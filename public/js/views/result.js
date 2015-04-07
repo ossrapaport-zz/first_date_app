@@ -10,5 +10,13 @@ App.Views.Result = Backbone.View.extend({
   setResult: function(result) {
     this.model = result;
     this.render();
+  },
+  newSearch: function() {
+    App.searchView.render();
+    var userID = parseInt( Backbone.history.fragment.split("/")[1] );
+    App.router.navigate("search/" + userID);
+  },
+  events: {
+    "click .search-again-btn": "newSearch"
   }
 })
