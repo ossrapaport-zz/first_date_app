@@ -26,7 +26,6 @@ App.Views.ModalView = Backbone.View.extend({
     var findTerm = "[name=" + checkboxName + "]";
     var checkboxes = this.$el.find(findTerm);
     var checkedBoxesIDs = [];
-
     for (var i = 0; i < checkboxes.length; i++) {
        if (checkboxes[i].checked) {
           checkedBoxesIDs.push( parseInt( checkboxes[i].value) );
@@ -40,9 +39,8 @@ App.Views.ModalView = Backbone.View.extend({
 		var usersName = this.$el.find( $("#name").val() );
 		var userDOB = this.$el.find("#dob").val();
 		var personalityList = this.$el.find("#personality-list");
-		var userPersonality = personalityList.find(":selected").text();
-		var interestsIDArray = this.getCheckedBoxesID("interest-checkbox");				
-		debugger;
+		// var userPersonality = personalityList.find(":selected").text();
+		// var interestsIDArray = this.getCheckedBoxesID("interest-checkbox");				
 		var data = {
 			username: userName,
 			password: userPassword,
@@ -50,6 +48,7 @@ App.Views.ModalView = Backbone.View.extend({
 			date_of_birth: userDOB,
 			personality: userPersonality
 		};
+		debugger;
 		App.users.create(data);
 		var userID = App.users.last().id;
 		var count = 0;

@@ -341,7 +341,7 @@ app.get("/test_call/:price/:neighborhood", function(req, res) {
           "price": 3,
           "meal_dinner": true,  
           "neighborhood": { 
-              "$includes": "soho"
+              "$includes": "Soho"
           },
           "category_labels": {
             "$excludes_any": ["Music and Show Venues", "Night Clubs", "Movie Theatres"]
