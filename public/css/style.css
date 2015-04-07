@@ -204,7 +204,7 @@ form input[type=password] {
   border: none;
   color: #fff;
   outline: none;
-  border-bottom: 2px solid white;
+/*  border-bottom: 2px solid white;*/
 }
 
 select, option {
@@ -328,7 +328,7 @@ select, option {
   display: inline-block;
   margin-top: 20px;
   padding: 20px 30px;
-  background-color: #E74C3C;
+  background-color: #ff6b57;
   border: none;
   color: #fff;
   text-align: center;
@@ -423,7 +423,6 @@ select, option {
 
 input[type=checkbox] {
   font-size: 50px;
-  background: red;
 }
 
 #search-result {  
