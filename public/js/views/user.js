@@ -9,11 +9,12 @@ App.Views.User = Backbone.View.extend({
     this.editTemplate = Handlebars.compile($("#edit-user-template").html());
 	},
 	render: function() {
-    var compiledTemplate = this.template( this.model.toJSON() );
+    var compiledTemplate = this.template( this.model );
 		this.$el.html( compiledTemplate.html() );
 	},
   setUser: function(user) {
     this.model = user;
+    debugger;
     this.render();
   },
   editUser: function() {
