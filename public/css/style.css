@@ -68,6 +68,9 @@ a {
   position: fixed;
   top:0;
   z-index: 1;
+  -webkit-box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
 }
 
 #top-menu {
@@ -192,6 +195,7 @@ form input[type=text],
 form input[type=password],
 form input[type=submit] {
   font-family: 'Roboto';
+  color: #fff;
 }
 
 form input[type=text],
@@ -382,7 +386,10 @@ select, option {
   padding: 20px;
   margin: 100px auto;
   background: #41c3ac;
-  border-radius: 8px
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
 }
 
 .form-label {
@@ -425,25 +432,15 @@ input[type=checkbox] {
   font-size: 50px;
 }
 
-#search-result {  
+#results-inner {  
   display: block;
-  width: 920px;
-  height: 755px;
+  position: relative;
   padding: 20px;
   margin: 50px auto;
   background: #E74C3C;
   border-radius: 8px
 }
 
-#results-wrapper {  
-  display: block;
-  width: 920px;
-  height: 755px;
-  padding: 20px;
-  margin: 50px auto;
-  background: #E74C3C;
-  border-radius: 8px
-}
 
 #img-gallery {
   margin-top: 10px;
@@ -694,6 +691,9 @@ input:focus, textarea:focus {
   margin-top: 20px;
   left: 50%;
   margin-left: -350px;
+  -webkit-box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
 }
 
 #create-account-wrapper {

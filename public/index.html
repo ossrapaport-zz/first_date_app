@@ -30,6 +30,8 @@
    <script src="js/views/modal_view.js"></script>
    <script src="js/views/interest_list.js"></script>
    <script src="js/views/user_list.js"></script>
+   <script src="js/views/new_user.js"></script>
+
 
 <!--          _             _     
   __ _  __| | ___  _ __ (_)___ 
@@ -72,7 +74,7 @@
 	 	<template id="account-modal-template">
 		<div id="modal-header"><span id="modal-logo">1stDate.</span></div>		 			
 		 		<div id="account-wrapper">
-		 			<h1 align="center">Welcome to 1stDate.f55r</h1>
+		 			<h1 align="center">Welcome to 1stDate.</h1>
 		 		<div class="one-half">
 		 			<h4> Select Your Account:</h4>
 					<ul class="user-list"></ul>
@@ -94,6 +96,7 @@
 
 			<!-- START single user template -->
 			<template id="single-user">
+				<a href = "#" id="edit-profile">Edit Profile</a>
 				<div id="name"><h1 align="center">Hey There, {{ name }}!</h1></div>
 				<h2 align="center">This is your personal information.</h2>
 				<div class="clear"></div>
@@ -329,7 +332,7 @@
 			<div class="clear2"></div>
 			<form>
 				<label><span class="form-label">Your Date's Name: </span></label>
-				<input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Enter Name Here" id="date-name" /><br />
+				<input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Enter Name Here" id="date-name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name Here'" /><br />
 				<div class="clear"></div>
 				<label><span class="form-label">Personality: </span></label>
 	             <select id = "personality-list">
@@ -497,16 +500,14 @@
 			<!-- START results template -->
       	<template id="search-result-template">
       	<h1><img src="http://png-1.findicons.com/files/icons/2232/wireframe_mono/48/checkmark.png" width="50"> We found the perfect place!</h1>
-		<div class="one-third">
-			<h2> {{ restaurant_name }} </h2>
+		<div id="results-inner">
+			<h2 align="center"> {{ restaurant_name }} </h2>
 			<p> {{ description }} </p>
 			<p> {{ telephone_number }} </p>
 			<p> {{ website }} </p>
 			<p> {{ address }}
 
 			<div id="img-gallery"><img src=" {{yelp_image_url}} " /></div>
-		</div>
-		<div class="one-third-last">			
 		</div>
 		<!-- <div class="fixed-width">
 			<div class="clear"></div>
