@@ -40,11 +40,25 @@ h4 {
   color: #fff;
   font-weight: 400;
   padding: 12px 0;
+  line-height: 30px;
 }
 
 a {
   text-decoration: none;
-  font-weight: 400
+
+}
+
+.heading {
+  width: 640px;
+  margin: 0 auto;
+  color: #32526e;
+  background: #fff;
+  padding: 25px;
+  -webkit-box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
+  border-radius: 5px;
+  margin-bottom: -8px;
 }
 
 .highlight {
@@ -777,7 +791,7 @@ input:focus, textarea:focus {
   background: url('http://greatmomentsinparenting.com/wp-content/uploads/2013/09/iStock_000025759519Medium.jpg')center fixed;
   background-size: cover;
   box-sizing: border-box;
-  padding-top: 60px;
+  padding-top: 40px;
 }
 
 #modal-header {
@@ -801,10 +815,9 @@ input:focus, textarea:focus {
   padding: 20px;
   background-color: #41c3ac;
   width: 700px;
-  height: 300px;
-  margin-top: 20px;
-  left: 50%;
-  margin-left: -350px;
+  height: 520px;
+  margin-top: 10px;
+  margin: 0 auto;
   -webkit-box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
@@ -832,7 +845,7 @@ input:focus, textarea:focus {
 
 .one-half {
   width:40%;
-  height: 75%;
+  height: 40%;
   float: left;
   padding: 0 10px;
   overflow-y: scroll;
@@ -841,7 +854,7 @@ input:focus, textarea:focus {
 
 .one-half-last {
   width: 48%;
-  height: 75%;
+  height: 40%;
   float: right;
   padding: 0 26px;
   border-left: 3px solid #fff;
