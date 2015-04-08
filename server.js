@@ -1,4 +1,3 @@
-//BEFORE HEROKU
 //Libraries
 var application_root = __dirname,
     express = require("express"),
@@ -382,7 +381,6 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   var price = req.params.price;
   var neighborhood = req.params.neighborhood;
 
-  //TODO: Make sure this works with the front-end structure
   var dateParams = {
     firstName: req.body.firstName,
     personality: req.body.personality

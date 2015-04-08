@@ -29,7 +29,6 @@ App.Routers.Main = Backbone.Router.extend({
     "result/:userID/:resultID": "searchResult", 
     "": "modalHome"
   },
-  //TODO: Change route below
   newUser: function() {
     App.modalView.show();
     App.modalView.showNewUser();

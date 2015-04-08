@@ -15,10 +15,6 @@ App.Views.ModalView = Backbone.View.extend({
 		App.usersView.renderAll();
 		this.show();
 	},
-	exit: function() {
-		this.undelegateEvents();
-		this.stopListening();
-	},
 	showNewUser: function() {
 		App.router.navigate("newprofile");
 		this.$el.html( new App.Views.NewUser().$el );
