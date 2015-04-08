@@ -41,7 +41,6 @@ App.Views.NewUser = Backbone.View.extend({
 
     App.users.create(data, {
       success: function(data) {
-        debugger
         var userID = data.id;
         var count = 0;
         interestsIDArray.forEach(function(interestID) {
