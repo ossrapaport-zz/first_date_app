@@ -166,20 +166,6 @@ app.post("/interests", function(req, res) {
   });
 });
 
-app.put("/interests/:id", function(req, res) {
-  var interestID = req.params.id;
-  var interestParams = req.body;
-  Interest
-  .findOne(interestID)
-  .then(function(interest) {
-    interest
-    .update(interestParams)
-    .then(function(updatedInterest) {
-      res.send(updatedInterest);
-    });
-  });
-});
-
 app.delete("/interests/:id", function(req ,res) {
   var interestID = req.params.id;
   Interest
@@ -203,34 +189,12 @@ app.get("/dates", function(req, res) {
   });
 });
 
-app.get("/dates/:id", function(req, res) {
-  var dateID = req.params.id;
-  Date
-  .findOne( dateID, { include: [Interest] })
-  .then(function(date) {
-    res.send(date);
-  });
-});
-
 app.post("/dates", function(req, res) {
   var dateParams = req.body;
   Date
   .create(dateParams)
   .then(function(newDate) {
     res.send(newDate);
-  });
-});
-
-app.delete("/dates/:id", function(req, res) {
-  var dateID = req.params.id;
-  Date
-  .findOne(dateID)
-  .then(function(date) {
-    date
-    .destroy()
-    .then(function() {
-      res.send(date);
-    });
   });
 });
 
@@ -295,21 +259,6 @@ app.post("/users/:id/results", function(req, res) {
   });
 });
 
-app.put("/results/:id", function(req, res) {
-  var resultID = req.params.id;
-  var data =req.body;
-
-  Result
-  .findOne(resultID)
-  .then(function(result) {
-    result
-    .update(data)
-    .then(function(updatedResult) {
-      res.send(updatedResult);
-    });
-  });
-});
-
 app.delete("/results/:id", function(req, res) {
   var resultID = req.params.id;
 
@@ -323,59 +272,6 @@ app.delete("/results/:id", function(req, res) {
     });
   });
 });
-
-//Factual Search -- For Example Only, Not Functional With Search
-
-app.get("/test_call/:price/:neighborhood", function(req, res) {
-
-  var price = req.params.price;
-  var neighborhood = req.params.neighborhood;
-  
-  factual.get('/t/restaurants-us?limit=50', 
-  { filters:
-    { "$and":
-      [
-        {
-          "alcohol": "true", 
-          "price": 3,
-          "meal_dinner": true,  
-          "neighborhood": { 
-              "$includes": "soho"
-          },
-          "category_labels": {
-            "$excludes_any": ["Music and Show Venues", "Night Clubs", "Movie Theatres"]
-          }
-        },
-        { "$or":
-            [
-              { "rating": "4" },
-              { "rating": "5" },
-              { "rating": "4.5" }, 
-              { "rating": "3.5"},
-              { "rating": "3"}
-            ]
-        },
-        { "$or": 
-          [
-            { "locality": "New York"},
-            { "locality": "Brooklyn"}
-          ]
-        }/*, 
-        { "$or":
-          [
-            { "price": 3 },
-            { "price": 5 },
-            { "price": 2 }, 
-            { "price": 4 }
-          ]
-        }*/
-      ]
-    }
-  },
-  function (error, response) {
-    res.send(response.data);
-  });
-})
 
 app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   var price = req.params.price;
@@ -441,7 +337,7 @@ app.get("/yelp_for_more/:name/:neighborhood1/:neighborhood2/:neighborhood3", fun
   var restaurantNeighborhood2 = req.params.neighborhood2 + ", New York City";
   var restaurantNeighborhood3 = req.params.neighborhood3 + ", New York City";
 
-  //This is the Yelp call. THe nested structure is in case the 
+  //This is the Yelp call. The nested structure is in case the 
   //neighborhoods of Yelp and Factual don't line up.
   yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood1}, function(error, data) {
     if (data !== undefined) {
@@ -468,14 +364,6 @@ app.get("/yelp_for_more/:name/:neighborhood1/:neighborhood2/:neighborhood3", fun
       });
     }
   });
-});
-
-app.get("/yelp_test", function(req, res) {
-
-  yelp.search({term: "vinegar hill house", limit: 1, location: "DUMBO, New York City"}, function(error, data) {
-    res.send(data);
-  })
-
 });
 
 app.listen(process.env.PORT || 3000, function() {
