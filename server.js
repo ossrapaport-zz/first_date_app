@@ -1,14 +1,15 @@
 //Libraries
-var application_root = __dirname,
-    express = require("express"),
-    logger = require("morgan"),
-    bodyParser = require("body-parser"),
-    models = require("./models"),
-    path = require("path"),
-    environment = require("dotenv"),
-    filterBuilder = require("./lib/filterBuilder.js"),
+var application_root  = __dirname,
+    express           = require("express"),
+    logger            = require("morgan"),
+    bodyParser        = require("body-parser"),
+    models            = require("./models"),
+    path              = require("path"),
+    environment       = require("dotenv"),
+    filterBuilder     = require("./lib/filterBuilder.js"),
     responseOptimizer = require("./lib/responseOptimizer.js"),
-    request = require("request");
+    request           = require("request"),
+    Factual           = require("factual-api");
 
 //Models 
 var User = models.users;
@@ -27,13 +28,11 @@ var yelp = require("yelp").createClient ({
   token_secret: process.env.YELP_TOKEN_SECRET
 });
 
-var Factual = require("factual-api");
 var factual = new Factual(process.env.FACTUAL_KEY_3, process.env.FACTUAL_SECRET_3);
 
 app.use(logger("dev"));
 app.use(bodyParser());
 
-//I connected this path to a test HTML folder
 app.use(express.static(path.join(application_root, "public"))); 
 app.use(express.static(path.join(application_root, "browser")));
 
@@ -139,6 +138,7 @@ app.put("/users/:id/remove_interest", function(req, res) {
 //Interest Routes
 
 app.get("/interests", function(req, res) {
+  
   Interest
   .findAll({ include: [User] })
   .then(function(interests) {
@@ -168,6 +168,7 @@ app.post("/interests", function(req, res) {
 
 app.delete("/interests/:id", function(req ,res) {
   var interestID = req.params.id;
+  
   Interest
   .findOne(interestID)
   .then(function(interest) {
@@ -191,6 +192,7 @@ app.get("/dates", function(req, res) {
 
 app.post("/dates", function(req, res) {
   var dateParams = req.body;
+  
   Date
   .create(dateParams)
   .then(function(newDate) {
@@ -222,7 +224,6 @@ app.put("/dates/:id/add_interest", function(req, res) {
 //Result Routes
 
 app.get("/results", function(req, res) {
-
   Result
   .findAll()
   .then(function(results) {
@@ -273,6 +274,7 @@ app.delete("/results/:id", function(req, res) {
   });
 });
 
+//The Factual query that finds the right restaurant
 app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   var price = req.params.price;
   var neighborhood = req.params.neighborhood;
@@ -281,9 +283,7 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
     firstName: req.body.firstName,
     personality: req.body.personality
   };
-  console.log(req.body);
   var interestIDArray = req.body.interest_ids;
-  console.log(interestIDArray);
   var count = 0;
 
   //Make new date
@@ -305,21 +305,13 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
             .getInterests()
              //Look at those interests
             .then(function(dateInterests) {
-              var typesArray = [];
-              for (var i = 0; i < dateInterests.length; i ++) {
-                //Creates an array of the types of the date's interests
-                typesArray.push(dateInterests[i].type); 
-              }
+              var typesArray = makeTypesArray(dateInterests);
               //Makes Factual filters
               var factualFilter = filterBuilder.buildSearchFilter(price, neighborhood, typesArray); 
-              factual.get("/t/restaurants-us?limit=50", 
-                factualFilter,
+              factual.get("/t/restaurants-us?limit=50", factualFilter,
               function(error, response) {
                 //Finds the single best spot for the date
-                //console.log(response.data);
                 var bestRestaurantIndex = responseOptimizer.optimizeResponse(price, dateParams.personality, response.data); 
-                console.log(bestRestaurantIndex);
-                console.log(response.data[bestRestaurantIndex]);
                 res.send(response.data[bestRestaurantIndex]);
               });
             });
@@ -330,7 +322,15 @@ app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   });
 });
 
-//Restaurant Search for a Photo - Yelp is Here
+//Creates an array of the types of the date's interests
+var makeTypesArray = function(dateInterestsArray) {
+  var typesArray = [];
+  for (var i = 0; i < dateInterestsArray.length; i ++) {
+    typesArray.push(dateInterestsArray[i].type); 
+  } return typesArray;
+};
+
+//Yelp Search For the Factual Restaurant - Better Information 
 app.get("/yelp_for_more/:name/:neighborhood1/:neighborhood2/:neighborhood3", function(req, res) {
   var restaurantName = req.params.name;
   var restaurantNeighborhood1 = req.params.neighborhood1 + ", New York City";
@@ -340,25 +340,21 @@ app.get("/yelp_for_more/:name/:neighborhood1/:neighborhood2/:neighborhood3", fun
   //This is the Yelp call. The nested structure is in case the 
   //neighborhoods of Yelp and Factual don't line up.
   yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood1}, function(error, data) {
-    if (data !== undefined) {
-    console.log("data:" + data);
-    res.send(data);
+    if (data) {
+      res.send(data);
     } else {
       yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood}, function(error, newData) {
-        if (newData !== undefined) {
-          console.log("newData:" + newData);
+        if (newData) {
           res.send(newData);
         } else {
           if (restaurantNeighborhood3 !== "notest") {
             yelp.search({term: restaurantName, limit: 1, location: restaurantNeighborhood3}, function(error, newestData) {
-              console.log("newestData:" + newestData);
               res.send(newestData);
             });            
           } else {
-            var noData = {
+            res.send({
               name: "Nothing"
-            }
-            res.send(noData);
+            });
           }
         }
       });
