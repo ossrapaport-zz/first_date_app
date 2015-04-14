@@ -1,6 +1,7 @@
 App.Views.UserList = Backbone.View.extend({
+  
   initialize: function() {
-    this.template = Handlebars.compile($('#user-list-template').html());  
+    this.template = Handlebars.compile( $('#user-list-template').html() );  
   },
   render: function() {
     var compiledTemplate = this.template( this.model.toJSON() );
