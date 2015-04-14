@@ -20,6 +20,8 @@ App.Routers.Main = Backbone.Router.extend({
     App.searchView = new App.Views.Search();
 
     App.results = new App.Collections.Results();
+
+    App.resultView = new App.Views.Result();
   },
   routes: {
     "search/:userID": "userSearch",
@@ -58,8 +60,12 @@ App.Routers.Main = Backbone.Router.extend({
   },
   searchResult: function(userID, resultID) {
     App.modalView.hide();
-    var result = App.results.get(resultID);
-    App.resultView.setResult(result);
+    App.results.fetch({
+      success: function() {
+        var result = App.results.get(resultID);
+      App.resultView.setResult(result);
+      }
+    });
   },
   modalHome: function() {
     //$(".app-wrapper").empty();

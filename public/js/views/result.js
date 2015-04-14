@@ -8,8 +8,16 @@ App.Views.Result = Backbone.View.extend({
 	
   render: function() {
 		this.$el.html(this.template( this.model.toJSON() ));
-    App.router.navigate("result/" + this.model.id);
+    var mapSRC = this.buildMapSRC(this.model.attributes.restaurant_name);
+    this.$el.find("iframe").attr("src", mapSRC);
+    
 	},
+
+  buildMapSRC: function(restaurantName) {
+    var base = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCwnxlkHNmO8y1NFmMP2VnWhG2K271rBZ0&q=";
+    var compiledSRC = base + encodeURI(restaurantName) + ",New+York+NY";
+    return compiledSRC;
+  },
   
   setResult: function(result) {
     this.model = result;

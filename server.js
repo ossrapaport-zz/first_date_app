@@ -41,18 +41,19 @@ app.use(express.static(path.join(application_root, "browser")));
 
 app.get("/users", function(req, res) {
   User
-  .findAll({ include: [Interest], include: Result })
+  .findAll({ 
+    include: Interest, 
+    include: Result
+  })
   .then(function(users) {
     res.send(users);
   });
 });
 
 app.get("/users/:id", function(req, res) {
-  var userID = req.params.id;
   User
-  .findOne({
-    where: {id: userID},
-    include: [Interest],
+  .findOne(req.params.id, {
+    include: Interest,
     include: Result
   })
   .then(function(user) {
@@ -61,9 +62,8 @@ app.get("/users/:id", function(req, res) {
 });
 
 app.post("/users", function(req, res) {
-  var userParams = req.body;
   User
-  .create(userParams)
+  .create(req.body)
   .then(function(newUser) {
     res.send(newUser);
   });
@@ -72,6 +72,7 @@ app.post("/users", function(req, res) {
 app.put("/users/:id", function(req, res) {
   var userID = req.params.id;
   var userParams = req.body;
+  
   User
   .findOne(userID)
   .then(function(user) {
@@ -84,9 +85,8 @@ app.put("/users/:id", function(req, res) {
 });
 
 app.delete("/users/:id", function(req, res) {
-  var userID = req.params.id;
   User
-  .findOne(userID)
+  .findOne(req.params.id)
   .then(function(user) {
     user
     .destroy()
@@ -103,7 +103,9 @@ app.put("/users/:id/add_interest", function(req, res) {
   var interestID = req.body.interest_id;
 
   User
-  .findOne(userID, { include: [Interest] })
+  .findOne(userID, { 
+    include: Interest 
+  })
   .then(function(user) {
     Interest
     .findOne(interestID)
@@ -122,7 +124,9 @@ app.put("/users/:id/remove_interest", function(req, res) {
   var interestID = req.body.interest_id;
 
   User
-  .findOne(userID, {include: [Interest]})
+  .findOne(userID, { 
+    include: Interest 
+  })
   .then(function(user) {
     Interest
     .findOne(interestID)
@@ -139,39 +143,34 @@ app.put("/users/:id/remove_interest", function(req, res) {
 //Interest Routes
 
 app.get("/interests", function(req, res) {
-  
   Interest
-  .findAll({ include: [User] })
+  .findAll({ 
+    include: User 
+  })
   .then(function(interests) {
     res.send(interests);
   });
 });
 
 app.get("/interests/:id", function(req, res) {
-  var interestID = req.params.id;
-
   Interest
-  .findOne(interestID)
+  .findOne(req.params.id)
   .then(function(interest) {
     res.send(interest);
   });
 });
 
 app.post("/interests", function(req, res) {
-  var interestParams = req.body;
-
   Interest
-  .create(interestParams)
+  .create(req.body)
   .then(function(newInterest) {
     res.send(newInterest);
   });
 });
 
 app.delete("/interests/:id", function(req ,res) {
-  var interestID = req.params.id;
-  
   Interest
-  .findOne(interestID)
+  .findOne(req.params.id)
   .then(function(interest) {
     interest
     .destroy()
@@ -185,17 +184,17 @@ app.delete("/interests/:id", function(req ,res) {
 
 app.get("/dates", function(req, res) {
   Date
-  .findAll({ include: [Interest]})
+  .findAll({ 
+    include: Interest 
+  })
   .then(function(dates) {
     res.send(dates);
   });
 });
 
 app.post("/dates", function(req, res) {
-  var dateParams = req.body;
-  
   Date
-  .create(dateParams)
+  .create(req.body)
   .then(function(newDate) {
     res.send(newDate);
   });
@@ -208,7 +207,9 @@ app.put("/dates/:id/add_interest", function(req, res) {
   var interestID = req.body.interest_id;
 
   Date
-  .findOne(dateID, { include : [Interest] })
+  .findOne(dateID, { 
+    include : Interest 
+  })
   .then(function(date) {
     Interest
     .findOne(interestID)
@@ -233,10 +234,8 @@ app.get("/results", function(req, res) {
 });
 
 app.get("/resuts/:id", function(req, res) {
-  var resultID = req.params.id;
-
   Result
-  .findOne(resultID)
+  .findOne(req.params.id)
   .then(function(result) {
     res.send(result);
   });
@@ -262,10 +261,8 @@ app.post("/users/:id/results", function(req, res) {
 });
 
 app.delete("/results/:id", function(req, res) {
-  var resultID = req.params.id;
-
   Result
-  .findOne(resultID)
+  .findOne(req.params.id)
   .then(function(result) {
     result
     .destroy()

@@ -82,7 +82,7 @@ App.Views.Search = Backbone.View.extend({
       telephone_number: restaurantInfo.display_phone,
       address: restaurantInfo.location.display_address.join(", "),
       website: restaurantInfo.url 
-    }
+    };
     return resultData;  
   },
 
@@ -136,12 +136,10 @@ App.Views.Search = Backbone.View.extend({
   //Takes the new result, adds it, and then renders it
   renderNewResult: function(newResultData) {
     App.results.add(newResultData);
-    var newResultView = new App.Views.Result ({ model: App.results.last() });
+    App.resultView.setResult( App.results.last() );
     var resultID = newResultData.id;
-    newResultView.render();
     var mapSRC = this.buildMapSRC(newResultData.restaurant_name);
-    newResultView.$el.find("iframe").attr("src", mapSRC);
-    App.router.navigate("search/" + this.userID + "/" + resultID);
+    App.router.navigate("result/" + this.userID + "/" + resultID);
   },
 
   //Builds the SRC for the Google Map iframe
