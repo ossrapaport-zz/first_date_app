@@ -9,6 +9,7 @@ var application_root  = __dirname,
     filterBuilder     = require("./lib/filterBuilder.js"),
     responseOptimizer = require("./lib/responseOptimizer.js"),
     request           = require("request"),
+    async             = require("async"),
     Factual           = require("factual-api");
 
 //Models 
@@ -278,44 +279,41 @@ app.delete("/results/:id", function(req, res) {
 app.post("/date_and_search/:price/:neighborhood", function(req, res) {
   var price = req.params.price;
   var neighborhood = req.params.neighborhood;
-
   var dateParams = {
     firstName: req.body.firstName,
     personality: req.body.personality
   };
   var interestIDArray = req.body.interest_ids;
-  var count = 0;
 
   //Make new date
   Date
   .create(dateParams)
   .then(function(date) {
-    //Add all the date's interests with a counter to avoid asynchronous issues 
-    interestIDArray.forEach(function(interestID) { 
-      Interest 
+    //Add all the date's interests with async to avoid asynchronous issues 
+    async.each(interestIDArray, function(interestID, callback) {
+      Interest
       .findOne(interestID)
-      .then(function(interest) {        
+      .then(function(interest) {
         date
         .addInterest(interest)
         .then(function() {
-          count ++;
-          //Once all are added, get those interests
-          if (count === interestIDArray.length) { 
-            date
-            .getInterests()
-             //Look at those interests
-            .then(function(dateInterests) {
-              var typesArray = makeTypesArray(dateInterests);
-              //Makes Factual filters
-              var factualFilter = filterBuilder.buildSearchFilter(price, neighborhood, typesArray); 
-              factual.get("/t/restaurants-us?limit=50", factualFilter,
-              function(error, response) {
-                //Finds the single best spot for the date
-                var bestRestaurantIndex = responseOptimizer.optimizeResponse(price, dateParams.personality, response.data); 
-                res.send(response.data[bestRestaurantIndex]);
-              });
-            });
-          }
+          callback();
+        })
+      })
+    }, function(err) {
+      if (err) return callback(err);
+      //Gets the interests and uses them to inform the search
+      date
+      .getInterests()
+      .then(function(dateInterests) {
+        var typesArray = makeTypesArray(dateInterests);
+        //Makes Factual filters
+        var factualFilter = filterBuilder.buildSearchFilter(price, neighborhood, typesArray); 
+        factual.get("/t/restaurants-us?limit=50", factualFilter,
+        function(error, response) {
+          //Finds the single best spot for the date
+          var bestRestaurantIndex = responseOptimizer.optimizeResponse(price, dateParams.personality, response.data); 
+          res.send(response.data[bestRestaurantIndex]);
         });
       });
     });
