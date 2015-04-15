@@ -1,5 +1,6 @@
 # first_date_suggestion_app
-A web application to plan your first date.
+
+1st Date is a single-page web application that algorithmically determines the best spot for you to take your date. You probably don't know that much about him or her; we've thought about that and given you a wide range of descriptors. Once you've told us a little bit about your date, you click a button and we'll take care of the rest by suggesting a restaurant and providing all the relevant details. All you'll need to do is make the reservation. And if you don't like your search, you can search again as many times as it takes for you to love the place (although we're pretty confident we'll get it on the first time!). We hope you enjoy our app and have a great first date. 
 
 -- Minimum Viable Product --
 The main focus for this app is the ability to suggest first date ideas based on a person's interests, personality and location.
